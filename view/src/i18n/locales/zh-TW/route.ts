@@ -20,4 +20,5 @@ export default {
   settingRemindLeaf: '提醒',
   utilities: '工具',
   import: '資料匯入',
+  retirementReadiness: '退休準備度',
 }

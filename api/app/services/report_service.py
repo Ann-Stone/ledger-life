@@ -85,6 +85,10 @@ from app.services.journal_types import (
     TRANSFER_MAIN_TYPES,
     norm_type,
 )
+from app.services.loan_journal_amounts import (
+    loan_repayment_by_bucket,
+    loanjournal_amount_twd as _loanjournal_amount_twd,
+)
 from app.services.month_utils import shift_month
 
 
@@ -338,7 +342,13 @@ def get_income_expense_report(
             fixed[bucket] += floor_expense(value)
         elif t == "floating":
             floating[bucket] += floor_expense(value)
-        # invest / transfer intentionally excluded
+        # invest / transfer / loanrepayment intentionally excluded
+
+    # Loan repayment (本金+利息) per period — purely additive context for the
+    # spending chart; sourced from Loan_Journal (the report-neutral loan Journal
+    # stays excluded above, so no double-count). It does NOT enter expense / net /
+    # savings_rate, which stay on the consumption basis.
+    loan_buckets = loan_repayment_by_bucket(session, start_vm, end_vm, bucket_of)
 
     points: list[IncomeExpensePoint] = []
     for p in periods:
@@ -346,6 +356,7 @@ def get_income_expense_report(
         fx = round(fixed[p], 2)
         fl = round(floating[p], 2)
         exp = round(fx + fl, 2)
+        lb = loan_buckets.get(p, {})
         points.append(
             IncomeExpensePoint(
                 period=p,
@@ -354,6 +365,7 @@ def get_income_expense_report(
                 floating=fl,
                 expense=exp,
                 net=round(inc - exp, 2),
+                loan_repayment=round(lb.get("principal", 0.0) + lb.get("interest", 0.0), 2),
             )
         )
 
@@ -784,35 +796,6 @@ def get_budget_variance(session: Session, year: str) -> BudgetVarianceRead:
             projected_total=projected_total,
         ),
     )
-
-
-def _loanjournal_amount_twd(
-    session: Session,
-    row: LoanJournal,
-    loan_by_id: dict[str, Loan],
-    fx_cache: dict[tuple[str, str], float],
-) -> float:
-    """``LoanJournal.excute_price`` (a positive magnitude) converted to TWD.
-
-    Currency follows the loan's repayment account (``Loan.account_id`` →
-    ``Account.fx_code``); the rate is taken for the excute_date's month. Domestic
-    loans stay 1:1.
-    """
-    loan = loan_by_id.get(row.loan_id)
-    fx_code = BASE_CURRENCY
-    if loan is not None:
-        account = session.exec(
-            select(Account).where(Account.account_id == loan.account_id)
-        ).first()
-        if account is not None and account.fx_code:
-            fx_code = account.fx_code
-    month = (row.excute_date or "")[:6]
-    if fx_code == BASE_CURRENCY or len(month) != 6:
-        return row.excute_price
-    key = (fx_code, month)
-    if key not in fx_cache:
-        fx_cache[key] = fx_rate_for_month(session, fx_code, month)
-    return row.excute_price * fx_cache[key]
 
 
 def get_cash_flow(

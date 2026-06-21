@@ -144,6 +144,11 @@ const menuItems = [
     icon: Tools,
     children: [
       { name: 'utilitiesImport', labelKey: 'nav.import', path: '/utilities/import' },
+      {
+        name: 'retirementReadiness',
+        labelKey: 'nav.retirementReadiness',
+        path: '/utilities/retirement-readiness',
+      },
     ],
   },
 ]

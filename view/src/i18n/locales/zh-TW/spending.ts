@@ -42,6 +42,7 @@ export default {
   colPayWay: '支付方式',
   seriesIncome: '收入',
   seriesFixed: '固定支出',
+  seriesLoanRepayment: '貸款還款',
   seriesNet: '淨結餘',
   typeFixed: '固定',
   typeFloating: '變動',

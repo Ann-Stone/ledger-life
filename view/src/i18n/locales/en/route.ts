@@ -20,4 +20,5 @@ export default {
   settingRemindLeaf: 'Reminders',
   utilities: 'Tools',
   import: 'Data Import',
+  retirementReadiness: 'Retirement Readiness',
 }

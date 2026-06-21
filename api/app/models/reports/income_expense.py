@@ -19,6 +19,7 @@ _POINT_EXAMPLE = {
     "floating": 18000.0,
     "expense": 43000.0,
     "net": 37000.0,
+    "loan_repayment": 9200.0,
 }
 
 
@@ -52,6 +53,15 @@ class IncomeExpensePoint(SQLModel):
         ...,
         description="income - expense, signed (negative = overspent)",
         schema_extra={"examples": [37000.0]},
+    )
+    loan_repayment: float = Field(
+        default=0.0,
+        description=(
+            "Loan repayment cash outflow (principal + interest, positive) from "
+            "Loan_Journal. Purely additive context for the spending chart — NOT "
+            "included in expense / net / savings_rate (those stay consumption-basis)."
+        ),
+        schema_extra={"examples": [9200.0]},
     )
 
     model_config = ConfigDict(json_schema_extra={"example": _POINT_EXAMPLE})

@@ -148,15 +148,16 @@ def test_expenditure_budget_aligns_mixed_casing(
     assert row["diff"] == 500.0
 
 
-# ---- Regression: loan repayment is report-neutral ----
+# ---- Loan repayment: visible in the ratio pie (from Loan_Journal), not the budget ----
 
 
-def test_expenditure_ratio_and_budget_exclude_loan_repayment(session: Session) -> None:
-    """A LoanRepayment journal must not leak into expenditure ratio / budget.
-
-    It is report-neutral (like transfer): the principal/interest split is sourced
-    from Loan_Journal, so counting the cash outflow here would double-count.
+def test_expenditure_ratio_shows_loan_repayment_from_loan_journal(session: Session) -> None:
+    """Loan repayment appears in the expenditure-ratio pie sourced ONLY from
+    Loan_Journal (principal+interest) — the report-neutral LoanRepayment *Journal*
+    row is still excluded, so the slice equals the Loan_Journal legs (no double-count).
+    The budget remains unaffected (loan repayment is not a budgeted expense type).
     """
+    from app.models.assets.loan import LoanJournal
     from app.models.monthly_report.journal import Journal
 
     session.add(
@@ -168,6 +169,8 @@ def test_expenditure_ratio_and_budget_exclude_loan_repayment(session: Session) -
             spending=-2000.0, invoice_number=None, note=None,
         )
     )
+    # The report-neutral LoanRepayment Journal (signed -(principal+interest)); it
+    # must NOT be counted — the pie's loan slice comes from Loan_Journal below.
     session.add(
         Journal(
             vesting_month="202603", spend_date="20260311", spend_way="1",
@@ -177,11 +180,19 @@ def test_expenditure_ratio_and_budget_exclude_loan_repayment(session: Session) -
             action_sub_table="Loan", spending=-9200.0, invoice_number=None, note=None,
         )
     )
+    session.add(LoanJournal(loan_id="LN-001", loan_excute_type="principal",
+                            excute_price=8000.0, excute_date="20260311", memo=None))
+    session.add(LoanJournal(loan_id="LN-001", loan_excute_type="interest",
+                            excute_price=1200.0, excute_date="20260311", memo=None))
     session.commit()
 
     ratio = compute_expenditure_ratio(session, "202603").model_dump()
     outer = {i["name"]: i["value"] for i in ratio["outer"]}
-    assert outer == {"Fixed": 2000.0}  # loan repayment excluded
+    # 9200 == 8000 + 1200 (Loan_Journal), NOT 18400 — the -9200 Journal is ignored.
+    assert outer == {"Fixed": 2000.0, "LoanRepayment": 9200.0}
+    inner = {i["name"]: i["value"] for i in ratio["inner"]}
+    assert inner["principal"] == 8000.0
+    assert inner["interest"] == 1200.0
 
     budget = compute_expenditure_budget(session, "202603").model_dump()
     assert all(r["action_main_type"].lower() != "loanrepayment" for r in budget["rows"])

@@ -15,6 +15,13 @@ from app.models.dashboard.stock_price_history import (
     StockPriceHistoryRead,
     StockPriceHistoryUpdate,
 )
+from app.models.dashboard.retirement import (
+    LoanPayoff,
+    RetirementReadinessRead,
+    RetirementSetting,
+    RetirementSettingRead,
+    RetirementSettingUpdate,
+)
 from app.models.dashboard.summary import SummaryPoint, SummaryRead, SummaryType
 from app.models.dashboard.target_setting import (
     TargetSetting,
@@ -24,6 +31,11 @@ from app.models.dashboard.target_setting import (
 )
 
 __all__ = [
+    "LoanPayoff",
+    "RetirementReadinessRead",
+    "RetirementSetting",
+    "RetirementSettingRead",
+    "RetirementSettingUpdate",
     "AlarmItem",
     "GiftItem",
     "BudgetLine",

@@ -767,6 +767,7 @@ export interface IncomeExpensePoint {
   floating: number              // variable-expense magnitude, positive
   expense: number               // fixed + floating, positive
   net: number                   // income - expense (signed; negative = overspent)
+  loan_repayment: number        // principal + interest cash outflow, positive; additive (not in expense/net)
 }
 
 export interface IncomeExpenseSummary {
@@ -780,6 +781,40 @@ export interface IncomeExpenseReport {
   type: string                  // 'monthly' | 'yearly'
   points: IncomeExpensePoint[]
   summary: IncomeExpenseSummary
+}
+
+// Retirement readiness (consumption-basis FIRE target + debt-service health).
+export interface RetirementSetting {
+  withdrawal_rate: number             // decimal, e.g. 0.04
+  annual_expense_override: number | null
+  exclude_self_occupied_estate: boolean  // exclude estate_status 'live' from net worth
+}
+
+export type RetirementSettingUpdate = Partial<RetirementSetting>
+
+export interface LoanPayoff {
+  loan_id: string
+  loan_name: string
+  remaining_balance: number           // TWD, positive
+  monthly_payment: number             // recent avg principal+interest, TWD
+  payoff_month: string | null         // YYYYMM, null if unknown
+  years_left: number | null
+}
+
+export interface RetirementReadiness {
+  net_worth: number                   // self-occupied housing excluded when configured
+  exclude_self_occupied_estate: boolean
+  self_occupied_estate_value: number  // amount excluded; 0 when off or none marked 'live'
+  annual_expense_base: number
+  expense_base_source: 'computed' | 'override'
+  withdrawal_rate: number
+  target_portfolio: number
+  readiness_pct: number               // net_worth / target (≥1 = reached)
+  gap: number                         // target − net_worth
+  monthly_income: number
+  monthly_loan_payment: number
+  debt_service_ratio: number          // monthly_loan_payment / monthly_income
+  loans: LoanPayoff[]
 }
 
 // Comprehensive income statement (綜合損益表): 本業 / 投資 / 綜合. Magnitudes

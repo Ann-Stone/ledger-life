@@ -24,6 +24,7 @@ import otherAssets from './en/otherAssets'
 import importMessages from './en/import'
 import chart from './en/chart'
 import alarm from './en/alarm'
+import retirement from './en/retirement'
 
 export default {
   common,
@@ -50,4 +51,5 @@ export default {
   import: importMessages,
   chart,
   alarm,
+  retirement,
 }

@@ -150,7 +150,7 @@
             v-else-if="!store.expenditureRatio || store.expenditureRatio.outer.length === 0"
             :message="t('cashFlow.noExpense')"
           />
-          <DonutChart v-else :data="store.expenditureRatio.outer" height="320px" />
+          <DonutChart v-else :data="expenditureRatioOuter" height="320px" />
         </el-tab-pane>
         <el-tab-pane :label="t('cashFlow.tabInvestRatio')" name="investRatio">
           <el-skeleton v-if="store.investRatioLoading" :rows="4" animated />
@@ -718,6 +718,18 @@ const totalExpense = computed(() =>
 )
 
 const netTotal = computed(() => totalIncome.value + totalExpense.value)
+
+// Outer pie slices, with the synthetic loan slice given a readable label. Other
+// slice names pass through unchanged (fallback to the raw backend name).
+const expenditureRatioOuter = computed(() => {
+  const labels: Record<string, string> = {
+    LoanRepayment: t('cashFlow.loanRepayment'),
+  }
+  return (store.expenditureRatio?.outer ?? []).map((it) => ({
+    name: labels[it.name] ?? it.name,
+    value: it.value,
+  }))
+})
 
 // ─── Analytics tabs ────────────────────────────────────────────────────────
 type ChartTab = 'budget' | 'expenditureRatio' | 'investRatio' | 'liability'
