@@ -22,6 +22,7 @@ export default {
   noBudget: 'No budget data this month',
   tabExpenseRatio: 'Expense Ratio',
   noExpense: 'No expense data this month',
+  loanRepayment: 'Loan Repayment',
   tabInvestRatio: 'Investment Ratio',
   noInvest: 'No investment data this month',
   tabLiability: 'Liabilities',

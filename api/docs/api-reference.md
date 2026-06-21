@@ -75,6 +75,8 @@ Frontend tickets that touch a single resource (`/settings/accounts`, `/assets/st
 | `alarms` | [api-reference/dashboard/alarms.md](api-reference/dashboard/alarms.md) | [openapi/dashboard/alarms.json](openapi/dashboard/alarms.json) | 1 |
 | `budget` | [api-reference/dashboard/budget.md](api-reference/dashboard/budget.md) | [openapi/dashboard/budget.json](openapi/dashboard/budget.json) | 1 |
 | `gifts` | [api-reference/dashboard/gifts.md](api-reference/dashboard/gifts.md) | [openapi/dashboard/gifts.json](openapi/dashboard/gifts.json) | 1 |
+| `retirement` | [api-reference/dashboard/retirement.md](api-reference/dashboard/retirement.md) | [openapi/dashboard/retirement.json](openapi/dashboard/retirement.json) | 1 |
+| `retirement-settings` | [api-reference/dashboard/retirement-settings.md](api-reference/dashboard/retirement-settings.md) | [openapi/dashboard/retirement-settings.json](openapi/dashboard/retirement-settings.json) | 2 |
 | `summary` | [api-reference/dashboard/summary.md](api-reference/dashboard/summary.md) | [openapi/dashboard/summary.json](openapi/dashboard/summary.json) | 1 |
 | `targets` | [api-reference/dashboard/targets.md](api-reference/dashboard/targets.md) | [openapi/dashboard/targets.json](openapi/dashboard/targets.json) | 4 |
 

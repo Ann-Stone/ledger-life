@@ -376,6 +376,14 @@ const chart = computed(() => {
       // month's bar shows the locked-in floor vs the flexible part.
       { name: t('spending.seriesFixed'), data: report.points.map((p) => p.fixed), stack: 'expense' },
       { name: t('spending.floatingExpense'), data: report.points.map((p) => p.floating), stack: 'expense' },
+      // Loan repayment (本金+利息) as its OWN bar — purely additive cash-outflow
+      // context. Not in the 'expense' stack, so income/expense bars and the net
+      // line are unchanged; this just makes the loan's 數值/趨勢 visible.
+      {
+        name: t('spending.seriesLoanRepayment'),
+        data: report.points.map((p) => p.loan_repayment ?? 0),
+        stack: 'loan',
+      },
       {
         name: t('spending.seriesNet'),
         data: report.points.map((p) => p.net),

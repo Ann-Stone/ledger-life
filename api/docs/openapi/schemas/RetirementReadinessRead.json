@@ -1,0 +1,175 @@
+{
+  "components": {
+    "schemas": {
+      "RetirementReadinessRead": {
+        "example": {
+          "annual_expense_base": 600000.0,
+          "debt_service_ratio": 0.3111,
+          "exclude_self_occupied_estate": true,
+          "expense_base_source": "computed",
+          "gap": 7000000.0,
+          "loans": [
+            {
+              "loan_id": "LN-001",
+              "loan_name": "房貸",
+              "monthly_payment": 28000.0,
+              "payoff_month": "203406",
+              "remaining_balance": 3200000.0,
+              "years_left": 8.5
+            }
+          ],
+          "monthly_income": 90000.0,
+          "monthly_loan_payment": 28000.0,
+          "net_worth": 8000000.0,
+          "readiness_pct": 0.5333,
+          "self_occupied_estate_value": 0.0,
+          "target_portfolio": 15000000.0,
+          "withdrawal_rate": 0.04
+        },
+        "properties": {
+          "annual_expense_base": {
+            "description": "Annual retirement expense base (TWD), consumption-basis (loan excluded)",
+            "examples": [
+              600000.0
+            ],
+            "title": "Annual Expense Base",
+            "type": "number"
+          },
+          "debt_service_ratio": {
+            "description": "monthly_loan_payment / monthly_income (cash-flow health; 0 when no income)",
+            "examples": [
+              0.3111
+            ],
+            "title": "Debt Service Ratio",
+            "type": "number"
+          },
+          "exclude_self_occupied_estate": {
+            "description": "Whether self-occupied (estate_status 'live') housing was excluded from net_worth",
+            "examples": [
+              true
+            ],
+            "title": "Exclude Self Occupied Estate",
+            "type": "boolean"
+          },
+          "expense_base_source": {
+            "description": "'computed' = trailing-12-month consumption; 'override' = manual setting",
+            "enum": [
+              "computed",
+              "override"
+            ],
+            "examples": [
+              "computed"
+            ],
+            "title": "Expense Base Source",
+            "type": "string"
+          },
+          "gap": {
+            "description": "target_portfolio − net_worth (TWD; ≤0 means surplus)",
+            "examples": [
+              7000000.0
+            ],
+            "title": "Gap",
+            "type": "number"
+          },
+          "loans": {
+            "description": "Per-loan remaining balance + projected payoff",
+            "examples": [
+              [
+                {
+                  "loan_id": "LN-001",
+                  "loan_name": "房貸",
+                  "monthly_payment": 28000.0,
+                  "payoff_month": "203406",
+                  "remaining_balance": 3200000.0,
+                  "years_left": 8.5
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/LoanPayoff"
+            },
+            "title": "Loans",
+            "type": "array"
+          },
+          "monthly_income": {
+            "description": "Trailing-12-month average monthly income (TWD)",
+            "examples": [
+              90000.0
+            ],
+            "title": "Monthly Income",
+            "type": "number"
+          },
+          "monthly_loan_payment": {
+            "description": "Trailing-12-month average monthly loan payment (principal+interest), TWD",
+            "examples": [
+              28000.0
+            ],
+            "title": "Monthly Loan Payment",
+            "type": "number"
+          },
+          "net_worth": {
+            "description": "Net worth (TWD) used for the readiness target; from the balance sheet (already nets the loan), minus self-occupied housing when exclude_self_occupied_estate is on",
+            "examples": [
+              8000000.0
+            ],
+            "title": "Net Worth",
+            "type": "number"
+          },
+          "readiness_pct": {
+            "description": "net_worth / target_portfolio (≥1.0 means target reached)",
+            "examples": [
+              0.5333
+            ],
+            "title": "Readiness Pct",
+            "type": "number"
+          },
+          "self_occupied_estate_value": {
+            "description": "Self-occupied housing market value excluded from net_worth (TWD); 0 when the toggle is off or no estate is marked 'live'",
+            "examples": [
+              0.0
+            ],
+            "title": "Self Occupied Estate Value",
+            "type": "number"
+          },
+          "target_portfolio": {
+            "description": "annual_expense_base / withdrawal_rate (the FIRE number), TWD",
+            "examples": [
+              15000000.0
+            ],
+            "title": "Target Portfolio",
+            "type": "number"
+          },
+          "withdrawal_rate": {
+            "description": "Safe withdrawal rate used",
+            "examples": [
+              0.04
+            ],
+            "title": "Withdrawal Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "net_worth",
+          "exclude_self_occupied_estate",
+          "self_occupied_estate_value",
+          "annual_expense_base",
+          "expense_base_source",
+          "withdrawal_rate",
+          "target_portfolio",
+          "readiness_pct",
+          "gap",
+          "monthly_income",
+          "monthly_loan_payment",
+          "debt_service_ratio"
+        ],
+        "title": "RetirementReadinessRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

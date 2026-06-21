@@ -4,6 +4,9 @@ import type {
   DashboardBudget,
   DashboardGift,
   DashboardSummary,
+  RetirementReadiness,
+  RetirementSetting,
+  RetirementSettingUpdate,
   TargetSetting,
   TargetSettingCreate,
   TargetSettingUpdate,
@@ -45,4 +48,18 @@ export function getDashboardBudget(params: {
 
 export function getDashboardGifts(year: number | string): Promise<DashboardGift[]> {
   return request.get(`/dashboard/gifts/${year}`)
+}
+
+export function getRetirementReadiness(): Promise<RetirementReadiness> {
+  return request.get('/dashboard/retirement')
+}
+
+export function getRetirementSettings(): Promise<RetirementSetting> {
+  return request.get('/dashboard/retirement-settings')
+}
+
+export function updateRetirementSettings(
+  data: RetirementSettingUpdate,
+): Promise<RetirementSetting> {
+  return request.put('/dashboard/retirement-settings', data)
 }

@@ -98,6 +98,7 @@ function incomeExpenseSeries(type: string, vestingMonth: string): IncomeExpenseR
         floating,
         expense,
         net: income - expense,
+        loan_repayment: 120000 - (2 - i) * 12000,
       })
     }
   } else {
@@ -115,6 +116,7 @@ function incomeExpenseSeries(type: string, vestingMonth: string): IncomeExpenseR
         floating,
         expense,
         net: income - expense,
+        loan_repayment: 9200,
       })
       m -= 1
       if (m === 0) {

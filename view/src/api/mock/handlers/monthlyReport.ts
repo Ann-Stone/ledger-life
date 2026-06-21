@@ -70,6 +70,8 @@ function expenditureRatio() {
       { name: '固定支出', value: 20400 },
       { name: '浮動支出', value: 1820 },
       { name: '投資',   value: 15000 },
+      // Backend emits the raw "LoanRepayment" token; the view maps it to 貸款還款.
+      { name: 'LoanRepayment', value: 9200 },
     ],
     inner: [
       { name: '房租', value: 18000 },
@@ -77,6 +79,8 @@ function expenditureRatio() {
       { name: '伙食', value: 1280 },
       { name: '交通', value: 540 },
       { name: '股票', value: 15000 },
+      { name: 'principal', value: 8000 },
+      { name: 'interest', value: 1200 },
     ],
   }
 }

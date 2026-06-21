@@ -90,6 +90,15 @@ const router = createRouter({
           component: () => import('@/views/utilities/ImportView.vue'),
           meta: { titleKey: 'route.import', breadcrumbKeys: ['route.utilities', 'route.import'] },
         },
+        {
+          path: 'utilities/retirement-readiness',
+          name: 'RetirementReadiness',
+          component: () => import('@/views/utilities/RetirementReadinessView.vue'),
+          meta: {
+            titleKey: 'route.retirementReadiness',
+            breadcrumbKeys: ['route.utilities', 'route.retirementReadiness'],
+          },
+        },
       ],
     },
     {

@@ -44,6 +44,7 @@ from app.models.settings.code_data import CodeData
 from app.models.settings.credit_card import CreditCard
 from app.services.expense_netting import floor_expense, floor_income
 from app.services.fx_lookup import BASE_CURRENCY, fx_rate_for_month
+from app.services.loan_journal_amounts import loan_repayment_by_bucket
 from app.services.journal_types import (
     EXPENSE_MAIN_TYPES,
     FINANCING_MAIN_TYPES,
@@ -690,6 +691,22 @@ def compute_expenditure_ratio(session: Session, vesting_month: str) -> Expenditu
         amount = floored(sub_is_income[stype], value)
         if amount > 0.005:
             inner[stype] += amount
+
+    # Loan repayment slice (財務行為) — the loanrepayment Journal is excluded above
+    # (FINANCING), so we add it back from Loan_Journal purely to make the cash
+    # outflow visible / proportional in the pie. Outer = LoanRepayment, inner =
+    # principal / interest. No double-count (same source as cash flow).
+    loan = loan_repayment_by_bucket(session, vesting_month, vesting_month, lambda _m: vesting_month)
+    legs = loan.get(vesting_month, {})
+    principal = legs.get("principal", 0.0)
+    interest = legs.get("interest", 0.0)
+    if principal + interest > 0.005:
+        outer["LoanRepayment"] += principal + interest
+    if principal > 0.005:
+        inner["principal"] += principal
+    if interest > 0.005:
+        inner["interest"] += interest
+
     return ExpenditureRatioResponse(
         outer=[ExpenditureRatioItem(name=k, value=round(v, 2)) for k, v in outer.items()],
         inner=[ExpenditureRatioItem(name=k, value=round(v, 2)) for k, v in inner.items()],

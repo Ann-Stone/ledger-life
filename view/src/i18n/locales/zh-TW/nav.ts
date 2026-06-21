@@ -15,6 +15,7 @@ export default {
   settingRemind: '提醒設定',
   utilities: '工具',
   import: '資料匯入',
+  retirementReadiness: '退休準備度',
   // Navbar font-scale dropdown
   adjustFontSize: '調整字級',
   fontXS: '極小 (85%)',

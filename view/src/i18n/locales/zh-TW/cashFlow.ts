@@ -22,6 +22,7 @@ export default {
   noBudget: '本月無預算資料',
   tabExpenseRatio: '支出比例',
   noExpense: '本月無支出資料',
+  loanRepayment: '貸款還款',
   tabInvestRatio: '投資比例',
   noInvest: '本月無投資資料',
   tabLiability: '負債',

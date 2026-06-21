@@ -16,6 +16,7 @@ export default {
   settingRemind: 'Reminders',
   utilities: 'Tools',
   import: 'Import',
+  retirementReadiness: 'Retirement Readiness',
   // Navbar font-scale dropdown
   adjustFontSize: 'Font size',
   fontXS: 'XS (85%)',

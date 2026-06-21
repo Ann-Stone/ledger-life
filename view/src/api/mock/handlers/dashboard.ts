@@ -7,6 +7,8 @@ import type {
   DashboardBudgetLine,
   DashboardGift,
   DashboardSummary,
+  RetirementReadiness,
+  RetirementSetting,
   TargetSetting,
   TargetSettingCreate,
   TargetSettingUpdate,
@@ -189,6 +191,50 @@ function dashboardAlarms(): DashboardAlarm[] {
 
 // ─── Handlers ────────────────────────────────────────────────────────────────
 
+// ─── Retirement readiness — in-memory state + derived snapshot ───────────────
+
+const retirementSetting: RetirementSetting = {
+  withdrawal_rate: 0.04,
+  annual_expense_override: null,
+  exclude_self_occupied_estate: true,
+}
+
+function retirementReadiness(): RetirementReadiness {
+  const fullNetWorth = 8_000_000
+  const selfOccupied = 3_000_000  // a self-occupied (live) home in the mock balance sheet
+  const excluded = retirementSetting.exclude_self_occupied_estate ? selfOccupied : 0
+  const netWorth = fullNetWorth - excluded
+  const annualExpenseBase = retirementSetting.annual_expense_override ?? 600_000
+  const rate = retirementSetting.withdrawal_rate || 0.04
+  const target = Math.round(annualExpenseBase / rate)
+  const monthlyIncome = 90_000
+  const monthlyLoan = 28_000
+  return {
+    net_worth: netWorth,
+    exclude_self_occupied_estate: retirementSetting.exclude_self_occupied_estate,
+    self_occupied_estate_value: excluded,
+    annual_expense_base: annualExpenseBase,
+    expense_base_source: retirementSetting.annual_expense_override ? 'override' : 'computed',
+    withdrawal_rate: rate,
+    target_portfolio: target,
+    readiness_pct: Math.round((netWorth / target) * 10000) / 10000,
+    gap: target - netWorth,
+    monthly_income: monthlyIncome,
+    monthly_loan_payment: monthlyLoan,
+    debt_service_ratio: Math.round((monthlyLoan / monthlyIncome) * 10000) / 10000,
+    loans: [
+      {
+        loan_id: 'LN-001',
+        loan_name: '房貸',
+        remaining_balance: 3_200_000,
+        monthly_payment: 28_000,
+        payoff_month: '203406',
+        years_left: 8.5,
+      },
+    ],
+  }
+}
+
 export const dashboardHandlers = [
   http.get('*/dashboard/summary', ({ request }) => {
     const url = new URL(request.url)
@@ -236,4 +282,17 @@ export const dashboardHandlers = [
     return ok(dashboardBudget(type, period))
   }),
   http.get('*/dashboard/gifts/:year', ({ params }) => ok(dashboardGifts(String(params.year)))),
+  http.get('*/dashboard/retirement-settings', () => ok(retirementSetting)),
+  http.put('*/dashboard/retirement-settings', async ({ request }) => {
+    const body = (await request.json()) as Partial<RetirementSetting>
+    if (body.withdrawal_rate != null) retirementSetting.withdrawal_rate = body.withdrawal_rate
+    retirementSetting.annual_expense_override =
+      body.annual_expense_override && body.annual_expense_override > 0
+        ? body.annual_expense_override
+        : null
+    if (body.exclude_self_occupied_estate != null)
+      retirementSetting.exclude_self_occupied_estate = body.exclude_self_occupied_estate
+    return ok(retirementSetting)
+  }),
+  http.get('*/dashboard/retirement', () => ok(retirementReadiness())),
 ]

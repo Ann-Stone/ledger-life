@@ -1,0 +1,93 @@
+{
+  "components": {
+    "schemas": {
+      "LoanPayoff": {
+        "example": {
+          "loan_id": "LN-001",
+          "loan_name": "房貸",
+          "monthly_payment": 28000.0,
+          "payoff_month": "203406",
+          "remaining_balance": 3200000.0,
+          "years_left": 8.5
+        },
+        "properties": {
+          "loan_id": {
+            "description": "Loan business ID",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "loan_name": {
+            "description": "Loan display name",
+            "examples": [
+              "房貸"
+            ],
+            "title": "Loan Name",
+            "type": "string"
+          },
+          "monthly_payment": {
+            "description": "Recent average monthly payment (principal + interest), TWD",
+            "examples": [
+              28000.0
+            ],
+            "title": "Monthly Payment",
+            "type": "number"
+          },
+          "payoff_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Projected payoff YYYYMM (from recent principal velocity); null if unknown",
+            "examples": [
+              "203406"
+            ],
+            "title": "Payoff Month"
+          },
+          "remaining_balance": {
+            "description": "Outstanding principal (amount − repayed), TWD, positive",
+            "examples": [
+              3200000.0
+            ],
+            "title": "Remaining Balance",
+            "type": "number"
+          },
+          "years_left": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Projected years until payoff; null if unknown",
+            "examples": [
+              8.5
+            ],
+            "title": "Years Left"
+          }
+        },
+        "required": [
+          "loan_id",
+          "loan_name",
+          "remaining_balance",
+          "monthly_payment"
+        ],
+        "title": "LoanPayoff",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

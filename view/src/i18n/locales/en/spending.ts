@@ -43,6 +43,7 @@ export default {
   colPayWay: 'Payment',
   seriesIncome: 'Income',
   seriesFixed: 'Fixed',
+  seriesLoanRepayment: 'Loan Repayment',
   seriesNet: 'Net',
   typeFixed: 'Fixed',
   typeFloating: 'Variable',

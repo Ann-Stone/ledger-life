@@ -24,6 +24,7 @@ import otherAssets from './zh-TW/otherAssets'
 import importMessages from './zh-TW/import'
 import chart from './zh-TW/chart'
 import alarm from './zh-TW/alarm'
+import retirement from './zh-TW/retirement'
 
 export default {
   common,
@@ -50,4 +51,5 @@ export default {
   import: importMessages,
   chart,
   alarm,
+  retirement,
 }
