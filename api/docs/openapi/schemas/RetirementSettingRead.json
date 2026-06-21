@@ -1,0 +1,56 @@
+{
+  "components": {
+    "schemas": {
+      "RetirementSettingRead": {
+        "example": {
+          "exclude_self_occupied_estate": true,
+          "withdrawal_rate": 0.04
+        },
+        "properties": {
+          "annual_expense_override": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Manual annual expense base (TWD), or null to auto-compute",
+            "examples": [
+              600000.0
+            ],
+            "title": "Annual Expense Override"
+          },
+          "exclude_self_occupied_estate": {
+            "default": true,
+            "description": "Exclude self-occupied (estate_status 'live') housing from retirement net worth",
+            "examples": [
+              true
+            ],
+            "title": "Exclude Self Occupied Estate",
+            "type": "boolean"
+          },
+          "withdrawal_rate": {
+            "description": "Safe withdrawal rate (decimal)",
+            "examples": [
+              0.04
+            ],
+            "title": "Withdrawal Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "withdrawal_rate"
+        ],
+        "title": "RetirementSettingRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

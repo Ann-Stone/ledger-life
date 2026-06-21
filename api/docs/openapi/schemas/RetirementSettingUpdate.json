@@ -1,0 +1,66 @@
+{
+  "components": {
+    "schemas": {
+      "RetirementSettingUpdate": {
+        "example": {
+          "exclude_self_occupied_estate": true,
+          "withdrawal_rate": 0.035
+        },
+        "properties": {
+          "annual_expense_override": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "New manual expense base (TWD); null keeps current. Send 0 to clear.",
+            "examples": [
+              600000.0
+            ],
+            "title": "Annual Expense Override"
+          },
+          "exclude_self_occupied_estate": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Toggle excluding self-occupied housing; null keeps current",
+            "examples": [
+              true
+            ],
+            "title": "Exclude Self Occupied Estate"
+          },
+          "withdrawal_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "New withdrawal rate (decimal, 0.01–0.10); null keeps current",
+            "examples": [
+              0.035
+            ],
+            "title": "Withdrawal Rate"
+          }
+        },
+        "title": "RetirementSettingUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

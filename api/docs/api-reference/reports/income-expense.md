@@ -47,6 +47,7 @@ Example:
         "fixed": 25000.0,
         "floating": 18000.0,
         "income": 80000.0,
+        "loan_repayment": 9200.0,
         "net": 37000.0,
         "period": "202403"
       }
