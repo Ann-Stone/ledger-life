@@ -1,0 +1,1 @@
+import{xt as e}from"./echarts-AAgcSxZX.js";function t(t,n){let r=e(n??null),i=e(!1);async function a(...e){i.value=!0;try{r.value=await t(...e)}finally{i.value=!1}}return{data:r,loading:i,fetch:a}}export{t};

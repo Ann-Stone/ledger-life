@@ -1,0 +1,1 @@
+import{$ as e,I as t,Kt as n,M as r}from"./echarts-AAgcSxZX.js";var i={key:0,class:`tabular-nums`},a={key:1,class:`text-on-surface-variant/40`},o=t({name:`SharePercent`,__name:`SharePercent`,props:{value:{}},setup(t){return(o,s)=>t.value==null?(e(),r(`span`,a,`—`)):(e(),r(`span`,i,n(t.value.toFixed(1))+`%`,1))}});export{o as t};

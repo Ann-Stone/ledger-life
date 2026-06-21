@@ -1,0 +1,1 @@
+function e(){return typeof document<`u`&&document.documentElement.classList.contains(`dark`)?[`#a78bfa`,`#fca5a5`,`#34d399`,`#60a5fa`,`#f472b6`,`#fbbf24`]:[`#6d28d9`,`#be123c`,`#047857`,`#1d4ed8`,`#be185d`,`#b45309`]}export{e as t};

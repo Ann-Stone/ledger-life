@@ -1,0 +1,1 @@
+import"./rolldown-runtime-S-ySWqyJ.js";import{n as e}from"./element-plus-BkivS-O2.js";import{n as t}from"./i18n-1KT0uWVn.js";function n(){return async n=>{try{return await e.confirm(n.message,n.title,{confirmButtonText:t.global.t(`common.submit`),cancelButtonText:t.global.t(`common.cancel`),type:n.type??`warning`}),!0}catch{return!1}}}export{n as t};
