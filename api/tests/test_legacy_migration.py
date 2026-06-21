@@ -381,6 +381,28 @@ def test_loan_interest_rate_percent_to_decimal(legacy_conn, target_engine) -> No
     assert rates["2"] == pytest.approx(0.025)
 
 
+def test_loan_journal_principal_sign_normalized(legacy_conn, target_engine) -> None:
+    """Legacy stores principal rows NEGATIVE; the migrator abs()es them.
+
+    Every downstream reader (settlement_service.run_loan_step,
+    report_service._loanjournal_amount_twd, get_cash_flow, get_income_statement)
+    treats each loan_excute_type as a positive magnitude, so the imported row
+    must be positive regardless of the legacy sign. The fixture seeds the
+    principal row as -1500.0 (interest stays +600.0).
+    """
+    run_migration(legacy_conn, target_engine, wipe=True)
+    with Session(target_engine) as session:
+        rows = {
+            j.loan_excute_type: j.excute_price
+            for j in session.exec(select(LoanJournal)).all()
+        }
+    assert rows["principal"] == 1500.0, "negative principal must be abs()ed on import"
+    assert rows["interest"] == 600.0
+    # No loan journal row may survive with a negative magnitude.
+    with Session(target_engine) as session:
+        assert all(j.excute_price >= 0 for j in session.exec(select(LoanJournal)).all())
+
+
 def test_credit_card_expiry_normalized(legacy_conn, target_engine) -> None:
     """All card_expiry values land as 'YYYY/MM', even datetime-string input."""
     run_migration(legacy_conn, target_engine, wipe=True)

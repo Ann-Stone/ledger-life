@@ -648,7 +648,14 @@ def migrate_loan_journals(src: sqlite3.Connection, session: Session) -> int:
             distinct_number=int(row["distinct_number"]),
             loan_id=_str(row["loan_id"]),
             loan_excute_type=row["loan_excute_type"],
-            excute_price=float(row["excute_price"]),
+            # IMPL-NOTE: legacy ledger.db stores principal rows as NEGATIVE
+            # excute_price (e.g. -23206.0), but every downstream reader
+            # (settlement_service.run_loan_step `balance = amount - sum(principal)`,
+            # report_service._loanjournal_amount_twd, get_cash_flow,
+            # get_income_statement) treats each loan_excute_type as a POSITIVE
+            # magnitude. abs() normalizes all loan rows to that canonical
+            # convention; interest/fee rows are already positive and unaffected.
+            excute_price=abs(float(row["excute_price"])),
             excute_date=_to_yyyymmdd(row["excute_date"]) or "",
             memo=_opt_str(row["memo"]),
         ))
