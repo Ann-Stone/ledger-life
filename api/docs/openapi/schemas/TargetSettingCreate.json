@@ -1,0 +1,62 @@
+{
+  "components": {
+    "schemas": {
+      "TargetSettingCreate": {
+        "example": {
+          "setting_value": "存頭期款 200 萬"
+        },
+        "properties": {
+          "is_done": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Y/N; defaults to N when omitted",
+            "examples": [
+              "N"
+            ],
+            "title": "Is Done"
+          },
+          "setting_value": {
+            "description": "Target description / value (free-form text)",
+            "examples": [
+              "存頭期款 200 萬"
+            ],
+            "maxLength": 45,
+            "title": "Setting Value",
+            "type": "string"
+          },
+          "target_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYY; defaults to the current year when omitted",
+            "examples": [
+              "2026"
+            ],
+            "title": "Target Year"
+          }
+        },
+        "required": [
+          "setting_value"
+        ],
+        "title": "TargetSettingCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

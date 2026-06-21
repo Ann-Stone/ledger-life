@@ -1,0 +1,23 @@
+// Journal `note` field placeholder hints, keyed by category.
+export default {
+  optional: '(optional)',
+  transfer: 'FX rate: 1 USD = ? TWD (required for cross-currency)',
+  creditCardRepayment: '(optional) statement period',
+  loanRepayment: '(optional) installment no.',
+  premiums: '(optional) policy no. or item',
+  favorLendOut: 'Counterparty name + reason (used later to track the balance)',
+  favorBorrowIn: 'Counterparty name + reason',
+  loanIncomeBorrow: 'Counterparty name (match the original loan-out)',
+  favorWedding: '(optional) name + relationship',
+  favorGift: '(optional) name + occasion',
+  favorTreat: '(optional) who + occasion',
+  favorDefault: '(optional) counterparty name',
+  dividendStock: 'Ticker + shares, e.g. TSLA 10',
+  dividendBankInterest: '(optional) bank or product',
+  dividendSavingsInsurance: '(optional) policy name',
+  investCapitalGain: 'Ticker + P/L',
+  investFutures: 'Instrument + position',
+  investDefault: '(optional) ticker',
+  creditCardBonus: '(optional) campaign or reward source',
+  rentIncome: 'Tenant name + month',
+}

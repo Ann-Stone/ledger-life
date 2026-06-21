@@ -1,0 +1,77 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/reports/assets": {
+      "get": {
+        "description": "Returns share (% + absolute) of each asset type, FX-converted to base currency.",
+        "operationId": "get_assets_reports_assets_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_AssetBreakdownRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Get asset composition",
+        "tags": [
+          "reports"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_AssetBreakdownRead_.json",
+    "schemas/AssetBreakdownRead.json",
+    "schemas/AssetShare.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

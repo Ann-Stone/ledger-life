@@ -1,0 +1,51 @@
+{
+  "components": {
+    "schemas": {
+      "IndexRefreshResult": {
+        "example": {
+          "ok": true,
+          "region": "臺北市全市",
+          "upserted": 48
+        },
+        "properties": {
+          "ok": {
+            "description": "False when the fetch failed and existing data was kept",
+            "examples": [
+              true
+            ],
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "region": {
+            "description": "Region refreshed",
+            "examples": [
+              "臺北市全市"
+            ],
+            "title": "Region",
+            "type": "string"
+          },
+          "upserted": {
+            "description": "Number of quarters inserted/updated",
+            "examples": [
+              48
+            ],
+            "title": "Upserted",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "region",
+          "upserted",
+          "ok"
+        ],
+        "title": "IndexRefreshResult",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

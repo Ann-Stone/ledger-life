@@ -1,0 +1,27 @@
+// 損益表 (Income statement) page.
+export default {
+  title: '損益表',
+  subtitle: '{year} 年 · 本業 / 投資 / 綜合',
+  empty: '暫無損益資料',
+  tabMonthly: '月度',
+  tabYearly: '年度',
+  operatingNet: '本業淨額',
+  operatingTooltip: '本業收入（薪資等）− 生活支出（固定＋變動）',
+  investmentNet: '投資損益',
+  investmentTooltip: '孳息（股息/利息）＋ 已實現資本利得 ＋ 未實現市值變動',
+  comprehensiveNet: '綜合損益',
+  comprehensiveTooltip: '本業淨額 ＋ 投資損益',
+  composition: '損益構成（本業 → 投資 → 綜合）',
+  byPeriod: '逐期損益',
+  detail: '損益明細',
+  detailNote:
+    '孳息（被動收入）歸於「投資損益」，與「年度支出」頁將其計入收入的口徑不同——兩者刻意分流，並非錯誤。',
+  operatingPnl: '本業損益',
+  activeIncome: '本業收入',
+  fixedExpense: '固定支出',
+  floatingExpense: '變動支出',
+  loanInterest: '貸款利息',
+  dividend: '孳息（股息/利息）',
+  realized: '已實現資本利得',
+  unrealized: '未實現市值變動',
+}

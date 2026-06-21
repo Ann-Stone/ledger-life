@@ -1,0 +1,66 @@
+{
+  "components": {
+    "schemas": {
+      "TargetSettingUpdate": {
+        "example": {
+          "is_done": "Y"
+        },
+        "properties": {
+          "is_done": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Y/N",
+            "examples": [
+              "Y"
+            ],
+            "title": "Is Done"
+          },
+          "setting_value": {
+            "anyOf": [
+              {
+                "maxLength": 45,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Target description / value",
+            "examples": [
+              "Buy a house by Q4"
+            ],
+            "title": "Setting Value"
+          },
+          "target_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYY",
+            "examples": [
+              "2026"
+            ],
+            "title": "Target Year"
+          }
+        },
+        "title": "TargetSettingUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

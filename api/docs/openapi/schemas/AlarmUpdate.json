@@ -1,0 +1,84 @@
+{
+  "components": {
+    "schemas": {
+      "AlarmUpdate": {
+        "example": {
+          "content": "報稅"
+        },
+        "properties": {
+          "alarm_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Recurring anchor: MMDD for Y, DD for M",
+            "examples": [
+              "0531"
+            ],
+            "title": "Alarm Date"
+          },
+          "alarm_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "Y",
+                  "M"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Recurrence: 'Y' yearly, 'M' monthly",
+            "examples": [
+              "Y"
+            ],
+            "title": "Alarm Type"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reminder text",
+            "examples": [
+              "報稅"
+            ],
+            "title": "Content"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional YYYYMM cutoff",
+            "examples": [
+              "202612"
+            ],
+            "title": "Due Date"
+          }
+        },
+        "title": "AlarmUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

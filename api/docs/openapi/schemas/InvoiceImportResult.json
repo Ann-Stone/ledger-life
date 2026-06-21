@@ -1,0 +1,98 @@
+{
+  "components": {
+    "schemas": {
+      "InvoiceImportResult": {
+        "example": {
+          "errors": [
+            {
+              "line": 42,
+              "reason": "malformed amount column"
+            }
+          ],
+          "failed": 1,
+          "imported": 10,
+          "months": [
+            {
+              "imported": 12,
+              "month": "202603",
+              "skipped": 3
+            }
+          ],
+          "skipped": 3
+        },
+        "properties": {
+          "errors": {
+            "description": "Per-row error details for failed rows",
+            "examples": [
+              [
+                {
+                  "line": 42,
+                  "reason": "malformed amount column"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InvoiceImportError"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "failed": {
+            "description": "Number of rows that raised an error during processing",
+            "examples": [
+              1
+            ],
+            "title": "Failed",
+            "type": "integer"
+          },
+          "imported": {
+            "description": "Number of journal rows successfully inserted",
+            "examples": [
+              10
+            ],
+            "title": "Imported",
+            "type": "integer"
+          },
+          "months": {
+            "description": "Per-month breakdown of imported/skipped counts, sorted by month",
+            "examples": [
+              [
+                {
+                  "imported": 12,
+                  "month": "202603",
+                  "skipped": 3
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InvoiceImportMonth"
+            },
+            "title": "Months",
+            "type": "array"
+          },
+          "skipped": {
+            "description": "Number of rows skipped (skip-list match or duplicate invoice)",
+            "examples": [
+              3
+            ],
+            "title": "Skipped",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "imported",
+          "skipped",
+          "failed",
+          "errors"
+        ],
+        "title": "InvoiceImportResult",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

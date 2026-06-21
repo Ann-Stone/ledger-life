@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "CashFlowItem": {
+        "example": {
+          "amount": 960000.0,
+          "label": "收入"
+        },
+        "properties": {
+          "amount": {
+            "description": "Signed cash flow (positive = in, negative = out)",
+            "examples": [
+              960000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "label": {
+            "description": "Component label",
+            "examples": [
+              "收入"
+            ],
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "amount"
+        ],
+        "title": "CashFlowItem",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,353 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/settings/codes": {
+      "get": {
+        "description": "List all main (top-level) codes ordered by code_index.",
+        "operationId": "list_codes_endpoint_settings_codes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_CodeDataRead__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List main codes",
+        "tags": [
+          "settings",
+          "settings:codes"
+        ]
+      },
+      "post": {
+        "description": "Create a main code. If code_type is Fixed or Floating, a Budget row for the current year is auto-inserted with all monthly amounts set to 0.",
+        "operationId": "create_code_endpoint_settings_codes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeDataCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CodeDataRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Duplicate code_id",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Duplicate code_id"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create main code",
+        "tags": [
+          "settings",
+          "settings:codes"
+        ]
+      }
+    },
+    "/settings/codes/{code_id}": {
+      "delete": {
+        "description": "Delete a main code by code_id. Returns 404 if not found.",
+        "operationId": "delete_code_endpoint_settings_codes__code_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code_id",
+            "required": true,
+            "schema": {
+              "title": "Code Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_dict_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Code 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Code not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Delete main code",
+        "tags": [
+          "settings",
+          "settings:codes"
+        ]
+      },
+      "put": {
+        "description": "Update a main code by code_id. Returns 404 if not found.",
+        "operationId": "update_code_endpoint_settings_codes__code_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code_id",
+            "required": true,
+            "schema": {
+              "title": "Code Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeDataUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CodeDataRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Code 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Code not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update main code",
+        "tags": [
+          "settings",
+          "settings:codes"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_CodeDataRead_.json",
+    "schemas/ApiResponse_dict_.json",
+    "schemas/ApiResponse_list_CodeDataRead__.json",
+    "schemas/CodeDataCreate.json",
+    "schemas/CodeDataRead.json",
+    "schemas/CodeDataUpdate.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

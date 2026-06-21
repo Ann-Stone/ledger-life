@@ -1,0 +1,136 @@
+{
+  "components": {
+    "schemas": {
+      "InsuranceCreate": {
+        "example": {
+          "asset_id": "AC-INS-001",
+          "end_date": "20500101",
+          "expected_spend": 1200.0,
+          "has_closed": "N",
+          "in_account": "BANK-CHASE-01",
+          "insurance_id": "INS-001",
+          "insurance_name": "Whole life policy",
+          "out_account": "BANK-CHASE-01",
+          "pay_day": "01/15",
+          "pay_type": "annual",
+          "start_date": "20200101"
+        },
+        "properties": {
+          "asset_id": {
+            "description": "Asset category ID",
+            "examples": [
+              "AC-INS-001"
+            ],
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20500101"
+            ],
+            "title": "End Date",
+            "type": "string"
+          },
+          "expected_spend": {
+            "description": "Expected premium per pay_type cadence (e.g. annual premium amount when pay_type='annual')",
+            "examples": [
+              1200.0
+            ],
+            "title": "Expected Spend",
+            "type": "number"
+          },
+          "has_closed": {
+            "description": "Closed flag (Y/N)",
+            "enum": [
+              "Y",
+              "N"
+            ],
+            "examples": [
+              "N"
+            ],
+            "title": "Has Closed",
+            "type": "string"
+          },
+          "in_account": {
+            "description": "Paying account id",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "In Account",
+            "type": "string"
+          },
+          "insurance_id": {
+            "description": "Policy business ID",
+            "examples": [
+              "INS-001"
+            ],
+            "title": "Insurance Id",
+            "type": "string"
+          },
+          "insurance_name": {
+            "description": "Policy display name",
+            "examples": [
+              "Whole life policy"
+            ],
+            "title": "Insurance Name",
+            "type": "string"
+          },
+          "out_account": {
+            "description": "Disbursing account id",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Out Account",
+            "type": "string"
+          },
+          "pay_day": {
+            "description": "Premium date(s); 'DD' / 'MM/DD' / 'MM/DD,...' by pay_type",
+            "examples": [
+              "01/15"
+            ],
+            "maxLength": 23,
+            "title": "Pay Day",
+            "type": "string"
+          },
+          "pay_type": {
+            "description": "Premium cadence",
+            "examples": [
+              "annual"
+            ],
+            "title": "Pay Type",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Start Date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "insurance_id",
+          "insurance_name",
+          "asset_id",
+          "in_account",
+          "out_account",
+          "start_date",
+          "end_date",
+          "pay_type",
+          "pay_day",
+          "expected_spend",
+          "has_closed"
+        ],
+        "title": "InsuranceCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

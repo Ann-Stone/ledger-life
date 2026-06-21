@@ -1,0 +1,117 @@
+{
+  "components": {
+    "schemas": {
+      "StockDetailRead": {
+        "example": {
+          "account_id": "BANK-CHASE-01",
+          "account_name": "Chase Checking",
+          "distinct_number": 1,
+          "excute_amount": 10.0,
+          "excute_date": "20260418",
+          "excute_price": 180.5,
+          "excute_type": "buy",
+          "memo": "Initial buy",
+          "stock_id": "STK-H-001"
+        },
+        "properties": {
+          "account_id": {
+            "description": "Settling account business ID",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Account Id",
+            "type": "string"
+          },
+          "account_name": {
+            "description": "Settling account display name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Account Name",
+            "type": "string"
+          },
+          "distinct_number": {
+            "description": "Autoincrement PK",
+            "examples": [
+              1
+            ],
+            "title": "Distinct Number",
+            "type": "integer"
+          },
+          "excute_amount": {
+            "description": "Quantity traded",
+            "examples": [
+              10.0
+            ],
+            "title": "Excute Amount",
+            "type": "number"
+          },
+          "excute_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260418"
+            ],
+            "title": "Excute Date",
+            "type": "string"
+          },
+          "excute_price": {
+            "description": "Price per share",
+            "examples": [
+              180.5
+            ],
+            "title": "Excute Price",
+            "type": "number"
+          },
+          "excute_type": {
+            "description": "buy / sell / dividend",
+            "examples": [
+              "buy"
+            ],
+            "title": "Excute Type",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Initial buy"
+            ],
+            "title": "Memo"
+          },
+          "stock_id": {
+            "description": "FK to Stock_Journal.stock_id",
+            "examples": [
+              "STK-H-001"
+            ],
+            "title": "Stock Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "distinct_number",
+          "stock_id",
+          "excute_type",
+          "excute_amount",
+          "excute_price",
+          "excute_date",
+          "account_id",
+          "account_name"
+        ],
+        "title": "StockDetailRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

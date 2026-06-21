@@ -1,0 +1,291 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/settings/sub-codes": {
+      "post": {
+        "description": "Create a sub-code. parent_id must reference an existing main code (404 otherwise).",
+        "operationId": "create_sub_code_endpoint_settings_sub_codes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeDataCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CodeDataRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Parent code 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Parent code not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create sub-code",
+        "tags": [
+          "settings",
+          "settings:sub-codes"
+        ]
+      }
+    },
+    "/settings/sub-codes/{code_id}": {
+      "delete": {
+        "description": "Delete a sub-code by code_id. Returns 404 if not found. No cascading.",
+        "operationId": "delete_sub_code_endpoint_settings_sub_codes__code_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code_id",
+            "required": true,
+            "schema": {
+              "title": "Code Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_dict_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Sub-code 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Sub-code not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Delete sub-code",
+        "tags": [
+          "settings",
+          "settings:sub-codes"
+        ]
+      },
+      "put": {
+        "description": "Update a sub-code by code_id. Returns 404 if not found.",
+        "operationId": "update_sub_code_endpoint_settings_sub_codes__code_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code_id",
+            "required": true,
+            "schema": {
+              "title": "Code Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeDataUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CodeDataRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Sub-code 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Sub-code not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update sub-code",
+        "tags": [
+          "settings",
+          "settings:sub-codes"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_CodeDataRead_.json",
+    "schemas/ApiResponse_dict_.json",
+    "schemas/CodeDataCreate.json",
+    "schemas/CodeDataRead.json",
+    "schemas/CodeDataUpdate.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

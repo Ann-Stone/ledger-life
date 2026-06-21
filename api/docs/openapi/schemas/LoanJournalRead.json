@@ -1,0 +1,87 @@
+{
+  "components": {
+    "schemas": {
+      "LoanJournalRead": {
+        "example": {
+          "distinct_number": 1,
+          "excute_date": "20260401",
+          "excute_price": 1500.0,
+          "loan_excute_type": "repayment",
+          "loan_id": "LN-001",
+          "memo": "April payment"
+        },
+        "properties": {
+          "distinct_number": {
+            "description": "Autoincrement PK",
+            "examples": [
+              1
+            ],
+            "title": "Distinct Number",
+            "type": "integer"
+          },
+          "excute_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260401"
+            ],
+            "title": "Excute Date",
+            "type": "string"
+          },
+          "excute_price": {
+            "description": "Amount",
+            "examples": [
+              1500.0
+            ],
+            "title": "Excute Price",
+            "type": "number"
+          },
+          "loan_excute_type": {
+            "description": "Execution type",
+            "examples": [
+              "repayment"
+            ],
+            "title": "Loan Excute Type",
+            "type": "string"
+          },
+          "loan_id": {
+            "description": "FK to Loan.loan_id",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "April payment"
+            ],
+            "title": "Memo"
+          }
+        },
+        "required": [
+          "distinct_number",
+          "loan_id",
+          "loan_excute_type",
+          "excute_price",
+          "excute_date"
+        ],
+        "title": "LoanJournalRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

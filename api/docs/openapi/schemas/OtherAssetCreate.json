@@ -1,0 +1,77 @@
+{
+  "components": {
+    "schemas": {
+      "OtherAssetCreate": {
+        "example": {
+          "asset_id": "AC-STK-001",
+          "asset_index": 1,
+          "asset_name": "US equities",
+          "asset_type": "stock",
+          "in_use": "Y"
+        },
+        "properties": {
+          "asset_id": {
+            "description": "Asset category business ID",
+            "examples": [
+              "AC-STK-001"
+            ],
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "asset_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Display order; server assigns max+1 if omitted",
+            "examples": [
+              1
+            ],
+            "title": "Asset Index"
+          },
+          "asset_name": {
+            "description": "Display name",
+            "examples": [
+              "US equities"
+            ],
+            "title": "Asset Name",
+            "type": "string"
+          },
+          "asset_type": {
+            "description": "Asset category type",
+            "examples": [
+              "stock"
+            ],
+            "title": "Asset Type",
+            "type": "string"
+          },
+          "in_use": {
+            "description": "Active flag",
+            "examples": [
+              "Y"
+            ],
+            "title": "In Use",
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset_id",
+          "asset_name",
+          "asset_type",
+          "in_use"
+        ],
+        "title": "OtherAssetCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

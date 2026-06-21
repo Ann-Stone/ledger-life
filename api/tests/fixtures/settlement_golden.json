@@ -1,0 +1,92 @@
+{
+  "estate": [
+    {
+      "id": "EST-1",
+      "asset_id": "AC-REAL",
+      "name": "Condo",
+      "market_value": 500000.0,
+      "cost": 500000.0,
+      "estate_status": "hold"
+    }
+  ],
+  "insurance": [
+    {
+      "id": "INS-1",
+      "asset_id": "AC-INS",
+      "name": "Whole life",
+      "surrender_value": 2400.0,
+      "cost": 2400.0,
+      "fx_code": "USD",
+      "fx_rate": 32.0
+    }
+  ],
+  "loan": [
+    {
+      "id": "LN-1",
+      "name": "Mortgage",
+      "balance": 240000.0,
+      "cost": 500.0
+    }
+  ],
+  "stock": [
+    {
+      "id": "H1",
+      "asset_id": "AC-STK",
+      "stock_code": "AAPL",
+      "stock_name": "Apple",
+      "amount": 10.0,
+      "price": 2050.0,
+      "cost": 1800.0,
+      "fx_code": "USD",
+      "fx_rate": 32.0
+    }
+  ],
+  "account_balance": [
+    {
+      "id": "FIN-1",
+      "name": "Finance Acct",
+      "balance": 0.0,
+      "fx_code": "TWD",
+      "fx_rate": 1.0,
+      "is_calculate": "Y"
+    },
+    {
+      "id": "JPY-1",
+      "name": "JPY Bank",
+      "balance": 0.0,
+      "fx_code": "JPY",
+      "fx_rate": 0.22,
+      "is_calculate": "Y"
+    },
+    {
+      "id": "TWD-1",
+      "name": "TWD Bank",
+      "balance": -14000.0,
+      "fx_code": "TWD",
+      "fx_rate": 1.0,
+      "is_calculate": "Y"
+    },
+    {
+      "id": "USD-1",
+      "name": "USD Bank",
+      "balance": -3050.0,
+      "fx_code": "USD",
+      "fx_rate": 32.0,
+      "is_calculate": "Y"
+    }
+  ],
+  "credit_card_balance": [
+    {
+      "id": "CC-A",
+      "name": "Card A",
+      "balance": -300.0,
+      "fx_rate": 1.0
+    },
+    {
+      "id": "CC-B",
+      "name": "Card B",
+      "balance": -20.0,
+      "fx_rate": 32.0
+    }
+  ]
+}

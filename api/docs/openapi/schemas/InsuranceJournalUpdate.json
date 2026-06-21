@@ -1,0 +1,86 @@
+{
+  "components": {
+    "schemas": {
+      "InsuranceJournalUpdate": {
+        "example": {
+          "memo": "Updated"
+        },
+        "properties": {
+          "excute_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260115"
+            ],
+            "title": "Excute Date"
+          },
+          "excute_price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Amount",
+            "examples": [
+              1200.0
+            ],
+            "title": "Excute Price"
+          },
+          "insurance_excute_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "pay",
+                  "cash",
+                  "return",
+                  "expect"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Execution type",
+            "examples": [
+              "cash"
+            ],
+            "title": "Insurance Excute Type"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Updated"
+            ],
+            "title": "Memo"
+          }
+        },
+        "title": "InsuranceJournalUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

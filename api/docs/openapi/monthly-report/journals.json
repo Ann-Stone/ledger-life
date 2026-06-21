@@ -1,0 +1,393 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/journals": {
+      "post": {
+        "description": "Persist a new Journal row. distinct_number is auto-assigned.",
+        "operationId": "post_journal_monthly_report_journals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create a journal entry",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/uncategorized-summary": {
+      "get": {
+        "description": "Return the total number of Journal rows whose action_main_type falls outside every report bucket (expense/income/invest/transfer — e.g. legacy 'undefined'/'No'/'' values), plus a per-month breakdown ordered newest first. Months with zero uncategorized rows are omitted.",
+        "operationId": "get_uncategorized_summary_monthly_report_journals_uncategorized_summary_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_UncategorizedSummaryResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Count uncategorized journals across all months",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{journal_id}": {
+      "delete": {
+        "description": "Delete a Journal identified by distinct_number.",
+        "operationId": "delete_journal_endpoint_monthly_report_journals__journal_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_dict_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Delete a journal entry",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      },
+      "put": {
+        "description": "Partial update of a Journal identified by distinct_number.",
+        "operationId": "put_journal_monthly_report_journals__journal_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update a journal entry",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{vesting_month}": {
+      "get": {
+        "description": "Return all Journal entries whose vesting_month matches the path parameter, ordered by spend_date. The response also includes the FX-converted gain/loss total for the month.",
+        "operationId": "get_journals_by_month_monthly_report_journals__vesting_month__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalMonthRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List journals for a month with gain/loss",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_JournalMonthRead_.json",
+    "schemas/ApiResponse_JournalRead_.json",
+    "schemas/ApiResponse_UncategorizedSummaryResponse_.json",
+    "schemas/ApiResponse_dict_.json",
+    "schemas/JournalCreate.json",
+    "schemas/JournalMonthRead.json",
+    "schemas/JournalRead.json",
+    "schemas/JournalUpdate.json",
+    "schemas/UncategorizedMonthCount.json",
+    "schemas/UncategorizedSummaryResponse.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

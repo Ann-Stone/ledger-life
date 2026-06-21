@@ -1,0 +1,19 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetType": {
+        "enum": [
+          "monthly",
+          "yearly"
+        ],
+        "title": "BudgetType",
+        "type": "string"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

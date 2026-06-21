@@ -1,0 +1,81 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetVarianceSummary": {
+        "example": {
+          "elapsed_months": 6,
+          "projected_total": 720000.0,
+          "total_actual": 360000.0,
+          "total_diff": -420000.0,
+          "total_expected": 780000.0,
+          "usage_rate": 0.4615
+        },
+        "properties": {
+          "elapsed_months": {
+            "description": "Highest month index (1-12) with expense data; 0 when none. Drives the projection.",
+            "examples": [
+              6
+            ],
+            "title": "Elapsed Months",
+            "type": "integer"
+          },
+          "projected_total": {
+            "description": "Run-rate annualized actual: total_actual / elapsed_months * 12 (= total_actual once the year is complete)",
+            "examples": [
+              720000.0
+            ],
+            "title": "Projected Total",
+            "type": "number"
+          },
+          "total_actual": {
+            "description": "Sum of actual across expense categories",
+            "examples": [
+              360000.0
+            ],
+            "title": "Total Actual",
+            "type": "number"
+          },
+          "total_diff": {
+            "description": "total_actual - total_expected",
+            "examples": [
+              -420000.0
+            ],
+            "title": "Total Diff",
+            "type": "number"
+          },
+          "total_expected": {
+            "description": "Sum of expected across expense categories",
+            "examples": [
+              780000.0
+            ],
+            "title": "Total Expected",
+            "type": "number"
+          },
+          "usage_rate": {
+            "description": "total_actual / total_expected (0 when no budget)",
+            "examples": [
+              0.4615
+            ],
+            "title": "Usage Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "total_expected",
+          "total_actual",
+          "total_diff",
+          "usage_rate",
+          "elapsed_months",
+          "projected_total"
+        ],
+        "title": "BudgetVarianceSummary",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

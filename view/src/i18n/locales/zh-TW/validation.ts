@@ -1,0 +1,23 @@
+// Form validation rule messages.
+export default {
+  required: '此欄位為必填',
+  yearFormat: '請輸入 YYYY',
+  enterContent: '請輸入內容',
+  pickDate: '請選擇日期',
+  pickAccount: '請選擇帳戶/卡片',
+  pickPaymentSource: '請選擇支付來源類型',
+  pickMainCategory: '請選擇主類別',
+  enterAmount: '請輸入金額',
+  enterCode: '請輸入代號',
+  enterOpenPrice: '請輸入開盤價',
+  enterHighPrice: '請輸入最高價',
+  enterLowPrice: '請輸入最低價',
+  enterClosePrice: '請輸入收盤價',
+  enterSurrenderValue: '請輸入解約金',
+  enterMarketValue: '請輸入市值',
+  pickType: '請選擇類型',
+  enterQuantity: '請輸入數量',
+  enterUnitPrice: '請輸入單價',
+  enterAccountId: '請輸入帳戶 ID',
+  enterAccountName: '請輸入帳戶名稱',
+}

@@ -1,0 +1,86 @@
+{
+  "components": {
+    "schemas": {
+      "LoanTransactionDetailCreate": {
+        "description": "Loan repayment split accepted by the composite endpoint.\n\n``principal`` and ``interest`` are POSITIVE magnitudes; the service stores\neach (when > 0) as its own ``Loan_Journal`` row and copies the values\nverbatim (no sign flip). Either portion may be 0 (an interest-only or\nprincipal-only payment) but not both. The journal ``spending`` is the signed\ntotal outflow ``−(principal+interest)``; the service rejects a mismatch.",
+        "example": {
+          "excute_date": "20260401",
+          "interest": 1200.0,
+          "loan_id": "LN-001",
+          "memo": "April payment",
+          "principal": 8000.0
+        },
+        "properties": {
+          "excute_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD; defaults to journal.spend_date when omitted.",
+            "examples": [
+              "20260401"
+            ],
+            "title": "Excute Date"
+          },
+          "interest": {
+            "default": 0.0,
+            "description": "Interest portion (positive magnitude; an operating cost / expense).",
+            "examples": [
+              1200.0
+            ],
+            "minimum": 0.0,
+            "title": "Interest",
+            "type": "number"
+          },
+          "loan_id": {
+            "description": "Existing Loan.loan_id this repayment belongs to.",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo; defaults to journal.note when omitted.",
+            "examples": [
+              "April payment"
+            ],
+            "title": "Memo"
+          },
+          "principal": {
+            "default": 0.0,
+            "description": "Principal portion (positive magnitude; reduces the loan balance).",
+            "examples": [
+              8000.0
+            ],
+            "minimum": 0.0,
+            "title": "Principal",
+            "type": "number"
+          }
+        },
+        "required": [
+          "loan_id"
+        ],
+        "title": "LoanTransactionDetailCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

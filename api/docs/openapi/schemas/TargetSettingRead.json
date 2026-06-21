@@ -1,0 +1,62 @@
+{
+  "components": {
+    "schemas": {
+      "TargetSettingRead": {
+        "example": {
+          "distinct_number": "11",
+          "is_done": "N",
+          "setting_value": "存頭期款 200 萬",
+          "target_year": "2026"
+        },
+        "properties": {
+          "distinct_number": {
+            "description": "Sequential serial ID",
+            "examples": [
+              "11"
+            ],
+            "title": "Distinct Number",
+            "type": "string"
+          },
+          "is_done": {
+            "description": "Y/N",
+            "examples": [
+              "N"
+            ],
+            "title": "Is Done",
+            "type": "string"
+          },
+          "setting_value": {
+            "description": "Target description / value",
+            "examples": [
+              "存頭期款 200 萬"
+            ],
+            "maxLength": 45,
+            "title": "Setting Value",
+            "type": "string"
+          },
+          "target_year": {
+            "description": "YYYY",
+            "examples": [
+              "2026"
+            ],
+            "title": "Target Year",
+            "type": "string"
+          }
+        },
+        "required": [
+          "distinct_number",
+          "target_year",
+          "setting_value",
+          "is_done"
+        ],
+        "title": "TargetSettingRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

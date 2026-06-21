@@ -1,0 +1,38 @@
+# schedctl manifest — the ONE artifact you author for auto-start, on ANY OS.
+# `schedctl` reads this and renders the right per-OS job for you (launchd agent
+# on macOS, Task Scheduler job on Windows) — never hand-write either. Full
+# schema: the schedule-task skill's manifest-spec.md. Commands: scripts/autostart/README.md.
+#
+# The always-on job is the API server, which embeds the Telegram bot. The
+# embedded bot long-polls getUpdates, so mode = "poll" (MAX ONE poller per token).
+
+schema_version = 1
+
+[job]
+label       = "com.networth.api"
+description = "Networth API + embedded Telegram bookkeeping bot"
+# Absolute path to THIS machine's api/ directory — EDIT per host.
+#   macOS / Linux: /Users/<you>/.../networth/api
+#   Windows:       C:\Users\<you>\networth\api
+working_dir = "/ABSOLUTE/PATH/TO/networth/api"
+# argv array (no shell), identical on every OS. Ensure `uv` is on the job's PATH,
+# or use the absolute uv path here / set [env] PATH below. No --reload in production.
+command     = ["uv", "run", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "9528"]
+# Loaded at runtime by the wrapper; secrets never get baked into the task XML.
+env_file    = ".env"
+
+[schedule]
+kind        = "always_on"   # keep-alive daemon, comes up at login
+run_at_load = true
+restart     = "on_failure"
+
+[telegram]
+mode        = "poll"               # embedded bot owns getUpdates (one poller per token)
+token_env   = "TELEGRAM_BOT_TOKEN" # NAME only; the value lives in .env
+
+[net]
+ports       = [9528]               # so `schedctl doctor` catches a port clash
+
+[logs]
+stdout      = "logs/networth-api.out.log"   # logs/ is already git-ignored
+stderr      = "logs/networth-api.err.log"

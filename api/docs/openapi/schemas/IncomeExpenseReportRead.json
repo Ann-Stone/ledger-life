@@ -1,0 +1,77 @@
+{
+  "components": {
+    "schemas": {
+      "IncomeExpenseReportRead": {
+        "example": {
+          "points": [
+            {
+              "expense": 43000.0,
+              "fixed": 25000.0,
+              "floating": 18000.0,
+              "income": 80000.0,
+              "net": 37000.0,
+              "period": "202403"
+            }
+          ],
+          "summary": {
+            "net": 444000.0,
+            "savings_rate": 0.4625,
+            "total_expense": 516000.0,
+            "total_income": 960000.0
+          },
+          "type": "monthly"
+        },
+        "properties": {
+          "points": {
+            "description": "Time series, oldest first",
+            "examples": [
+              [
+                {
+                  "expense": 43000.0,
+                  "fixed": 25000.0,
+                  "floating": 18000.0,
+                  "income": 80000.0,
+                  "net": 37000.0,
+                  "period": "202403"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/IncomeExpensePoint"
+            },
+            "title": "Points",
+            "type": "array"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/IncomeExpenseSummary",
+            "description": "Totals and savings rate across the window"
+          },
+          "type": {
+            "description": "Aggregation granularity",
+            "enum": [
+              "monthly",
+              "yearly"
+            ],
+            "examples": [
+              "monthly"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "points",
+          "summary"
+        ],
+        "title": "IncomeExpenseReportRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

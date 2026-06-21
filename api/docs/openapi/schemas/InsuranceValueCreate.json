@@ -1,0 +1,67 @@
+{
+  "components": {
+    "schemas": {
+      "InsuranceValueCreate": {
+        "example": {
+          "insurance_id": "INS-001",
+          "memo": "保單第 6 年度解約金",
+          "surrender_value": 185000.0,
+          "vesting_month": "202604"
+        },
+        "properties": {
+          "insurance_id": {
+            "description": "FK to Insurance.insurance_id",
+            "examples": [
+              "INS-001"
+            ],
+            "title": "Insurance Id",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "保單第 6 年度解約金"
+            ],
+            "title": "Memo"
+          },
+          "surrender_value": {
+            "description": "解約金 in policy currency",
+            "examples": [
+              185000.0
+            ],
+            "title": "Surrender Value",
+            "type": "number"
+          },
+          "vesting_month": {
+            "description": "YYYYMM the value is effective from",
+            "examples": [
+              "202604"
+            ],
+            "title": "Vesting Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "insurance_id",
+          "vesting_month",
+          "surrender_value"
+        ],
+        "title": "InsuranceValueCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

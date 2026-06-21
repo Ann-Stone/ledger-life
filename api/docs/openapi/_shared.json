@@ -1,0 +1,64 @@
+{
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "description": "Failure response envelope.",
+        "example": {
+          "error": "ValueError: bad input",
+          "msg": "fail",
+          "status": 0
+        },
+        "properties": {
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Error payload. A string for simple errors, or a list/dict for validation details.",
+            "examples": [
+              "ValueError: bad input"
+            ],
+            "title": "Error"
+          },
+          "msg": {
+            "default": "fail",
+            "description": "Human-readable status message",
+            "examples": [
+              "fail"
+            ],
+            "title": "Msg",
+            "type": "string"
+          },
+          "status": {
+            "default": 0,
+            "description": "Always 0 for failure",
+            "examples": [
+              0
+            ],
+            "title": "Status",
+            "type": "integer"
+          }
+        },
+        "title": "ApiError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

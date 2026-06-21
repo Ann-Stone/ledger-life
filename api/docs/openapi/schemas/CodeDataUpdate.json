@@ -1,0 +1,110 @@
+{
+  "components": {
+    "schemas": {
+      "CodeDataUpdate": {
+        "example": {
+          "in_use": "N"
+        },
+        "properties": {
+          "code_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Dropdown order",
+            "examples": [
+              2
+            ],
+            "title": "Code Index"
+          },
+          "code_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "code type",
+            "examples": [
+              "Fixed"
+            ],
+            "title": "Code Type"
+          },
+          "in_use": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Active flag",
+            "examples": [
+              "N"
+            ],
+            "title": "In Use"
+          },
+          "is_annual_event": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Budget as a single annual envelope",
+            "examples": [
+              true
+            ],
+            "title": "Is Annual Event"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Display name",
+            "examples": [
+              "Renamed"
+            ],
+            "title": "Name"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Parent code_id",
+            "examples": [
+              null
+            ],
+            "title": "Parent Id"
+          }
+        },
+        "title": "CodeDataUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

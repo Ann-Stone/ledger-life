@@ -1,0 +1,61 @@
+{
+  "components": {
+    "schemas": {
+      "IncomeExpenseSummary": {
+        "example": {
+          "net": 444000.0,
+          "savings_rate": 0.4625,
+          "total_expense": 516000.0,
+          "total_income": 960000.0
+        },
+        "properties": {
+          "net": {
+            "description": "total_income - total_expense (net savings)",
+            "examples": [
+              444000.0
+            ],
+            "title": "Net",
+            "type": "number"
+          },
+          "savings_rate": {
+            "description": "net / total_income; 0 when no income, may be negative",
+            "examples": [
+              0.4625
+            ],
+            "title": "Savings Rate",
+            "type": "number"
+          },
+          "total_expense": {
+            "description": "Sum of expense across all periods in the window",
+            "examples": [
+              516000.0
+            ],
+            "title": "Total Expense",
+            "type": "number"
+          },
+          "total_income": {
+            "description": "Sum of income across all periods in the window",
+            "examples": [
+              960000.0
+            ],
+            "title": "Total Income",
+            "type": "number"
+          }
+        },
+        "required": [
+          "total_income",
+          "total_expense",
+          "net",
+          "savings_rate"
+        ],
+        "title": "IncomeExpenseSummary",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

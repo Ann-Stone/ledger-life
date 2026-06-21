@@ -1,0 +1,200 @@
+{
+  "components": {
+    "schemas": {
+      "LoanUpdate": {
+        "example": {
+          "repayed": 13000.0
+        },
+        "properties": {
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Repayment account business ID",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Account Id"
+          },
+          "account_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Repayment account display name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Account Name"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Original loan amount",
+            "examples": [
+              250000.0
+            ],
+            "title": "Amount"
+          },
+          "apply_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Apply Date"
+          },
+          "grace_expire_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Grace period end",
+            "examples": [
+              "20200401"
+            ],
+            "title": "Grace Expire Date"
+          },
+          "interest_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Annual interest rate",
+            "examples": [
+              0.035
+            ],
+            "title": "Interest Rate"
+          },
+          "loan_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Dropdown order",
+            "examples": [
+              2
+            ],
+            "title": "Loan Index"
+          },
+          "loan_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Loan display name",
+            "examples": [
+              "Mortgage"
+            ],
+            "title": "Loan Name"
+          },
+          "loan_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Loan type",
+            "examples": [
+              "mortgage"
+            ],
+            "title": "Loan Type"
+          },
+          "pay_day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Day of month for repayment",
+            "examples": [
+              1
+            ],
+            "title": "Pay Day"
+          },
+          "period": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Loan period in months",
+            "examples": [
+              360
+            ],
+            "title": "Period"
+          },
+          "repayed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Cumulative principal repaid",
+            "examples": [
+              12500.0
+            ],
+            "title": "Repayed"
+          }
+        },
+        "title": "LoanUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,80 @@
+{
+  "components": {
+    "schemas": {
+      "OtherAssetUpdate": {
+        "example": {
+          "in_use": "N"
+        },
+        "properties": {
+          "asset_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Dropdown order",
+            "examples": [
+              2
+            ],
+            "title": "Asset Index"
+          },
+          "asset_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Display name",
+            "examples": [
+              "US equities"
+            ],
+            "title": "Asset Name"
+          },
+          "asset_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Asset category type",
+            "examples": [
+              "stock"
+            ],
+            "title": "Asset Type"
+          },
+          "in_use": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Active flag",
+            "examples": [
+              "N"
+            ],
+            "title": "In Use"
+          }
+        },
+        "title": "OtherAssetUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

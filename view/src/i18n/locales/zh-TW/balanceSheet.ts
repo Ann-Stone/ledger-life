@@ -1,0 +1,37 @@
+// 資產負債表 (Balance sheet) page.
+export default {
+  title: '資產負債表',
+  empty: '尚無資產負債資料',
+  totalAssets: '總資產',
+  totalLiabilities: '總負債',
+  netAssets: '淨資產',
+  categoryOverview: '類別總覽',
+  assetDetail: '資產明細',
+  liabilityDetail: '負債明細',
+  originalCurrency: '原幣',
+  share: '佔比',
+  // Currency group labels (balanceTree)
+  curTWD: '台幣',
+  curUSD: '美金',
+  curJPY: '日圓',
+  curEUR: '歐元',
+  curCNY: '人民幣',
+  curHKD: '港幣',
+  curGBP: '英鎊',
+  curAUD: '澳幣',
+  // Stock market group labels (currency proxy)
+  mktTWD: '台股',
+  mktUSD: '美股',
+  mktJPY: '日股',
+  mktHKD: '港股',
+  mktCNY: '陸股',
+  mktEUR: '歐股',
+  mktFallback: '{code} 股',
+  // Category labels
+  catCash: '現金及約當現金',
+  catInvest: '投資',
+  catInsurance: '保險',
+  catEstate: '不動產',
+  catCreditCard: '信用卡',
+  catLoan: '貸款',
+}

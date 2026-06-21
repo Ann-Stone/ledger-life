@@ -1,0 +1,23 @@
+// Journal `note` field placeholder hints, keyed by category.
+export default {
+  optional: '(可選)',
+  transfer: '匯率：1 USD = ? TWD（跨幣別時必填）',
+  creditCardRepayment: '(可選) 對賬期間',
+  loanRepayment: '(可選) 期數',
+  premiums: '(可選) 保單號或保項',
+  favorLendOut: '對方姓名 + 事由（之後查餘額靠這欄）',
+  favorBorrowIn: '對方姓名 + 事由',
+  loanIncomeBorrow: '對方姓名（要對得起當初借出的那筆）',
+  favorWedding: '(可選) 對方姓名 + 關係',
+  favorGift: '(可選) 對方姓名 + 場合',
+  favorTreat: '(可選) 對象 + 場合',
+  favorDefault: '(可選) 對方姓名',
+  dividendStock: '股票代號 + 股數，例如 TSLA 10',
+  dividendBankInterest: '(可選) 銀行或產品',
+  dividendSavingsInsurance: '(可選) 保單名',
+  investCapitalGain: '標的代號 + 損益',
+  investFutures: '標的 + 倉位',
+  investDefault: '(可選) 標的代號',
+  creditCardBonus: '(可選) 活動名或回饋來源',
+  rentIncome: '房客姓名 + 月份',
+}

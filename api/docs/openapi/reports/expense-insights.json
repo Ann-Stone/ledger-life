@@ -1,0 +1,95 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/reports/expense-insights/{year}": {
+      "get": {
+        "description": "Per expense category: this year vs prior-year actual with YoY rate (ordered by absolute change), plus the year's largest individual expense transactions. FX-converted; only Fixed/Floating rows count.",
+        "operationId": "get_insights_reports_expense_insights__year__get",
+        "parameters": [
+          {
+            "description": "Calendar year YYYY",
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "description": "Calendar year YYYY",
+              "examples": [
+                "2026"
+              ],
+              "pattern": "^\\d{4}$",
+              "title": "Year",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ExpenseInsightsRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Get year-over-year change + largest transactions",
+        "tags": [
+          "reports"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_ExpenseInsightsRead_.json",
+    "schemas/ExpenseInsightsRead.json",
+    "schemas/LargeTxn.json",
+    "schemas/YoYRow.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

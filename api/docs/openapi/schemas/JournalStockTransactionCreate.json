@@ -1,0 +1,51 @@
+{
+  "components": {
+    "schemas": {
+      "JournalStockTransactionCreate": {
+        "description": "Composite payload: Journal + Stock_Detail written atomically.",
+        "example": {
+          "journal": {
+            "action_main": "INV01",
+            "action_main_table": "Code_Data",
+            "action_main_type": "Invest",
+            "note": "Buy AAPL",
+            "spend_date": "20260418",
+            "spend_way": "1",
+            "spend_way_table": "Account",
+            "spend_way_type": "account",
+            "spending": -1805.0,
+            "vesting_month": "202604"
+          },
+          "stock_detail": {
+            "excute_amount": 10.0,
+            "excute_date": "20260418",
+            "excute_type": "buy",
+            "memo": "First lot",
+            "stock_id": "STK-H-001"
+          }
+        },
+        "properties": {
+          "journal": {
+            "$ref": "#/components/schemas/JournalCreate",
+            "description": "Journal row to insert."
+          },
+          "stock_detail": {
+            "$ref": "#/components/schemas/StockTransactionDetailCreate",
+            "description": "Stock detail row derived from + linked to the journal."
+          }
+        },
+        "required": [
+          "journal",
+          "stock_detail"
+        ],
+        "title": "JournalStockTransactionCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

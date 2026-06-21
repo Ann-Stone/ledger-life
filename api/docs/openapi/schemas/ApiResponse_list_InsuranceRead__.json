@@ -1,0 +1,54 @@
+{
+  "components": {
+    "schemas": {
+      "ApiResponse_list_InsuranceRead__": {
+        "example": {
+          "msg": "success",
+          "status": 1
+        },
+        "properties": {
+          "data": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/InsuranceRead"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Response payload. Shape depends on the endpoint.",
+            "title": "Data"
+          },
+          "msg": {
+            "default": "success",
+            "description": "Human-readable status message",
+            "examples": [
+              "success"
+            ],
+            "title": "Msg",
+            "type": "string"
+          },
+          "status": {
+            "default": 1,
+            "description": "1 = success, 0 = fail",
+            "examples": [
+              1
+            ],
+            "title": "Status",
+            "type": "integer"
+          }
+        },
+        "title": "ApiResponse[list[InsuranceRead]]",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,26 @@
+{
+  "components": {
+    "schemas": {
+      "Body_trigger_invoice_import_utilities_import_invoices_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "description": "Pipe-delimited invoice CSV",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_trigger_invoice_import_utilities_import_invoices_post",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

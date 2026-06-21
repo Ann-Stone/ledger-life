@@ -1,0 +1,307 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/estate-values": {
+      "post": {
+        "description": "Upsert the 估值 for an (estate, month). Idempotent on the composite key; 404 when the estate does not exist.",
+        "operationId": "post_estate_value_monthly_report_estate_values_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstateValueCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_EstateValueRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Estate 42 not found",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Estate not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Record (insert or update) a property's market value for a month",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/estate-values/refresh-index": {
+      "post": {
+        "description": "Pull the latest 住宅價格指數 (repeat-sales, market-based) from data.gov.tw open data and upsert the quarterly series. Best-effort: on a fetch/parse failure it keeps the existing data and returns ok=false.",
+        "operationId": "post_refresh_index_monthly_report_estate_values_refresh_index_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_IndexRefreshResult_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Refresh the house-price index from data.gov.tw (best-effort)",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/estate-values/{vesting_month}": {
+      "get": {
+        "description": "For every real-estate holding, return the latest recorded market value (估值) on or before month-end (carried forward), with a ``recorded`` flag that is true only when entered in this exact month.",
+        "operationId": "get_estate_values_by_month_monthly_report_estate_values__vesting_month__get",
+        "parameters": [
+          {
+            "description": "YYYYMM",
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "description": "YYYYMM",
+              "examples": [
+                "202604"
+              ],
+              "pattern": "^\\d{6}$",
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_EstateValueMonthRead__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Month-level market values for every property",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/estate-values/{vesting_month}/suggestions": {
+      "get": {
+        "description": "For each estate, suggest a market value = acquisition cost × (current index / obtain-quarter index), using the configured house-price index region. suggested_market_value is null when the index is unavailable. The suggestion is advisory — a recorded value always overrides it.",
+        "operationId": "get_estate_value_suggestions_monthly_report_estate_values__vesting_month__suggestions_get",
+        "parameters": [
+          {
+            "description": "YYYYMM",
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "description": "YYYYMM",
+              "examples": [
+                "202604"
+              ],
+              "pattern": "^\\d{6}$",
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_EstateValueSuggestion__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Index-based suggested market value per property",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_EstateValueRead_.json",
+    "schemas/ApiResponse_IndexRefreshResult_.json",
+    "schemas/ApiResponse_list_EstateValueMonthRead__.json",
+    "schemas/ApiResponse_list_EstateValueSuggestion__.json",
+    "schemas/EstateValueCreate.json",
+    "schemas/EstateValueMonthRead.json",
+    "schemas/EstateValueRead.json",
+    "schemas/EstateValueSuggestion.json",
+    "schemas/IndexRefreshResult.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

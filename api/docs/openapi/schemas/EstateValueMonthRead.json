@@ -1,0 +1,84 @@
+{
+  "components": {
+    "schemas": {
+      "EstateValueMonthRead": {
+        "description": "Per-estate view for a month: recorded market value plus context for the form.\n\n``market_value`` is the latest recorded value on or before the month (carried\nforward); ``recorded`` is True only when entered in this exact month.",
+        "example": {
+          "estate_id": "EST-001",
+          "estate_name": "主要住所",
+          "market_value": 13800000.0,
+          "recorded": true,
+          "vesting_month": "202604"
+        },
+        "properties": {
+          "estate_id": {
+            "description": "Estate business ID",
+            "examples": [
+              "EST-001"
+            ],
+            "title": "Estate Id",
+            "type": "string"
+          },
+          "estate_name": {
+            "description": "Estate display name",
+            "examples": [
+              "主要住所"
+            ],
+            "title": "Estate Name",
+            "type": "string"
+          },
+          "market_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Latest recorded market value on or before the month, or null when none",
+            "examples": [
+              13800000.0
+            ],
+            "title": "Market Value"
+          },
+          "recorded": {
+            "default": false,
+            "description": "True when a value was recorded in this exact month (not carried forward)",
+            "examples": [
+              true
+            ],
+            "title": "Recorded",
+            "type": "boolean"
+          },
+          "vesting_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMM the market_value was recorded for, or null when none",
+            "examples": [
+              "202604"
+            ],
+            "title": "Vesting Month"
+          }
+        },
+        "required": [
+          "estate_id",
+          "estate_name"
+        ],
+        "title": "EstateValueMonthRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

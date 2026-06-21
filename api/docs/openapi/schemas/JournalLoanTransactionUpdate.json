@@ -1,0 +1,48 @@
+{
+  "components": {
+    "schemas": {
+      "JournalLoanTransactionUpdate": {
+        "description": "Composite payload for editing a Journal while creating its Loan_Journal rows.\n\nUsed when re-classifying a previously-untagged journal as a loan repayment.\nThe Journal is updated in place; the Loan_Journal rows are always created\nfresh — partial edits of existing rows go through the independent\nLoan_Journal endpoints. Both writes succeed or both roll back.",
+        "example": {
+          "journal": {
+            "action_main": "LoanRepayment",
+            "action_main_table": "Loan",
+            "action_main_type": "LoanRepayment",
+            "action_sub": "LN-001",
+            "action_sub_table": "Loan",
+            "action_sub_type": "Loan",
+            "note": "Re-classified as loan repayment"
+          },
+          "loan_detail": {
+            "excute_date": "20260401",
+            "interest": 1200.0,
+            "loan_id": "LN-001",
+            "memo": "April payment",
+            "principal": 8000.0
+          }
+        },
+        "properties": {
+          "journal": {
+            "$ref": "#/components/schemas/JournalUpdate",
+            "description": "Journal fields to update."
+          },
+          "loan_detail": {
+            "$ref": "#/components/schemas/LoanTransactionDetailCreate",
+            "description": "Loan repayment split to insert alongside the update."
+          }
+        },
+        "required": [
+          "journal",
+          "loan_detail"
+        ],
+        "title": "JournalLoanTransactionUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

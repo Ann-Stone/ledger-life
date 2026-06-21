@@ -1,0 +1,787 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/journals/estate-transaction": {
+      "post": {
+        "description": "Persist a Journal row and an Estate_Journal row in a single database transaction. excute_price is copied verbatim from journal.spending (sign preserved). Estate_Journal stores no payment source, so unlike the stock variant there is no settling-account lookup.",
+        "operationId": "post_journal_estate_transaction_monthly_report_journals_estate_transaction_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalEstateTransactionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalEstateTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Estate not found: EST-001",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Estate not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create a journal entry + estate transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/insurance-transaction": {
+      "post": {
+        "description": "Persist a Journal row and an Insurance_Journal row in a single database transaction. excute_price is copied verbatim from journal.spending (sign preserved). Insurance_Journal stores no payment source, so unlike the stock variant there is no settling-account lookup.",
+        "operationId": "post_journal_insurance_transaction_monthly_report_journals_insurance_transaction_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalInsuranceTransactionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalInsuranceTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Insurance not found: INS-001",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Insurance policy not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create a journal entry + insurance transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/loan-transaction": {
+      "post": {
+        "description": "Persist a Journal row and its Loan_Journal rows in a single database transaction. The repayment splits into a principal portion and an interest portion, each stored as a positive magnitude (NOT a signed copy of journal.spending); journal.spending is the signed total outflow and must equal −(principal+interest). Loan_Journal stores no payment source, so unlike the stock variant there is no settling-account lookup.",
+        "operationId": "post_journal_loan_transaction_monthly_report_journals_loan_transaction_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalLoanTransactionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalLoanTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Loan not found: LN-001",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Loan not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create a journal entry + loan repayment (principal/interest) atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/stock-transaction": {
+      "post": {
+        "description": "Persist a Journal row and a Stock_Detail row in a single database transaction. excute_price is copied verbatim from journal.spending (sign preserved); account_id/account_name are resolved from journal.spend_way (account or credit card).",
+        "operationId": "post_journal_stock_transaction_monthly_report_journals_stock_transaction_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalStockTransactionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalStockTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Stock not found: STK-H-001",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Settling source or stock not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Create a journal entry + stock transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{journal_id}/estate-transaction": {
+      "put": {
+        "description": "Apply a partial Journal update and insert a brand-new Estate_Journal row in a single database transaction. Intended for re-classifying a previously-untagged journal (action_sub null) as an estate transaction. Both writes succeed or both roll back.",
+        "operationId": "put_journal_estate_transaction_monthly_report_journals__journal_id__estate_transaction_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalEstateTransactionUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalEstateTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal not found: 42",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal or estate not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update a journal entry + create estate transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{journal_id}/insurance-transaction": {
+      "put": {
+        "description": "Apply a partial Journal update and insert a brand-new Insurance_Journal row in a single database transaction. Intended for re-classifying a previously-untagged journal (action_sub null) as an insurance transaction. Both writes succeed or both roll back.",
+        "operationId": "put_journal_insurance_transaction_monthly_report_journals__journal_id__insurance_transaction_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalInsuranceTransactionUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalInsuranceTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal not found: 42",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal or insurance policy not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update a journal entry + create insurance transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{journal_id}/loan-transaction": {
+      "put": {
+        "description": "Apply a partial Journal update and insert fresh Loan_Journal rows (principal/interest) in a single database transaction. Intended for re-classifying a previously-untagged journal as a loan repayment. Both writes succeed or both roll back.",
+        "operationId": "put_journal_loan_transaction_monthly_report_journals__journal_id__loan_transaction_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalLoanTransactionUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalLoanTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal not found: 42",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal or loan not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update a journal entry + create loan repayment rows atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{journal_id}/stock-transaction": {
+      "put": {
+        "description": "Apply a partial Journal update and insert a brand-new Stock_Detail row in a single database transaction. Intended for the case where a journal was originally untagged (action_sub null) and is being re-classified as a stock transaction. Both writes succeed or both roll back.",
+        "operationId": "put_journal_stock_transaction_monthly_report_journals__journal_id__stock_transaction_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "journal_id",
+            "required": true,
+            "schema": {
+              "title": "Journal Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JournalStockTransactionUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_JournalStockTransactionRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Journal not found: 42",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Journal, settling source, or stock not found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Update a journal entry + create stock transaction atomically",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_JournalEstateTransactionRead_.json",
+    "schemas/ApiResponse_JournalInsuranceTransactionRead_.json",
+    "schemas/ApiResponse_JournalLoanTransactionRead_.json",
+    "schemas/ApiResponse_JournalStockTransactionRead_.json",
+    "schemas/EstateJournalRead.json",
+    "schemas/EstateTransactionDetailCreate.json",
+    "schemas/InsuranceJournalRead.json",
+    "schemas/InsuranceTransactionDetailCreate.json",
+    "schemas/JournalCreate.json",
+    "schemas/JournalEstateTransactionCreate.json",
+    "schemas/JournalEstateTransactionRead.json",
+    "schemas/JournalEstateTransactionUpdate.json",
+    "schemas/JournalInsuranceTransactionCreate.json",
+    "schemas/JournalInsuranceTransactionRead.json",
+    "schemas/JournalInsuranceTransactionUpdate.json",
+    "schemas/JournalLoanTransactionCreate.json",
+    "schemas/JournalLoanTransactionRead.json",
+    "schemas/JournalLoanTransactionUpdate.json",
+    "schemas/JournalRead.json",
+    "schemas/JournalStockTransactionCreate.json",
+    "schemas/JournalStockTransactionRead.json",
+    "schemas/JournalStockTransactionUpdate.json",
+    "schemas/JournalUpdate.json",
+    "schemas/LoanJournalRead.json",
+    "schemas/LoanTransactionDetailCreate.json",
+    "schemas/StockDetailRead.json",
+    "schemas/StockTransactionDetailCreate.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

@@ -1,0 +1,25 @@
+// Sidebar navigation labels + group headings + Navbar font-scale options.
+export default {
+  dashboard: '儀表板',
+  cashFlow: '月度帳務',
+  otherAssets: '資產管理',
+  reports: '財務報表',
+  balanceSheet: '資產負債表',
+  incomeStatement: '損益表',
+  cashFlowStatement: '現金流量表',
+  spending: '年度支出',
+  assets: '資產概覽',
+  settings: '設定',
+  settingMenu: '選單設定',
+  settingBudget: '預算設定',
+  settingRemind: '提醒設定',
+  utilities: '工具',
+  import: '資料匯入',
+  // Navbar font-scale dropdown
+  adjustFontSize: '調整字級',
+  fontXS: '極小 (85%)',
+  fontSM: '小 (92%)',
+  fontMD: '標準 (100%)',
+  fontLG: '大 (110%)',
+  fontXL: '極大 (120%)',
+}

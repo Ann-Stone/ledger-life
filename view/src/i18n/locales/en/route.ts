@@ -1,0 +1,23 @@
+// Document titles + breadcrumb segments. Consumed via meta.titleKey / meta.breadcrumbKeys.
+export default {
+  appName: 'Balance Sheet',
+  home: 'Home',
+  dashboard: 'Dashboard',
+  cashFlow: 'Monthly Ledger',
+  reports: 'Reports',
+  balanceSheet: 'Balance Sheet',
+  incomeStatement: 'Income Statement',
+  cashFlowStatement: 'Cash Flow Statement',
+  spending: 'Annual Spending',
+  assets: 'Asset Overview',
+  otherAssets: 'Assets & Liabilities',
+  settings: 'Settings',
+  settingMenu: 'Menu Settings',
+  settingBudget: 'Budget Settings',
+  settingRemind: 'Reminder Settings',
+  settingMenuLeaf: 'Menu',
+  settingBudgetLeaf: 'Budget',
+  settingRemindLeaf: 'Reminders',
+  utilities: 'Tools',
+  import: 'Data Import',
+}

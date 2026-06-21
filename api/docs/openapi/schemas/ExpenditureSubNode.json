@@ -1,0 +1,61 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureSubNode": {
+        "example": {
+          "amount": 18000.0,
+          "code": "E0101",
+          "name": "外食",
+          "share": 12.5
+        },
+        "properties": {
+          "amount": {
+            "description": "Expense magnitude in base currency, positive",
+            "examples": [
+              18000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "code": {
+            "description": "action_sub code_id ('' for the un-subcategorized remainder)",
+            "examples": [
+              "E0101"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "description": "Subcategory display name (Code_Data.name)",
+            "examples": [
+              "外食"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "share": {
+            "description": "Percentage of grand total expense",
+            "examples": [
+              12.5
+            ],
+            "title": "Share",
+            "type": "number"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "amount",
+          "share"
+        ],
+        "title": "ExpenditureSubNode",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

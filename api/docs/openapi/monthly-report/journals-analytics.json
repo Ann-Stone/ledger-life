@@ -1,0 +1,380 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/journals/{vesting_month}/expenditure-budget": {
+      "get": {
+        "description": "Compare expected (Budget.expected<MM>) vs actual (Journal.spending sum) per category, returning diff and usage_rate.",
+        "operationId": "get_expenditure_budget_monthly_report_journals__vesting_month__expenditure_budget_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ExpenditureBudgetResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No data for the month",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "No data for the month"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Actual vs budget per category",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{vesting_month}/expenditure-ratio": {
+      "get": {
+        "description": "Return outer/inner aggregations of journal spending for the given month. Outer = grouped by action_main_type; inner = grouped by action_sub_type. Excludes 'invest' and 'transfer' main types.",
+        "operationId": "get_expenditure_ratio_monthly_report_journals__vesting_month__expenditure_ratio_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_ExpenditureRatioResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No data for the month",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "No data for the month"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Monthly expenditure ratio (inner/outer pie)",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{vesting_month}/invest-ratio": {
+      "get": {
+        "description": "Aggregate journal spending whose action_main_type == 'invest', grouped by action_sub_type.",
+        "operationId": "get_invest_ratio_monthly_report_journals__vesting_month__invest_ratio_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_InvestRatioResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No data for the month",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "No data for the month"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Monthly invest ratio",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/journals/{vesting_month}/liability": {
+      "get": {
+        "description": "Aggregate journal spending whose spend_way_type == 'credit_card', grouped by credit card.",
+        "operationId": "get_liability_monthly_report_journals__vesting_month__liability_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_LiabilityResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "No data for the month",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "No data for the month"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Credit-card liability breakdown",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_ExpenditureBudgetResponse_.json",
+    "schemas/ApiResponse_ExpenditureRatioResponse_.json",
+    "schemas/ApiResponse_InvestRatioResponse_.json",
+    "schemas/ApiResponse_LiabilityResponse_.json",
+    "schemas/ExpenditureBudgetResponse.json",
+    "schemas/ExpenditureBudgetRow.json",
+    "schemas/ExpenditureRatioItem.json",
+    "schemas/ExpenditureRatioResponse.json",
+    "schemas/InvestRatioItem.json",
+    "schemas/InvestRatioResponse.json",
+    "schemas/LiabilityItem.json",
+    "schemas/LiabilityResponse.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

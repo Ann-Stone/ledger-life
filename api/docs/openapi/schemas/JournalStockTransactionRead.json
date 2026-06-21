@@ -1,0 +1,56 @@
+{
+  "components": {
+    "schemas": {
+      "JournalStockTransactionRead": {
+        "description": "Response body for the composite endpoint.",
+        "example": {
+          "journal": {
+            "action_main": "INV01",
+            "action_main_table": "Code_Data",
+            "action_main_type": "Invest",
+            "distinct_number": 42,
+            "note": "Buy AAPL",
+            "spend_date": "20260418",
+            "spend_way": "1",
+            "spend_way_table": "Account",
+            "spend_way_type": "account",
+            "spending": -1805.0,
+            "vesting_month": "202604"
+          },
+          "stock_detail": {
+            "account_id": "BANK-CHASE-01",
+            "account_name": "Chase Checking",
+            "distinct_number": 17,
+            "excute_amount": 10.0,
+            "excute_date": "20260418",
+            "excute_price": -1805.0,
+            "excute_type": "buy",
+            "memo": "First lot",
+            "stock_id": "STK-H-001"
+          }
+        },
+        "properties": {
+          "journal": {
+            "$ref": "#/components/schemas/JournalRead",
+            "description": "Persisted journal row."
+          },
+          "stock_detail": {
+            "$ref": "#/components/schemas/StockDetailRead",
+            "description": "Persisted stock detail row."
+          }
+        },
+        "required": [
+          "journal",
+          "stock_detail"
+        ],
+        "title": "JournalStockTransactionRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

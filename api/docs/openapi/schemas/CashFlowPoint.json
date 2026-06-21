@@ -1,0 +1,71 @@
+{
+  "components": {
+    "schemas": {
+      "CashFlowPoint": {
+        "example": {
+          "financing": -7000.0,
+          "investing": -15000.0,
+          "net_change": 15000.0,
+          "operating": 37000.0,
+          "period": "202403"
+        },
+        "properties": {
+          "financing": {
+            "description": "債務 net for the period (new borrowing − principal repayment), signed",
+            "examples": [
+              -7000.0
+            ],
+            "title": "Financing",
+            "type": "number"
+          },
+          "investing": {
+            "description": "投資 net for the period (buy negative, sell positive), signed",
+            "examples": [
+              -15000.0
+            ],
+            "title": "Investing",
+            "type": "number"
+          },
+          "net_change": {
+            "description": "operating + investing + financing for the period, signed",
+            "examples": [
+              15000.0
+            ],
+            "title": "Net Change",
+            "type": "number"
+          },
+          "operating": {
+            "description": "生活 net for the period (income − living − loan interest), signed",
+            "examples": [
+              37000.0
+            ],
+            "title": "Operating",
+            "type": "number"
+          },
+          "period": {
+            "description": "YYYYMM for monthly or YYYY for yearly",
+            "examples": [
+              "202403"
+            ],
+            "title": "Period",
+            "type": "string"
+          }
+        },
+        "required": [
+          "period",
+          "operating",
+          "investing",
+          "financing",
+          "net_change"
+        ],
+        "title": "CashFlowPoint",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

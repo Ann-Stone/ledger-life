@@ -1,0 +1,50 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureBudgetResponse": {
+        "example": {
+          "rows": [
+            {
+              "action_main_type": "expense",
+              "actual": 28500.5,
+              "diff": -1499.5,
+              "expected": 30000.0,
+              "usage_rate": 0.95
+            }
+          ]
+        },
+        "properties": {
+          "rows": {
+            "description": "Per action_main_type comparison rows",
+            "examples": [
+              [
+                {
+                  "action_main_type": "expense",
+                  "actual": 28500.5,
+                  "diff": -1499.5,
+                  "expected": 30000.0,
+                  "usage_rate": 0.95
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditureBudgetRow"
+            },
+            "title": "Rows",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rows"
+        ],
+        "title": "ExpenditureBudgetResponse",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

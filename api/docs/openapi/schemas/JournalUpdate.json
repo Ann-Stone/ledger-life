@@ -1,0 +1,230 @@
+{
+  "components": {
+    "schemas": {
+      "JournalUpdate": {
+        "example": {
+          "note": "Updated note"
+        },
+        "properties": {
+          "action_main": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reference to a Code_Data row's code_id. The set of valid code_ids is user-configurable via Settings → Codes.",
+            "examples": [
+              "EXP01"
+            ],
+            "title": "Action Main"
+          },
+          "action_main_table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source SQL table for action_main. Always 'Code_Data' for code-driven classification.",
+            "examples": [
+              "Code_Data"
+            ],
+            "title": "Action Main Table"
+          },
+          "action_main_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mirror of the referenced Code_Data.code_type. Common values: 'Fixed', 'Floating', 'Income', 'Invest', 'Transfer'. Frontend should fetch /utilities/selections/codes for the live set.",
+            "examples": [
+              "expense"
+            ],
+            "title": "Action Main Type"
+          },
+          "action_sub": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional sub-classification: a Code_Data.code_id whose parent_id equals action_main. Null when there is no secondary breakdown.",
+            "examples": [
+              null
+            ],
+            "title": "Action Sub"
+          },
+          "action_sub_table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source SQL table for action_sub. 'Code_Data' when action_sub is set, null otherwise.",
+            "examples": [
+              null
+            ],
+            "title": "Action Sub Table"
+          },
+          "action_sub_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mirror of the sub-code's Code_Data.code_type. Null when action_sub is null. Either all three action_sub_* fields are populated together or all three are null.",
+            "examples": [
+              null
+            ],
+            "title": "Action Sub Type"
+          },
+          "invoice_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Invoice number",
+            "examples": [
+              "AB12345678"
+            ],
+            "title": "Invoice Number"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form note",
+            "examples": [
+              "Updated"
+            ],
+            "title": "Note"
+          },
+          "spend_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260418"
+            ],
+            "title": "Spend Date"
+          },
+          "spend_way": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment source id",
+            "examples": [
+              "1"
+            ],
+            "title": "Spend Way"
+          },
+          "spend_way_table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source SQL table for spend_way. Must be 'Account' when spend_way_type='account', or 'Credit_Card' when spend_way_type='credit_card'.",
+            "examples": [
+              "Account"
+            ],
+            "title": "Spend Way Table"
+          },
+          "spend_way_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Polymorphic discriminator for spend_way. Valid values: 'account' (spend_way_table='Account', spend_way → Account.id PK) | 'credit_card' (spend_way_table='Credit_Card', spend_way → CreditCard.credit_card_id PK).",
+            "examples": [
+              "account"
+            ],
+            "title": "Spend Way Type"
+          },
+          "spending": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Signed amount",
+            "examples": [
+              -123.45
+            ],
+            "title": "Spending"
+          },
+          "vesting_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMM",
+            "examples": [
+              "202604"
+            ],
+            "title": "Vesting Month"
+          }
+        },
+        "title": "JournalUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,87 @@
+{
+  "components": {
+    "schemas": {
+      "EstateJournalRead": {
+        "example": {
+          "distinct_number": 1,
+          "estate_excute_type": "tax",
+          "estate_id": "EST-001",
+          "excute_date": "20200101",
+          "excute_price": 500000.0,
+          "memo": "Closing"
+        },
+        "properties": {
+          "distinct_number": {
+            "description": "Autoincrement PK",
+            "examples": [
+              1
+            ],
+            "title": "Distinct Number",
+            "type": "integer"
+          },
+          "estate_excute_type": {
+            "description": "Transaction type",
+            "examples": [
+              "purchase"
+            ],
+            "title": "Estate Excute Type",
+            "type": "string"
+          },
+          "estate_id": {
+            "description": "FK to Estate.estate_id",
+            "examples": [
+              "EST-001"
+            ],
+            "title": "Estate Id",
+            "type": "string"
+          },
+          "excute_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Excute Date",
+            "type": "string"
+          },
+          "excute_price": {
+            "description": "Amount",
+            "examples": [
+              500000.0
+            ],
+            "title": "Excute Price",
+            "type": "number"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Closing"
+            ],
+            "title": "Memo"
+          }
+        },
+        "required": [
+          "distinct_number",
+          "estate_id",
+          "estate_excute_type",
+          "excute_price",
+          "excute_date"
+        ],
+        "title": "EstateJournalRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

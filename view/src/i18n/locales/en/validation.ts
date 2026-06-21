@@ -1,0 +1,23 @@
+// Form validation rule messages.
+export default {
+  required: 'This field is required',
+  yearFormat: 'Enter YYYY',
+  enterContent: 'Enter content',
+  pickDate: 'Select a date',
+  pickAccount: 'Select account/card',
+  pickPaymentSource: 'Select payment source type',
+  pickMainCategory: 'Select main category',
+  enterAmount: 'Enter amount',
+  enterCode: 'Enter code',
+  enterOpenPrice: 'Enter open price',
+  enterHighPrice: 'Enter high price',
+  enterLowPrice: 'Enter low price',
+  enterClosePrice: 'Enter close price',
+  enterSurrenderValue: 'Enter surrender value',
+  enterMarketValue: 'Enter market value',
+  pickType: 'Select type',
+  enterQuantity: 'Enter quantity',
+  enterUnitPrice: 'Enter unit price',
+  enterAccountId: 'Enter account ID',
+  enterAccountName: 'Enter account name',
+}

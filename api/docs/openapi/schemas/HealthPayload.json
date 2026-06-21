@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "HealthPayload": {
+        "example": {
+          "alive": true,
+          "version": "1.0.0"
+        },
+        "properties": {
+          "alive": {
+            "description": "True when the API process is responsive",
+            "examples": [
+              true
+            ],
+            "title": "Alive",
+            "type": "boolean"
+          },
+          "version": {
+            "description": "Running app version (from pyproject.toml)",
+            "examples": [
+              "1.0.0"
+            ],
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "alive",
+          "version"
+        ],
+        "title": "HealthPayload",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

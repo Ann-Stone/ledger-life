@@ -1,0 +1,157 @@
+{
+  "components": {
+    "schemas": {
+      "LoanRead": {
+        "example": {
+          "account_id": "BANK-CHASE-01",
+          "account_name": "Chase Checking",
+          "amount": 250000.0,
+          "apply_date": "20200101",
+          "grace_expire_date": "20200401",
+          "interest_rate": 0.035,
+          "loan_id": "LN-001",
+          "loan_index": 1,
+          "loan_name": "Mortgage",
+          "loan_type": "mortgage",
+          "pay_day": 1,
+          "period": 360,
+          "repayed": 12500.0
+        },
+        "properties": {
+          "account_id": {
+            "description": "Repayment account business ID",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Account Id",
+            "type": "string"
+          },
+          "account_name": {
+            "description": "Repayment account display name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Account Name",
+            "type": "string"
+          },
+          "amount": {
+            "description": "Original loan amount",
+            "examples": [
+              250000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "apply_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Apply Date",
+            "type": "string"
+          },
+          "grace_expire_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Grace period end",
+            "examples": [
+              "20200401"
+            ],
+            "title": "Grace Expire Date"
+          },
+          "interest_rate": {
+            "description": "Annual interest rate",
+            "examples": [
+              0.035
+            ],
+            "title": "Interest Rate",
+            "type": "number"
+          },
+          "loan_id": {
+            "description": "Loan business ID",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "loan_index": {
+            "description": "Dropdown order",
+            "examples": [
+              1
+            ],
+            "title": "Loan Index",
+            "type": "integer"
+          },
+          "loan_name": {
+            "description": "Loan display name",
+            "examples": [
+              "Mortgage"
+            ],
+            "title": "Loan Name",
+            "type": "string"
+          },
+          "loan_type": {
+            "description": "Loan type",
+            "examples": [
+              "mortgage"
+            ],
+            "title": "Loan Type",
+            "type": "string"
+          },
+          "pay_day": {
+            "description": "Day of month for repayment",
+            "examples": [
+              1
+            ],
+            "title": "Pay Day",
+            "type": "integer"
+          },
+          "period": {
+            "description": "Loan period in months",
+            "examples": [
+              360
+            ],
+            "title": "Period",
+            "type": "integer"
+          },
+          "repayed": {
+            "description": "Cumulative principal repaid",
+            "examples": [
+              12500.0
+            ],
+            "title": "Repayed",
+            "type": "number"
+          }
+        },
+        "required": [
+          "loan_id",
+          "loan_name",
+          "loan_type",
+          "account_id",
+          "account_name",
+          "interest_rate",
+          "period",
+          "apply_date",
+          "pay_day",
+          "amount",
+          "repayed",
+          "loan_index"
+        ],
+        "title": "LoanRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

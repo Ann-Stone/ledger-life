@@ -1,0 +1,72 @@
+{
+  "components": {
+    "schemas": {
+      "JournalMonthRead": {
+        "example": {
+          "gain_loss": 1234.56,
+          "items": [
+            {
+              "action_main": "EXP01",
+              "action_main_table": "Code_Data",
+              "action_main_type": "expense",
+              "distinct_number": 1,
+              "note": "Lunch",
+              "spend_date": "20260418",
+              "spend_way": "1",
+              "spend_way_table": "Account",
+              "spend_way_type": "account",
+              "spending": -123.45,
+              "vesting_month": "202604"
+            }
+          ]
+        },
+        "properties": {
+          "gain_loss": {
+            "description": "Net gain/loss for the month after FX conversion to base currency",
+            "examples": [
+              1234.56
+            ],
+            "title": "Gain Loss",
+            "type": "number"
+          },
+          "items": {
+            "description": "Journal entries for the month, ordered by spend_date",
+            "examples": [
+              [
+                {
+                  "action_main": "EXP01",
+                  "action_main_table": "Code_Data",
+                  "action_main_type": "expense",
+                  "distinct_number": 1,
+                  "note": "Lunch",
+                  "spend_date": "20260418",
+                  "spend_way": "1",
+                  "spend_way_table": "Account",
+                  "spend_way_type": "account",
+                  "spending": -123.45,
+                  "vesting_month": "202604"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/JournalRead"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items",
+          "gain_loss"
+        ],
+        "title": "JournalMonthRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

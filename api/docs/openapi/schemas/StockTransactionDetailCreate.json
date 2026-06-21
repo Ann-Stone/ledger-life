@@ -1,0 +1,90 @@
+{
+  "components": {
+    "schemas": {
+      "StockTransactionDetailCreate": {
+        "description": "Stock_Detail subset accepted by the composite endpoint.\n\n``excute_price`` is intentionally absent: the service copies\n``journal.spending`` into it verbatim (sign preserved — a buy/outflow\njournal is negative, so the detail's price is negative too).\n``account_id``/``account_name`` are also absent: they are resolved from\n``journal.spend_way`` by the service so the two rows stay in sync.\n\n``excute_amount`` defaults to 0.0 so cash dividends (no share count)\ncan omit it; stock splits / stock dividends can keep amount and rely on\n``journal.spending`` being 0 to imply ``excute_price = 0``.",
+        "example": {
+          "excute_amount": 10.0,
+          "excute_date": "20260418",
+          "excute_type": "buy",
+          "memo": "First lot",
+          "stock_id": "STK-H-001"
+        },
+        "properties": {
+          "excute_amount": {
+            "default": 0.0,
+            "description": "Quantity traded (shares). Defaults to 0 so cash dividends (excute_type='cash') can omit it.",
+            "examples": [
+              10.0
+            ],
+            "title": "Excute Amount",
+            "type": "number"
+          },
+          "excute_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD; defaults to journal.spend_date when omitted.",
+            "examples": [
+              "20260418"
+            ],
+            "title": "Excute Date"
+          },
+          "excute_type": {
+            "description": "buy / sell / stock (split or stock dividend) / cash (cash dividend)",
+            "enum": [
+              "buy",
+              "sell",
+              "stock",
+              "cash"
+            ],
+            "examples": [
+              "buy"
+            ],
+            "title": "Excute Type",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo; defaults to journal.note when omitted.",
+            "examples": [
+              "First lot"
+            ],
+            "title": "Memo"
+          },
+          "stock_id": {
+            "description": "Existing StockJournal.stock_id this transaction belongs to.",
+            "examples": [
+              "STK-H-001"
+            ],
+            "title": "Stock Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stock_id",
+          "excute_type"
+        ],
+        "title": "StockTransactionDetailCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,451 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/utilities/selections/accounts": {
+      "get": {
+        "description": "Return active accounts grouped by account_type, ordered by account_index ASC.",
+        "operationId": "list_account_selections_utilities_selections_accounts_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List accounts grouped by type",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/codes": {
+      "get": {
+        "description": "Return codes whose parent_id is NULL, grouped by code_type and ordered by code_index ASC.",
+        "operationId": "list_code_selections_utilities_selections_codes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List top-level codes grouped by code_type",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/codes/{parent_id}": {
+      "get": {
+        "description": "Return children of the parent code (parent_id) as a single 'sub' group.",
+        "operationId": "list_sub_code_selections_utilities_selections_codes__parent_id__get",
+        "parameters": [
+          {
+            "description": "Parent code_id",
+            "in": "path",
+            "name": "parent_id",
+            "required": true,
+            "schema": {
+              "description": "Parent code_id",
+              "examples": [
+                "92"
+              ],
+              "title": "Parent Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Parent code 'XYZ' has no children",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Parent code has no children"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List sub-codes for a parent code",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/credit-cards": {
+      "get": {
+        "description": "Return active credit cards in one group labelled 'Credit_Card'.",
+        "operationId": "list_credit_card_selections_utilities_selections_credit_cards_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List credit cards as a single group",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/estates": {
+      "get": {
+        "description": "Return active estates (estate_status != 'sold') in one group labelled 'Estate'.",
+        "operationId": "list_estate_selections_utilities_selections_estates_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List estates as a single group",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/insurances": {
+      "get": {
+        "description": "Return open insurance policies (has_closed != 'Y') in one group labelled 'Insurance'.",
+        "operationId": "list_insurance_selections_utilities_selections_insurances_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List insurance policies as a single group",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/loans": {
+      "get": {
+        "description": "Return loans in one group labelled 'Loan'.",
+        "operationId": "list_loan_selections_utilities_selections_loans_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List loans as a single group",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/other-asset-types": {
+      "get": {
+        "description": "Return one group whose options are the distinct asset_type values across active Other_Asset rows. Drives the 'transfer to other asset' sub-category dropdown so it stays in sync with the user's asset setup.",
+        "operationId": "list_other_asset_type_selections_utilities_selections_other_asset_types_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List distinct asset_type values from Other_Asset",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/stock-categories": {
+      "get": {
+        "description": "Return active (in_use='Y') stock allocation categories in one group labelled 'Stock_Category', ordered by category_index. Drives the allocation-category dropdown on the stock holding form.",
+        "operationId": "list_stock_category_selections_utilities_selections_stock_categories_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List active stock categories as a single group",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    },
+    "/utilities/selections/stocks": {
+      "get": {
+        "description": "Return every Stock_Journal row grouped by its parent asset_id; each option's label is '<stock_code> <stock_name>' for filterable dropdowns.",
+        "operationId": "list_stock_selections_utilities_selections_stocks_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_SelectionGroup__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "List stock holdings grouped by asset_id",
+        "tags": [
+          "utilities",
+          "utilities:selections"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_list_SelectionGroup__.json",
+    "schemas/SelectionGroup.json",
+    "schemas/SelectionOption.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

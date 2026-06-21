@@ -1,0 +1,67 @@
+{
+  "components": {
+    "schemas": {
+      "EstateValueRead": {
+        "example": {
+          "estate_id": "EST-001",
+          "market_value": 13800000.0,
+          "memo": "同社區 2026Q1 實價登錄估算",
+          "vesting_month": "202604"
+        },
+        "properties": {
+          "estate_id": {
+            "description": "FK to Estate.estate_id",
+            "examples": [
+              "EST-001"
+            ],
+            "title": "Estate Id",
+            "type": "string"
+          },
+          "market_value": {
+            "description": "Appraised market value in estate currency",
+            "examples": [
+              13800000.0
+            ],
+            "title": "Market Value",
+            "type": "number"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "同社區 2026Q1 實價登錄估算"
+            ],
+            "title": "Memo"
+          },
+          "vesting_month": {
+            "description": "YYYYMM the value is effective from",
+            "examples": [
+              "202604"
+            ],
+            "title": "Vesting Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "estate_id",
+          "vesting_month",
+          "market_value"
+        ],
+        "title": "EstateValueRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

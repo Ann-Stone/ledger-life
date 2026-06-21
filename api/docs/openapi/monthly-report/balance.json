@@ -1,0 +1,109 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/balance/{vesting_month}/settle": {
+      "put": {
+        "description": "Snapshot every asset/liability net value for the vesting month. Idempotent: per-asset-type tables are delete+reinsert; AccountBalance and CreditCardBalance use cascade-delete from the target month forward to invalidate later carry-forward snapshots.",
+        "operationId": "put_settle_monthly_report_balance__vesting_month__settle_put",
+        "parameters": [
+          {
+            "description": "YYYYMM",
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "description": "YYYYMM",
+              "examples": [
+                "202604"
+              ],
+              "pattern": "^\\d{6}$",
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_SettlementResult_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Vesting month has no eligible data",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Vesting month has no eligible data"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Run monthly balance settlement",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_SettlementResult_.json",
+    "schemas/SettlementResult.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

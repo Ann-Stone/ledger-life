@@ -1,0 +1,267 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetUpdate": {
+        "example": {
+          "budget_year": "2026",
+          "category_code": "E01",
+          "expected12": 250000.0
+        },
+        "properties": {
+          "annual_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Annual envelope for annual-event categories",
+            "examples": [
+              null
+            ],
+            "title": "Annual Amount"
+          },
+          "budget_year": {
+            "description": "Identifies the row along with category_code",
+            "examples": [
+              "2026"
+            ],
+            "title": "Budget Year",
+            "type": "string"
+          },
+          "category_code": {
+            "description": "Identifies the row along with budget_year",
+            "examples": [
+              "E01"
+            ],
+            "title": "Category Code",
+            "type": "string"
+          },
+          "category_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Category display name",
+            "examples": [
+              "Salary"
+            ],
+            "title": "Category Name"
+          },
+          "code_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Code type",
+            "examples": [
+              "income"
+            ],
+            "title": "Code Type"
+          },
+          "expected01": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 01 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected01"
+          },
+          "expected02": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 02 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected02"
+          },
+          "expected03": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 03 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected03"
+          },
+          "expected04": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 04 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected04"
+          },
+          "expected05": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 05 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected05"
+          },
+          "expected06": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 06 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected06"
+          },
+          "expected07": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 07 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected07"
+          },
+          "expected08": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 08 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected08"
+          },
+          "expected09": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 09 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected09"
+          },
+          "expected10": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 10 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected10"
+          },
+          "expected11": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 11 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected11"
+          },
+          "expected12": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Month 12 expected",
+            "examples": [
+              200000.0
+            ],
+            "title": "Expected12"
+          }
+        },
+        "required": [
+          "budget_year",
+          "category_code"
+        ],
+        "title": "BudgetUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,175 @@
+{
+  "components": {
+    "schemas": {
+      "InsuranceUpdate": {
+        "example": {
+          "has_closed": "Y"
+        },
+        "properties": {
+          "asset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Asset category ID",
+            "examples": [
+              "AC-INS-001"
+            ],
+            "title": "Asset Id"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20500101"
+            ],
+            "title": "End Date"
+          },
+          "expected_spend": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Expected premium per pay_type cadence (e.g. annual premium amount when pay_type='annual')",
+            "examples": [
+              1200.0
+            ],
+            "title": "Expected Spend"
+          },
+          "has_closed": {
+            "anyOf": [
+              {
+                "enum": [
+                  "Y",
+                  "N"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Closed flag",
+            "examples": [
+              "Y"
+            ],
+            "title": "Has Closed"
+          },
+          "in_account": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Paying account id",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "In Account"
+          },
+          "insurance_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Policy display name",
+            "examples": [
+              "Whole life policy"
+            ],
+            "title": "Insurance Name"
+          },
+          "out_account": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Disbursing account id",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Out Account"
+          },
+          "pay_day": {
+            "anyOf": [
+              {
+                "maxLength": 23,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Premium date(s); 'DD' / 'MM/DD' / 'MM/DD,...' by pay_type",
+            "examples": [
+              "01/15"
+            ],
+            "title": "Pay Day"
+          },
+          "pay_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Premium cadence",
+            "examples": [
+              "annual"
+            ],
+            "title": "Pay Type"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Start Date"
+          }
+        },
+        "title": "InsuranceUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

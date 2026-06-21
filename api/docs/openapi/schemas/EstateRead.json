@@ -1,0 +1,149 @@
+{
+  "components": {
+    "schemas": {
+      "EstateRead": {
+        "example": {
+          "asset_id": "AC-REAL-001",
+          "estate_address": "123 Main St",
+          "estate_id": "EST-001",
+          "estate_name": "Condo",
+          "estate_status": "live",
+          "estate_type": "residential",
+          "fx_code": "TWD",
+          "loan_id": "LN-001",
+          "memo": "Primary residence",
+          "obtain_date": "20200101",
+          "region": "臺北市"
+        },
+        "properties": {
+          "asset_id": {
+            "description": "Asset category ID",
+            "examples": [
+              "AC-REAL-001"
+            ],
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "estate_address": {
+            "description": "Physical address",
+            "examples": [
+              "123 Main St"
+            ],
+            "title": "Estate Address",
+            "type": "string"
+          },
+          "estate_id": {
+            "description": "Estate business ID",
+            "examples": [
+              "EST-001"
+            ],
+            "title": "Estate Id",
+            "type": "string"
+          },
+          "estate_name": {
+            "description": "Estate display name",
+            "examples": [
+              "Condo"
+            ],
+            "title": "Estate Name",
+            "type": "string"
+          },
+          "estate_status": {
+            "description": "Status",
+            "examples": [
+              "hold"
+            ],
+            "title": "Estate Status",
+            "type": "string"
+          },
+          "estate_type": {
+            "description": "Estate type",
+            "examples": [
+              "residential"
+            ],
+            "title": "Estate Type",
+            "type": "string"
+          },
+          "fx_code": {
+            "default": "TWD",
+            "description": "Currency code (TWD; USD/JPY/... for overseas property)",
+            "examples": [
+              "TWD"
+            ],
+            "title": "Fx Code",
+            "type": "string"
+          },
+          "loan_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Associated loan ID",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Primary residence"
+            ],
+            "title": "Memo"
+          },
+          "obtain_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20200101"
+            ],
+            "title": "Obtain Date",
+            "type": "string"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "House-price-index 縣市 (全國/臺北市/新北市/桃園市/臺中市/臺南市/高雄市); null → 全國",
+            "examples": [
+              "臺北市"
+            ],
+            "title": "Region"
+          }
+        },
+        "required": [
+          "estate_id",
+          "estate_name",
+          "estate_type",
+          "estate_address",
+          "asset_id",
+          "obtain_date",
+          "estate_status"
+        ],
+        "title": "EstateRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

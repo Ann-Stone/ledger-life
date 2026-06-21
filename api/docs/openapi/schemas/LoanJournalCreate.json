@@ -1,0 +1,83 @@
+{
+  "components": {
+    "schemas": {
+      "LoanJournalCreate": {
+        "example": {
+          "excute_date": "20260401",
+          "excute_price": 1500.0,
+          "loan_excute_type": "repayment",
+          "loan_id": "LN-001",
+          "memo": "April payment"
+        },
+        "properties": {
+          "excute_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260401"
+            ],
+            "title": "Excute Date",
+            "type": "string"
+          },
+          "excute_price": {
+            "description": "Amount",
+            "examples": [
+              1500.0
+            ],
+            "title": "Excute Price",
+            "type": "number"
+          },
+          "loan_excute_type": {
+            "description": "principal/interest/increment/fee",
+            "enum": [
+              "principal",
+              "interest",
+              "increment",
+              "fee"
+            ],
+            "examples": [
+              "principal"
+            ],
+            "title": "Loan Excute Type",
+            "type": "string"
+          },
+          "loan_id": {
+            "description": "FK to Loan.loan_id",
+            "examples": [
+              "LN-001"
+            ],
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "April payment"
+            ],
+            "title": "Memo"
+          }
+        },
+        "required": [
+          "loan_id",
+          "loan_excute_type",
+          "excute_price",
+          "excute_date"
+        ],
+        "title": "LoanJournalCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

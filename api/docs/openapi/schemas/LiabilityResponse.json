@@ -1,0 +1,46 @@
+{
+  "components": {
+    "schemas": {
+      "LiabilityResponse": {
+        "example": {
+          "items": [
+            {
+              "amount": 2500.0,
+              "credit_card_id": "CC-VISA-01",
+              "credit_card_name": "Chase Sapphire"
+            }
+          ]
+        },
+        "properties": {
+          "items": {
+            "description": "Per-card credit card liability for the month",
+            "examples": [
+              [
+                {
+                  "amount": 2500.0,
+                  "credit_card_id": "CC-VISA-01",
+                  "credit_card_name": "Chase Sapphire"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/LiabilityItem"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "LiabilityResponse",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

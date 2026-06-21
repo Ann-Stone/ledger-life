@@ -1,0 +1,172 @@
+{
+  "components": {
+    "schemas": {
+      "AccountUpdate": {
+        "example": {
+          "in_use": "N",
+          "name": "Chase Checking Renamed"
+        },
+        "properties": {
+          "account_id": {
+            "anyOf": [
+              {
+                "maxLength": 20,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Business identifier",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Account Id"
+          },
+          "account_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Dropdown order",
+            "examples": [
+              1
+            ],
+            "title": "Account Index"
+          },
+          "account_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Account type",
+            "examples": [
+              "bank"
+            ],
+            "title": "Account Type"
+          },
+          "discount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Discount multiplier",
+            "examples": [
+              1.0
+            ],
+            "title": "Discount"
+          },
+          "fx_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Currency code",
+            "examples": [
+              "USD"
+            ],
+            "title": "Fx Code"
+          },
+          "in_use": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Active flag (Y/N)",
+            "examples": [
+              "N"
+            ],
+            "title": "In Use"
+          },
+          "is_calculate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Include in totals (Y/N)",
+            "examples": [
+              "Y"
+            ],
+            "title": "Is Calculate"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Primary checking"
+            ],
+            "title": "Memo"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Account name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Name"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Owner label",
+            "examples": [
+              "stone"
+            ],
+            "title": "Owner"
+          }
+        },
+        "title": "AccountUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

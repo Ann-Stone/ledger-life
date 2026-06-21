@@ -1,0 +1,81 @@
+{
+  "components": {
+    "schemas": {
+      "IncomeExpensePoint": {
+        "example": {
+          "expense": 43000.0,
+          "fixed": 25000.0,
+          "floating": 18000.0,
+          "income": 80000.0,
+          "net": 37000.0,
+          "period": "202403"
+        },
+        "properties": {
+          "expense": {
+            "description": "Total expense = fixed + floating, positive",
+            "examples": [
+              43000.0
+            ],
+            "title": "Expense",
+            "type": "number"
+          },
+          "fixed": {
+            "description": "Fixed-expense magnitude, positive",
+            "examples": [
+              25000.0
+            ],
+            "title": "Fixed",
+            "type": "number"
+          },
+          "floating": {
+            "description": "Variable-expense magnitude, positive",
+            "examples": [
+              18000.0
+            ],
+            "title": "Floating",
+            "type": "number"
+          },
+          "income": {
+            "description": "Income in base currency, positive",
+            "examples": [
+              80000.0
+            ],
+            "title": "Income",
+            "type": "number"
+          },
+          "net": {
+            "description": "income - expense, signed (negative = overspent)",
+            "examples": [
+              37000.0
+            ],
+            "title": "Net",
+            "type": "number"
+          },
+          "period": {
+            "description": "YYYYMM for monthly or YYYY for yearly",
+            "examples": [
+              "202403"
+            ],
+            "title": "Period",
+            "type": "string"
+          }
+        },
+        "required": [
+          "period",
+          "income",
+          "fixed",
+          "floating",
+          "expense",
+          "net"
+        ],
+        "title": "IncomeExpensePoint",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

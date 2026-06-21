@@ -1,0 +1,314 @@
+/*
+ * Tailwind v4 — import only theme & utilities, skip preflight
+ * to avoid conflicts with Element Plus's own base styles.
+ */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* ─── Dark-mode variant (class-based on <html>) ──────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design-system token registration (Tailwind @theme) ─── */
+/*
+ * `inline` mode: Tailwind emits var() references in generated utilities
+ * instead of resolving to static hex values. This is required for runtime
+ * dark ↔ light switching without a rebuild.
+ */
+@theme inline {
+  /* Surfaces */
+  --color-surface:                   var(--ds-surface);
+  --color-surface-dim:               var(--ds-surface-dim);
+  --color-surface-bright:            var(--ds-surface-bright);
+  --color-surface-container-lowest:  var(--ds-surface-container-lowest);
+  --color-surface-container-low:     var(--ds-surface-container-low);
+  --color-surface-container:         var(--ds-surface-container);
+  --color-surface-container-high:    var(--ds-surface-container-high);
+  --color-surface-container-highest: var(--ds-surface-container-highest);
+  /* On-surface text */
+  --color-on-surface:                var(--ds-on-surface);
+  --color-on-surface-variant:        var(--ds-on-surface-variant);
+  /* Outline */
+  --color-outline:                   var(--ds-outline);
+  --color-outline-variant:           var(--ds-outline-variant);
+  /* Brand — primary (light sage) + primary-container (medium sage) */
+  --color-primary:                   var(--ds-primary);
+  --color-on-primary:                var(--ds-on-primary);
+  --color-primary-container:         var(--ds-primary-container);
+  --color-on-primary-container:      var(--ds-on-primary-container);
+  /* Brand — secondary (dusty rose) */
+  --color-secondary:                 var(--ds-secondary);
+  --color-on-secondary:              var(--ds-on-secondary);
+  --color-secondary-container:       var(--ds-secondary-container);
+  --color-on-secondary-container:    var(--ds-on-secondary-container);
+  /* Semantic signals */
+  --color-error:                     var(--ds-error);
+  --color-positive:                  var(--ds-positive);
+  --color-negative:                  var(--ds-negative);
+  --color-neutral-text:              var(--ds-neutral-text);
+  /* Background */
+  --color-background:                var(--ds-background);
+  --color-on-background:             var(--ds-on-background);
+
+  /* ── Font-size overrides (so Tailwind text-* utilities scale with --app-font-scale) ── */
+  --text-xs:   calc(0.75rem  * var(--app-font-scale));
+  --text-sm:   calc(0.875rem * var(--app-font-scale));
+  --text-base: calc(1rem     * var(--app-font-scale));
+  --text-lg:   calc(1.125rem * var(--app-font-scale));
+  --text-xl:   calc(1.25rem  * var(--app-font-scale));
+  --text-2xl:  calc(1.5rem   * var(--app-font-scale));
+  --text-3xl:  calc(1.875rem * var(--app-font-scale));
+  --text-4xl:  calc(2.25rem  * var(--app-font-scale));
+}
+
+/* ─── Semantic design-system tokens — dark default ───────── */
+/*
+ * Dark is the primary mode; `:root` holds dark values.
+ * `html.light` overrides every surface/text/outline token
+ * with warm-neutral light equivalents (MD3-derived).
+ */
+:root {
+  /* ── Surfaces ──────────────────────────────────────────── */
+  --ds-surface:                   #121413;
+  --ds-surface-dim:               #121413;
+  --ds-surface-bright:            #383938;
+  --ds-surface-container-lowest:  #0d0e0e;
+  --ds-surface-container-low:     #1b1c1b;
+  --ds-surface-container:         #1f201f;
+  --ds-surface-container-high:    #292a29;
+  --ds-surface-container-highest: #343534;
+  --ds-background:                #121413;
+
+  /* ── On-surface text ───────────────────────────────────── */
+  --ds-on-surface:                #e3e2e0;
+  --ds-on-surface-variant:        #c2c8c3;
+  --ds-on-background:             #e3e2e0;
+
+  /* ── Outlines ──────────────────────────────────────────── */
+  --ds-outline:                   #8c928e;
+  --ds-outline-variant:           #424845;
+
+  /* ── Brand — primary ───────────────────────────────────── */
+  --ds-primary:                   #b3ccbf;
+  --ds-on-primary:                #1f352c;
+  --ds-primary-container:         #8fa79b;
+  --ds-on-primary-container:      #273c33;
+
+  /* ── Brand — secondary ─────────────────────────────────── */
+  --ds-secondary:                 #e8bcbc;
+  --ds-on-secondary:              #452929;
+  --ds-secondary-container:       #614141;
+  --ds-on-secondary-container:    #d9aeae;
+
+  /* ── Error + semantic signals ──────────────────────────── */
+  --ds-error:                     #ffb4ab;
+  --ds-on-error:                  #690005;
+  --ds-error-container:           #93000a;
+  --ds-positive:                  #81c784;
+  --ds-negative:                  #e8bcbc;   /* mirrors secondary / dusty rose */
+  --ds-neutral-text:              #8c928e;
+
+  /* ── Element Plus overrides (referenced via --ds-* tokens) */
+  --el-border-radius-base:        6px;
+  --el-border-radius-small:       4px;
+  --el-border-radius-round:       20px;
+  --el-font-size-base:            calc(14px * var(--app-font-scale));
+  --el-font-size-small:           calc(13px * var(--app-font-scale));
+
+  /* ── User font-size preference (set via JS in stores/app.ts) ── */
+  --app-font-scale: 1;
+}
+
+/* ─── Dark mode EP overrides (html.dark specificity wins over EP :root) ── */
+/*
+ * EP component CSS loads after main.css via Vite / unplugin-vue-components,
+ * so EP's :root { --el-bg-color: #fff } overrides our :root definitions.
+ * html.dark {} has higher specificity (0,1,1 vs 0,1,0) and wins.
+ */
+html.dark {
+  --el-color-primary:             var(--ds-primary-container);
+  --el-color-primary-light-3:     color-mix(in srgb, var(--ds-primary-container) 70%, white);
+  --el-color-primary-light-5:     color-mix(in srgb, var(--ds-primary-container) 50%, white);
+  --el-color-primary-light-7:     color-mix(in srgb, var(--ds-primary-container) 30%, white);
+  --el-color-primary-light-9:     color-mix(in srgb, var(--ds-primary-container) 10%, white);
+  --el-color-primary-dark-2:      color-mix(in srgb, var(--ds-primary-container) 80%, black);
+  --el-bg-color:                  var(--ds-surface-container);
+  --el-bg-color-page:             var(--ds-surface);
+  --el-bg-color-overlay:          var(--ds-surface-container);
+  --el-text-color-primary:        var(--ds-on-surface);
+  --el-text-color-regular:        var(--ds-on-surface);
+  --el-text-color-secondary:      var(--ds-on-surface-variant);
+  --el-border-color:              var(--ds-outline-variant);
+  --el-border-color-light:        var(--ds-outline-variant);
+  --el-border-color-lighter:      var(--ds-outline-variant);
+  --el-border-color-extra-light:  var(--ds-outline-variant);
+  --el-fill-color-blank:          var(--ds-surface-container);
+  --el-fill-color:                var(--ds-surface-container-high);
+  --el-fill-color-light:          var(--ds-surface-container-high);
+  --el-fill-color-lighter:        var(--ds-surface-container-low);
+  --el-fill-color-dark:           var(--ds-surface-container-highest);
+  --el-fill-color-darker:         var(--ds-surface-bright);
+  --el-disabled-bg-color:         var(--ds-surface-container-low);
+  --el-disabled-text-color:       var(--ds-outline);
+  --el-disabled-border-color:     var(--ds-outline-variant);
+  --el-table-bg-color:            var(--ds-surface-container);
+  --el-table-tr-bg-color:         var(--ds-surface-container);
+  --el-table-stripe-color:        var(--ds-surface-container-high);
+  --el-table-header-bg-color:     var(--ds-surface-container-high);
+  --el-table-row-hover-bg-color:  var(--ds-surface-container-high);
+  --el-table-border-color:        var(--ds-outline-variant);
+  --el-table-header-text-color:   var(--ds-on-surface);
+  --el-table-text-color:          var(--ds-on-surface);
+  --el-table-fixed-box-shadow:    none;
+}
+
+/* ─── Light mode overrides ───────────────────────────────── */
+html.light {
+  --ds-surface:                   #f4f6f4;
+  --ds-surface-dim:               #d8dbd8;
+  --ds-surface-bright:            #f4f6f4;
+  --ds-surface-container-lowest:  #ffffff;
+  --ds-surface-container-low:     #eef1ee;
+  --ds-surface-container:         #e8ebe8;
+  --ds-surface-container-high:    #e2e6e2;
+  --ds-surface-container-highest: #dce0dc;
+  --ds-background:                #f4f6f4;
+  --ds-on-surface:                #181d1a;
+  --ds-on-surface-variant:        #404944;
+  --ds-on-background:             #181d1a;
+  --ds-outline:                   #717870;
+  --ds-outline-variant:           #c1c9c2;
+  --ds-primary:                   #4d6359;
+  --ds-on-primary:                #ffffff;
+  --ds-primary-container:         #cfe8db;
+  --ds-on-primary-container:      #091f17;
+  --ds-secondary:                 #765656;
+  --ds-on-secondary:              #ffffff;
+  --ds-secondary-container:       #ffdad9;
+  --ds-on-secondary-container:    #2d1415;
+  --ds-positive:                  #2e7d32;
+  --ds-negative:                  #c62828;
+  --ds-neutral-text:              #717870;
+
+  --el-color-primary:             var(--ds-primary);
+  --el-color-primary-light-3:     color-mix(in srgb, var(--ds-primary) 70%, white);
+  --el-color-primary-light-5:     color-mix(in srgb, var(--ds-primary) 50%, white);
+  --el-color-primary-light-7:     color-mix(in srgb, var(--ds-primary) 30%, white);
+  --el-color-primary-light-9:     color-mix(in srgb, var(--ds-primary) 10%, white);
+  --el-color-primary-dark-2:      color-mix(in srgb, var(--ds-primary) 80%, black);
+  --el-bg-color:                  var(--ds-surface-container);
+  --el-bg-color-page:             var(--ds-background);
+  --el-bg-color-overlay:          var(--ds-surface-container-lowest);
+  --el-text-color-primary:        var(--ds-on-surface);
+  --el-text-color-regular:        var(--ds-on-surface);
+  --el-text-color-secondary:      var(--ds-on-surface-variant);
+  --el-border-color:              var(--ds-outline-variant);
+  --el-border-color-light:        var(--ds-outline-variant);
+  --el-border-color-lighter:      var(--ds-outline-variant);
+  --el-border-color-extra-light:  var(--ds-outline-variant);
+  --el-fill-color-blank:          var(--ds-surface-container-lowest);
+  --el-fill-color:                var(--ds-surface-container);
+  --el-fill-color-light:          var(--ds-surface-container-low);
+  --el-fill-color-lighter:        var(--ds-surface-container-lowest);
+  --el-fill-color-dark:           var(--ds-surface-container-high);
+  --el-fill-color-darker:         var(--ds-surface-container-highest);
+  --el-disabled-bg-color:         var(--ds-surface-container-low);
+  --el-disabled-text-color:       var(--ds-outline);
+  --el-disabled-border-color:     var(--ds-outline-variant);
+  --el-table-bg-color:            var(--ds-surface-container-lowest);
+  --el-table-tr-bg-color:         var(--ds-surface-container-lowest);
+  --el-table-stripe-color:        var(--ds-surface-container-low);
+  --el-table-header-bg-color:     var(--ds-surface-container-low);
+  --el-table-row-hover-bg-color:  var(--ds-surface-container-low);
+  --el-table-border-color:        var(--ds-outline-variant);
+  --el-table-header-text-color:   var(--ds-on-surface);
+  --el-table-text-color:          var(--ds-on-surface);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--ds-background);
+  color: var(--ds-on-surface);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Typography utilities ───────────────────────────────── */
+@layer utilities {
+  .text-display-xl  { font-size: calc(36px * var(--app-font-scale)); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+  .text-headline-lg { font-size: calc(24px * var(--app-font-scale)); font-weight: 700; line-height: 1.3; }
+  .text-title-md    { font-size: calc(16px * var(--app-font-scale)); font-weight: 600; line-height: 1.5; }
+  .text-body-md     { font-size: calc(14px * var(--app-font-scale)); font-weight: 400; line-height: 1.6; }
+  .text-label-caps  { font-size: calc(10px * var(--app-font-scale)); font-weight: 700; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; }
+  .text-stats-lg    { font-size: calc(30px * var(--app-font-scale)); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+}
+
+/* ─── Semantic signal helpers ────────────────────────────── */
+.text-positive { color: var(--ds-positive); font-weight: 500; }
+.text-negative { color: var(--ds-negative); font-weight: 500; }
+.text-neutral  { color: var(--ds-neutral-text); }
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--ds-surface-container-low); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--ds-primary-container); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ds-primary); }
+
+/* ─── Element Plus Radio Button Border Fix ─── */
+.el-radio-button__inner {
+  border: 1px solid var(--el-border-color) !important;
+  border-left: 1px solid var(--el-border-color) !important;
+  transition: all 0.2s ease;
+}
+.el-radio-button:not(:first-child) .el-radio-button__inner {
+  border-left: none !important;
+}
+.el-radio-button.is-active .el-radio-button__inner {
+  border-color: var(--el-color-primary) !important;
+  box-shadow: -1px 0 0 0 var(--el-color-primary) !important;
+}
+
+/* ─── Custom Target Complete Button ─── */
+.btn-complete {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  
+  /* Default: Dark Mode Styles */
+  background-color: transparent !important;
+  border: 1px solid var(--ds-outline-variant) !important;
+  color: var(--ds-primary) !important;
+}
+
+.btn-complete:hover {
+  background-color: var(--ds-primary-container) !important;
+  border-color: var(--ds-primary-container) !important;
+  color: var(--ds-on-primary-container) !important;
+  transform: scale(1.08) !important;
+}
+
+/* Light Mode Override */
+html.light .btn-complete {
+  background-color: var(--ds-primary-container) !important;
+  border: 1px solid transparent !important;
+  color: var(--ds-positive) !important; /* Deep forest green for high contrast */
+}
+
+html.light .btn-complete:hover {
+  background-color: var(--ds-primary) !important;
+  border-color: var(--ds-primary) !important;
+  color: var(--ds-on-primary) !important; /* White */
+  transform: scale(1.08) !important;
+}

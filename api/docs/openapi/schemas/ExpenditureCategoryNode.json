@@ -1,0 +1,98 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureCategoryNode": {
+        "example": {
+          "amount": 42000.0,
+          "children": [
+            {
+              "amount": 18000.0,
+              "code": "E0101",
+              "name": "外食",
+              "share": 12.5
+            }
+          ],
+          "code": "E01",
+          "name": "餐飲",
+          "share": 29.1,
+          "type": "Floating"
+        },
+        "properties": {
+          "amount": {
+            "description": "Expense magnitude in base currency, positive",
+            "examples": [
+              42000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "children": {
+            "description": "Subcategory nodes, empty when the category has no sub-codes",
+            "examples": [
+              [
+                {
+                  "amount": 18000.0,
+                  "code": "E0101",
+                  "name": "外食",
+                  "share": 12.5
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditureSubNode"
+            },
+            "title": "Children",
+            "type": "array"
+          },
+          "code": {
+            "description": "action_main code_id",
+            "examples": [
+              "E01"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "description": "Category display name (Code_Data.name)",
+            "examples": [
+              "餐飲"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "share": {
+            "description": "Percentage of grand total expense",
+            "examples": [
+              29.1
+            ],
+            "title": "Share",
+            "type": "number"
+          },
+          "type": {
+            "description": "action_main_type: Fixed or Floating",
+            "examples": [
+              "Floating"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "type",
+          "amount",
+          "share",
+          "children"
+        ],
+        "title": "ExpenditureCategoryNode",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

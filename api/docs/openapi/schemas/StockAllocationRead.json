@@ -1,0 +1,62 @@
+{
+  "components": {
+    "schemas": {
+      "StockAllocationRead": {
+        "example": {
+          "items": [
+            {
+              "amount": 200000.0,
+              "category_id": "SC-001",
+              "category_name": "成長型",
+              "share": 55.0
+            },
+            {
+              "amount": 100000.0,
+              "category_id": "SC-002",
+              "category_name": "債券",
+              "share": 27.5
+            },
+            {
+              "amount": 63636.36,
+              "category_name": "未分類",
+              "share": 17.5
+            }
+          ],
+          "total": 363636.36
+        },
+        "properties": {
+          "items": {
+            "description": "Per-category share, sums to 100% within rounding",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/StockAllocationShare"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "total": {
+            "description": "Total stock value in base currency",
+            "examples": [
+              363636.36
+            ],
+            "title": "Total",
+            "type": "number"
+          }
+        },
+        "required": [
+          "total",
+          "items"
+        ],
+        "title": "StockAllocationRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,214 @@
+{
+  "components": {
+    "schemas": {
+      "StockPnlSummaryRead": {
+        "description": "Computed per-holding performance, derived fresh from ``Stock_Detail``.\n\nAll money fields are in the holding's own ``fx_code`` (no base-currency\nconversion). Cost uses moving-average basis; ``realized`` is the signed sum\nof per-sale price-vs-average-cost gains (capital gains only — dividends are\nin ``dividends_total``). ``unrealized``/``market_value`` are ``None`` when no\nprice snapshot exists for the ticker; the percent/yield fields are fractions\n(0.05 = 5%) and ``None`` when their denominator is zero.",
+        "example": {
+          "cash_yield": 0.0278,
+          "close_price": 180.0,
+          "cost": 14850.0,
+          "cost_yield": 0.0303,
+          "dividends_total": 450.0,
+          "fx_code": "USD",
+          "market_value": 16200.0,
+          "price_date": "20260430",
+          "realized": 1500.0,
+          "shares": 90.0,
+          "stock_code": "AAPL",
+          "stock_id": "STK-H-001",
+          "stock_name": "Apple Inc.",
+          "unrealized": 1350.0,
+          "unrealized_pct": 0.0909
+        },
+        "properties": {
+          "cash_yield": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Trailing-12-month cash dividends ÷ market_value (fraction); null when market_value is 0/None",
+            "examples": [
+              0.0278
+            ],
+            "title": "Cash Yield"
+          },
+          "close_price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Latest close price used for market_value; null when none exists",
+            "examples": [
+              180.0
+            ],
+            "title": "Close Price"
+          },
+          "cost": {
+            "description": "Moving-average cost basis of held shares (own currency)",
+            "examples": [
+              14850.0
+            ],
+            "title": "Cost",
+            "type": "number"
+          },
+          "cost_yield": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Cumulative cash dividends ÷ cost (fraction); null when cost is 0",
+            "examples": [
+              0.0303
+            ],
+            "title": "Cost Yield"
+          },
+          "dividends_total": {
+            "description": "Cumulative cash dividends received (own currency)",
+            "examples": [
+              450.0
+            ],
+            "title": "Dividends Total",
+            "type": "number"
+          },
+          "fx_code": {
+            "description": "Currency the figures are expressed in",
+            "examples": [
+              "USD"
+            ],
+            "title": "Fx Code",
+            "type": "string"
+          },
+          "market_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "shares × latest close price; null when no price snapshot exists",
+            "examples": [
+              16200.0
+            ],
+            "title": "Market Value"
+          },
+          "price_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD of the close price used; null when none exists",
+            "examples": [
+              "20260430"
+            ],
+            "title": "Price Date"
+          },
+          "realized": {
+            "description": "Signed realized capital gain/loss from sells (own currency); dividends excluded",
+            "examples": [
+              1500.0
+            ],
+            "title": "Realized",
+            "type": "number"
+          },
+          "shares": {
+            "description": "Net shares currently held",
+            "examples": [
+              90.0
+            ],
+            "title": "Shares",
+            "type": "number"
+          },
+          "stock_code": {
+            "description": "Ticker symbol",
+            "examples": [
+              "AAPL"
+            ],
+            "title": "Stock Code",
+            "type": "string"
+          },
+          "stock_id": {
+            "description": "Holding business ID",
+            "examples": [
+              "STK-H-001"
+            ],
+            "title": "Stock Id",
+            "type": "string"
+          },
+          "stock_name": {
+            "description": "Stock display name",
+            "examples": [
+              "Apple Inc."
+            ],
+            "title": "Stock Name",
+            "type": "string"
+          },
+          "unrealized": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "market_value − cost; null when no price snapshot exists",
+            "examples": [
+              1350.0
+            ],
+            "title": "Unrealized"
+          },
+          "unrealized_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "unrealized ÷ cost as a fraction; null when cost is 0 or no price",
+            "examples": [
+              0.0909
+            ],
+            "title": "Unrealized Pct"
+          }
+        },
+        "required": [
+          "stock_id",
+          "stock_code",
+          "stock_name",
+          "shares",
+          "cost",
+          "realized",
+          "dividends_total",
+          "fx_code"
+        ],
+        "title": "StockPnlSummaryRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

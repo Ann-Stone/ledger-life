@@ -1,0 +1,80 @@
+{
+  "components": {
+    "schemas": {
+      "AlarmRead": {
+        "example": {
+          "alarm_date": "0531",
+          "alarm_id": 1,
+          "alarm_type": "Y",
+          "content": "報稅"
+        },
+        "properties": {
+          "alarm_date": {
+            "description": "Recurring anchor: MMDD for Y, DD for M",
+            "examples": [
+              "0531"
+            ],
+            "title": "Alarm Date",
+            "type": "string"
+          },
+          "alarm_id": {
+            "description": "Autoincrement PK",
+            "examples": [
+              1
+            ],
+            "title": "Alarm Id",
+            "type": "integer"
+          },
+          "alarm_type": {
+            "description": "Recurrence: 'Y' yearly, 'M' monthly",
+            "enum": [
+              "Y",
+              "M"
+            ],
+            "examples": [
+              "Y"
+            ],
+            "title": "Alarm Type",
+            "type": "string"
+          },
+          "content": {
+            "description": "Reminder text",
+            "examples": [
+              "報稅"
+            ],
+            "title": "Content",
+            "type": "string"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional YYYYMM cutoff",
+            "examples": [
+              "202612"
+            ],
+            "title": "Due Date"
+          }
+        },
+        "required": [
+          "alarm_id",
+          "alarm_type",
+          "alarm_date",
+          "content"
+        ],
+        "title": "AlarmRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

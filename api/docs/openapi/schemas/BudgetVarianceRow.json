@@ -1,0 +1,91 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetVarianceRow": {
+        "example": {
+          "actual": 372000.0,
+          "code": "F01",
+          "diff": 12000.0,
+          "expected": 360000.0,
+          "name": "居住",
+          "type": "Fixed",
+          "usage_rate": 1.0333
+        },
+        "properties": {
+          "actual": {
+            "description": "Actual expense for the year, FX-converted",
+            "examples": [
+              372000.0
+            ],
+            "title": "Actual",
+            "type": "number"
+          },
+          "code": {
+            "description": "Category code (action_main / Budget.category_code)",
+            "examples": [
+              "F01"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "diff": {
+            "description": "actual - expected (positive = over budget)",
+            "examples": [
+              12000.0
+            ],
+            "title": "Diff",
+            "type": "number"
+          },
+          "expected": {
+            "description": "Annual budgeted amount",
+            "examples": [
+              360000.0
+            ],
+            "title": "Expected",
+            "type": "number"
+          },
+          "name": {
+            "description": "Category display name",
+            "examples": [
+              "居住"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "description": "Code type: Fixed or Floating",
+            "examples": [
+              "Fixed"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "usage_rate": {
+            "description": "actual / expected (0 when expected == 0)",
+            "examples": [
+              1.0333
+            ],
+            "title": "Usage Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "type",
+          "expected",
+          "actual",
+          "diff",
+          "usage_rate"
+        ],
+        "title": "BudgetVarianceRow",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

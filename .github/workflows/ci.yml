@@ -1,0 +1,79 @@
+# Test/type-check/build gate for api/ and view/ on pushes and PRs to main.
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'api/**'
+      - 'view/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'api/**'
+      - 'view/**'
+      - '.github/workflows/ci.yml'
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Sync dependencies
+        working-directory: ./api
+        # --locked installs the exact pinned versions and fails loudly if
+        # uv.lock is out of date with pyproject.toml (so a dependency bump can
+        # never silently re-resolve to newer, untested versions on CI).
+        run: uv sync --locked
+
+      - name: Run tests
+        working-directory: ./api
+        run: uv run pytest --cov
+
+      - name: Verify API docs discipline and no drift
+        working-directory: ./api
+        run: |
+          uv run export-docs
+          git diff --exit-code docs/openapi docs/api-reference docs/api-reference.md
+
+  view:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: view/package.json
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: view/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: ./view
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        working-directory: ./view
+        run: pnpm run type-check
+
+      - name: Build
+        working-directory: ./view
+        run: pnpm run build

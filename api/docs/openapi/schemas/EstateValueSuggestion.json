@@ -1,0 +1,109 @@
+{
+  "components": {
+    "schemas": {
+      "EstateValueSuggestion": {
+        "example": {
+          "cost": 10000000.0,
+          "current_quarter": "2024Q1",
+          "estate_id": "EST-001",
+          "estate_name": "主要住所",
+          "obtain_quarter": "2020Q1",
+          "region": "臺北市全市",
+          "suggested_market_value": 13773000.0
+        },
+        "properties": {
+          "cost": {
+            "description": "Acquisition cost (sum of estate journals)",
+            "examples": [
+              10000000.0
+            ],
+            "title": "Cost",
+            "type": "number"
+          },
+          "current_quarter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Latest index quarter at or before the report month",
+            "examples": [
+              "2024Q1"
+            ],
+            "title": "Current Quarter"
+          },
+          "estate_id": {
+            "description": "Estate business ID",
+            "examples": [
+              "EST-001"
+            ],
+            "title": "Estate Id",
+            "type": "string"
+          },
+          "estate_name": {
+            "description": "Estate display name",
+            "examples": [
+              "主要住所"
+            ],
+            "title": "Estate Name",
+            "type": "string"
+          },
+          "obtain_quarter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Quarter of the estate's obtain_date",
+            "examples": [
+              "2020Q1"
+            ],
+            "title": "Obtain Quarter"
+          },
+          "region": {
+            "description": "Index region used for the suggestion",
+            "examples": [
+              "臺北市全市"
+            ],
+            "title": "Region",
+            "type": "string"
+          },
+          "suggested_market_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "cost × (current index / obtain-quarter index); null when the index is unavailable",
+            "examples": [
+              13773000.0
+            ],
+            "title": "Suggested Market Value"
+          }
+        },
+        "required": [
+          "estate_id",
+          "estate_name",
+          "cost",
+          "region"
+        ],
+        "title": "EstateValueSuggestion",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

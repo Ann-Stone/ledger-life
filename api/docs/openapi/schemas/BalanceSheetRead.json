@@ -1,0 +1,65 @@
+{
+  "components": {
+    "schemas": {
+      "BalanceSheetRead": {
+        "example": {
+          "assets": {
+            "accounts": [
+              {
+                "amount": 123456.78,
+                "currency": "TWD",
+                "name": "Cathay Bank",
+                "original_amount": 123456.78
+              }
+            ],
+            "estates": [],
+            "insurances": [],
+            "stocks": []
+          },
+          "liabilities": {
+            "credit_cards": [],
+            "loans": [
+              {
+                "amount": -250000.0,
+                "currency": "TWD",
+                "name": "Mortgage",
+                "original_amount": -250000.0
+              }
+            ]
+          },
+          "net_worth": 987654.32
+        },
+        "properties": {
+          "assets": {
+            "$ref": "#/components/schemas/BalanceAssets",
+            "description": "Asset breakdown"
+          },
+          "liabilities": {
+            "$ref": "#/components/schemas/BalanceLiabilities",
+            "description": "Liability breakdown"
+          },
+          "net_worth": {
+            "description": "Total assets minus total liabilities in base currency",
+            "examples": [
+              987654.32
+            ],
+            "title": "Net Worth",
+            "type": "number"
+          }
+        },
+        "required": [
+          "assets",
+          "liabilities",
+          "net_worth"
+        ],
+        "title": "BalanceSheetRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

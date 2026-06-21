@@ -1,0 +1,95 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/reports/budget-variance/{year}": {
+      "get": {
+        "description": "Per expense category: annual expected (Budget sum of expected01..12, or annual_amount for annual-event categories) vs actual FX-converted spend for the year, with diff, usage rate, and a run-rate projection. Income, invest and transfer categories are excluded.",
+        "operationId": "get_budget_reports_budget_variance__year__get",
+        "parameters": [
+          {
+            "description": "Budget year YYYY",
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "description": "Budget year YYYY",
+              "examples": [
+                "2026"
+              ],
+              "pattern": "^\\d{4}$",
+              "title": "Year",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_BudgetVarianceRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Get annual budget vs actual variance",
+        "tags": [
+          "reports"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_BudgetVarianceRead_.json",
+    "schemas/BudgetVarianceRead.json",
+    "schemas/BudgetVarianceRow.json",
+    "schemas/BudgetVarianceSummary.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

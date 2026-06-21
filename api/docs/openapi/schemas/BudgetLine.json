@@ -1,0 +1,61 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetLine": {
+        "example": {
+          "actual": 8700.0,
+          "category": "Food",
+          "planned": 10000.0,
+          "usage_pct": 87.0
+        },
+        "properties": {
+          "actual": {
+            "description": "Actual spend",
+            "examples": [
+              8700.0
+            ],
+            "title": "Actual",
+            "type": "number"
+          },
+          "category": {
+            "description": "Budget category code",
+            "examples": [
+              "Food"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "planned": {
+            "description": "Planned amount",
+            "examples": [
+              10000.0
+            ],
+            "title": "Planned",
+            "type": "number"
+          },
+          "usage_pct": {
+            "description": "actual / planned * 100, 0 when planned == 0",
+            "examples": [
+              87.0
+            ],
+            "title": "Usage Pct",
+            "type": "number"
+          }
+        },
+        "required": [
+          "category",
+          "planned",
+          "actual",
+          "usage_pct"
+        ],
+        "title": "BudgetLine",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

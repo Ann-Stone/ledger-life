@@ -1,0 +1,185 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/monthly-report/stock-prices": {
+      "post": {
+        "description": "Persist a new StockPriceHistory row. When trigger_yfinance is True the close price is overwritten by yfinance.",
+        "operationId": "post_stock_price_monthly_report_stock_prices_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockPriceCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_StockPriceRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "yfinance fetch failed",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "yfinance fetch failed"
+          }
+        },
+        "summary": "Insert a stock price record (optionally fetch yfinance)",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    },
+    "/monthly-report/stock-prices/{vesting_month}": {
+      "get": {
+        "description": "For every stock present in the holdings table, return the most recent StockPriceHistory close on or before month-end (falling back to the latest prior row when the month has none).",
+        "operationId": "get_stock_prices_by_month_monthly_report_stock_prices__vesting_month__get",
+        "parameters": [
+          {
+            "description": "YYYYMM",
+            "in": "path",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "description": "YYYYMM",
+              "examples": [
+                "202604"
+              ],
+              "pattern": "^\\d{6}$",
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_list_StockPriceMonthRead__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Month-level closing prices for held stocks",
+        "tags": [
+          "monthly_report",
+          "monthly-report"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_StockPriceRead_.json",
+    "schemas/ApiResponse_list_StockPriceMonthRead__.json",
+    "schemas/StockPriceCreate.json",
+    "schemas/StockPriceMonthRead.json",
+    "schemas/StockPriceRead.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

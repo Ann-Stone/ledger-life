@@ -1,0 +1,110 @@
+{
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/reports/cash-flow/{type}": {
+      "get": {
+        "description": "Cash flow over the monthly (trailing 12 months) or yearly (trailing 10 years) window, split into three activities: operating (生活: income − living − loan interest), investing (投資), financing (債務: loan principal / new borrowing). FX-converted; self-transfers excluded.",
+        "operationId": "get_cash_flow_endpoint_reports_cash_flow__type__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "enum": [
+                "monthly",
+                "yearly"
+              ],
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Anchor month YYYYMM",
+            "in": "query",
+            "name": "vesting_month",
+            "required": true,
+            "schema": {
+              "description": "Anchor month YYYYMM",
+              "examples": [
+                "202412"
+              ],
+              "pattern": "^\\d{6}$",
+              "title": "Vesting Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse_CashFlowRead_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": [
+                    {
+                      "input": {},
+                      "loc": [
+                        "body",
+                        "field_name"
+                      ],
+                      "msg": "Field required",
+                      "type": "missing"
+                    }
+                  ],
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Validation error — request payload failed Pydantic validation"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "RuntimeError: unexpected failure",
+                  "msg": "fail",
+                  "status": 0
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unhandled server error — wrapped by global exception handler"
+          }
+        },
+        "summary": "Get personal cash-flow statement",
+        "tags": [
+          "reports"
+        ]
+      }
+    }
+  },
+  "x-schema-files": [
+    "schemas/ApiResponse_CashFlowRead_.json",
+    "schemas/CashFlowActivity.json",
+    "schemas/CashFlowItem.json",
+    "schemas/CashFlowPoint.json",
+    "schemas/CashFlowRead.json",
+    "schemas/CashFlowSummary.json"
+  ],
+  "x-shared-file": "_shared.json"
+}

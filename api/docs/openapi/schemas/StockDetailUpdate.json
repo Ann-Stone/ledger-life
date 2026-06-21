@@ -1,0 +1,131 @@
+{
+  "components": {
+    "schemas": {
+      "StockDetailUpdate": {
+        "example": {
+          "memo": "Updated"
+        },
+        "properties": {
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Settling account business ID",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "title": "Account Id"
+          },
+          "account_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Settling account display name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Account Name"
+          },
+          "excute_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Quantity traded",
+            "examples": [
+              5.0
+            ],
+            "title": "Excute Amount"
+          },
+          "excute_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260420"
+            ],
+            "title": "Excute Date"
+          },
+          "excute_price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Price per share",
+            "examples": [
+              185.0
+            ],
+            "title": "Excute Price"
+          },
+          "excute_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "buy",
+                  "sell",
+                  "stock",
+                  "cash"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Transaction type",
+            "examples": [
+              "sell"
+            ],
+            "title": "Excute Type"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Updated"
+            ],
+            "title": "Memo"
+          }
+        },
+        "title": "StockDetailUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

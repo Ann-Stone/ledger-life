@@ -1,0 +1,37 @@
+// 資產負債表 (Balance sheet) page.
+export default {
+  title: 'Balance Sheet',
+  empty: 'No balance sheet data',
+  totalAssets: 'Total Assets',
+  totalLiabilities: 'Total Liabilities',
+  netAssets: 'Net Worth',
+  categoryOverview: 'Category Overview',
+  assetDetail: 'Asset Detail',
+  liabilityDetail: 'Liability Detail',
+  originalCurrency: 'Original',
+  share: 'Share',
+  // Currency group labels (balanceTree)
+  curTWD: 'TWD',
+  curUSD: 'USD',
+  curJPY: 'JPY',
+  curEUR: 'EUR',
+  curCNY: 'CNY',
+  curHKD: 'HKD',
+  curGBP: 'GBP',
+  curAUD: 'AUD',
+  // Stock market group labels (currency proxy)
+  mktTWD: 'TW Stocks',
+  mktUSD: 'US Stocks',
+  mktJPY: 'JP Stocks',
+  mktHKD: 'HK Stocks',
+  mktCNY: 'CN Stocks',
+  mktEUR: 'EU Stocks',
+  mktFallback: '{code} Stocks',
+  // Category labels
+  catCash: 'Cash & Equivalents',
+  catInvest: 'Investments',
+  catInsurance: 'Insurance',
+  catEstate: 'Real Estate',
+  catCreditCard: 'Credit Cards',
+  catLoan: 'Loans',
+}

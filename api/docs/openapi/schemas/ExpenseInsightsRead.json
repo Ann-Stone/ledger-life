@@ -1,0 +1,93 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenseInsightsRead": {
+        "example": {
+          "largest": [
+            {
+              "amount": 85000.0,
+              "category": "旅遊",
+              "date": "20260815",
+              "note": "日本機票",
+              "pay_way": "Chase Sapphire"
+            }
+          ],
+          "year": "2026",
+          "yoy": [
+            {
+              "code": "E01",
+              "current": 192000.0,
+              "delta": 24000.0,
+              "name": "餐飲",
+              "previous": 168000.0,
+              "type": "Floating",
+              "yoy_rate": 0.1429
+            }
+          ]
+        },
+        "properties": {
+          "largest": {
+            "description": "Largest expense transactions, amount descending",
+            "examples": [
+              [
+                {
+                  "amount": 85000.0,
+                  "category": "旅遊",
+                  "date": "20260815",
+                  "note": "日本機票",
+                  "pay_way": "Chase Sapphire"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/LargeTxn"
+            },
+            "title": "Largest",
+            "type": "array"
+          },
+          "year": {
+            "description": "Calendar year YYYY",
+            "examples": [
+              "2026"
+            ],
+            "title": "Year",
+            "type": "string"
+          },
+          "yoy": {
+            "description": "Per-category YoY, ordered by |delta| descending",
+            "examples": [
+              [
+                {
+                  "code": "E01",
+                  "current": 192000.0,
+                  "delta": 24000.0,
+                  "name": "餐飲",
+                  "previous": 168000.0,
+                  "type": "Floating",
+                  "yoy_rate": 0.1429
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/YoYRow"
+            },
+            "title": "Yoy",
+            "type": "array"
+          }
+        },
+        "required": [
+          "year",
+          "yoy",
+          "largest"
+        ],
+        "title": "ExpenseInsightsRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

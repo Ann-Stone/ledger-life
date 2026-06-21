@@ -1,0 +1,76 @@
+{
+  "components": {
+    "schemas": {
+      "CashFlowSummary": {
+        "example": {
+          "activities": [
+            {
+              "items": [
+                {
+                  "amount": 960000.0,
+                  "label": "收入"
+                },
+                {
+                  "amount": -516000.0,
+                  "label": "生活支出"
+                }
+              ],
+              "key": "operating",
+              "label": "生活",
+              "net": 444000.0
+            }
+          ],
+          "net_change": 123000.0
+        },
+        "properties": {
+          "activities": {
+            "description": "[operating, investing, financing] in order, with signed sub-items",
+            "examples": [
+              [
+                {
+                  "items": [
+                    {
+                      "amount": 960000.0,
+                      "label": "收入"
+                    },
+                    {
+                      "amount": -516000.0,
+                      "label": "生活支出"
+                    }
+                  ],
+                  "key": "operating",
+                  "label": "生活",
+                  "net": 444000.0
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CashFlowActivity"
+            },
+            "title": "Activities",
+            "type": "array"
+          },
+          "net_change": {
+            "description": "Sum of the three activities' net flows across the window (overall change in cash)",
+            "examples": [
+              123000.0
+            ],
+            "title": "Net Change",
+            "type": "number"
+          }
+        },
+        "required": [
+          "activities",
+          "net_change"
+        ],
+        "title": "CashFlowSummary",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

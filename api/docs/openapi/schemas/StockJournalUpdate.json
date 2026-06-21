@@ -1,0 +1,95 @@
+{
+  "components": {
+    "schemas": {
+      "StockJournalUpdate": {
+        "example": {
+          "expected_spend": 12000.0
+        },
+        "properties": {
+          "asset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Asset category ID",
+            "examples": [
+              "AC-STK-001"
+            ],
+            "title": "Asset Id"
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Allocation category id (references Stock_Category.category_id)",
+            "examples": [
+              "SC-002"
+            ],
+            "title": "Category Id"
+          },
+          "expected_spend": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Planned investment amount for this holding entry (one-shot purchase budget; not a recurring premium — see Insurance.expected_spend for that)",
+            "examples": [
+              12000.0
+            ],
+            "title": "Expected Spend"
+          },
+          "stock_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Ticker symbol",
+            "examples": [
+              "AAPL"
+            ],
+            "title": "Stock Code"
+          },
+          "stock_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Stock display name",
+            "examples": [
+              "Apple Inc."
+            ],
+            "title": "Stock Name"
+          }
+        },
+        "title": "StockJournalUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

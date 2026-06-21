@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "UncategorizedMonthCount": {
+        "example": {
+          "count": 87,
+          "vesting_month": "202405"
+        },
+        "properties": {
+          "count": {
+            "description": "Uncategorized journal rows in the month",
+            "examples": [
+              87
+            ],
+            "title": "Count",
+            "type": "integer"
+          },
+          "vesting_month": {
+            "description": "YYYYMM the uncategorized rows belong to",
+            "examples": [
+              "202405"
+            ],
+            "title": "Vesting Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "vesting_month",
+          "count"
+        ],
+        "title": "UncategorizedMonthCount",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

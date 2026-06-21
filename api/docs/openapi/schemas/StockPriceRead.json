@@ -1,0 +1,81 @@
+{
+  "components": {
+    "schemas": {
+      "StockPriceRead": {
+        "example": {
+          "close_price": 181.8,
+          "fetch_date": "20260418",
+          "highest_price": 182.5,
+          "lowest_price": 179.2,
+          "open_price": 180.0,
+          "stock_code": "AAPL"
+        },
+        "properties": {
+          "close_price": {
+            "description": "Close price",
+            "examples": [
+              181.8
+            ],
+            "title": "Close Price",
+            "type": "number"
+          },
+          "fetch_date": {
+            "description": "YYYYMMDD",
+            "examples": [
+              "20260418"
+            ],
+            "title": "Fetch Date",
+            "type": "string"
+          },
+          "highest_price": {
+            "description": "Daily high",
+            "examples": [
+              182.5
+            ],
+            "title": "Highest Price",
+            "type": "number"
+          },
+          "lowest_price": {
+            "description": "Daily low",
+            "examples": [
+              179.2
+            ],
+            "title": "Lowest Price",
+            "type": "number"
+          },
+          "open_price": {
+            "description": "Open price",
+            "examples": [
+              180.0
+            ],
+            "title": "Open Price",
+            "type": "number"
+          },
+          "stock_code": {
+            "description": "Ticker symbol",
+            "examples": [
+              "AAPL"
+            ],
+            "title": "Stock Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stock_code",
+          "fetch_date",
+          "open_price",
+          "highest_price",
+          "lowest_price",
+          "close_price"
+        ],
+        "title": "StockPriceRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

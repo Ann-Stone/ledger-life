@@ -1,0 +1,67 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureRatioResponse": {
+        "example": {
+          "inner": [
+            {
+              "name": "expense",
+              "value": 1234.56
+            }
+          ],
+          "outer": [
+            {
+              "name": "expense",
+              "value": 1234.56
+            }
+          ]
+        },
+        "properties": {
+          "inner": {
+            "description": "Inner pie: amounts grouped by action_sub_type",
+            "examples": [
+              [
+                {
+                  "name": "expense",
+                  "value": 1234.56
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditureRatioItem"
+            },
+            "title": "Inner",
+            "type": "array"
+          },
+          "outer": {
+            "description": "Outer pie: amounts grouped by action_main_type",
+            "examples": [
+              [
+                {
+                  "name": "expense",
+                  "value": 1234.56
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditureRatioItem"
+            },
+            "title": "Outer",
+            "type": "array"
+          }
+        },
+        "required": [
+          "outer",
+          "inner"
+        ],
+        "title": "ExpenditureRatioResponse",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

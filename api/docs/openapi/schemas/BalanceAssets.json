@@ -1,0 +1,74 @@
+{
+  "components": {
+    "schemas": {
+      "BalanceAssets": {
+        "example": {
+          "accounts": [
+            {
+              "amount": 123456.78,
+              "currency": "TWD",
+              "name": "Cathay Bank",
+              "original_amount": 123456.78
+            }
+          ],
+          "estates": [],
+          "insurances": [],
+          "stocks": []
+        },
+        "properties": {
+          "accounts": {
+            "description": "Cash account balances",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BalanceLine"
+            },
+            "title": "Accounts",
+            "type": "array"
+          },
+          "estates": {
+            "description": "Real estate market value",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BalanceLine"
+            },
+            "title": "Estates",
+            "type": "array"
+          },
+          "insurances": {
+            "description": "Insurance surrender value",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BalanceLine"
+            },
+            "title": "Insurances",
+            "type": "array"
+          },
+          "stocks": {
+            "description": "Stock holdings (market value)",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BalanceLine"
+            },
+            "title": "Stocks",
+            "type": "array"
+          }
+        },
+        "title": "BalanceAssets",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

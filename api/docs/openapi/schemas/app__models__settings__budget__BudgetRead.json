@@ -1,0 +1,196 @@
+{
+  "components": {
+    "schemas": {
+      "app__models__settings__budget__BudgetRead": {
+        "example": {
+          "budget_year": "2026",
+          "category_code": "INC01",
+          "category_name": "Salary",
+          "code_type": "income",
+          "expected01": 100000.0,
+          "expected02": 100000.0,
+          "expected03": 100000.0,
+          "expected04": 100000.0,
+          "expected05": 100000.0,
+          "expected06": 100000.0,
+          "expected07": 100000.0,
+          "expected08": 100000.0,
+          "expected09": 100000.0,
+          "expected10": 100000.0,
+          "expected11": 100000.0,
+          "expected12": 200000.0
+        },
+        "properties": {
+          "annual_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Annual envelope for annual-event categories",
+            "examples": [
+              null
+            ],
+            "title": "Annual Amount"
+          },
+          "budget_year": {
+            "description": "YYYY",
+            "examples": [
+              "2026"
+            ],
+            "title": "Budget Year",
+            "type": "string"
+          },
+          "category_code": {
+            "description": "FK to CodeData.code_id",
+            "examples": [
+              "INC01"
+            ],
+            "title": "Category Code",
+            "type": "string"
+          },
+          "category_name": {
+            "description": "Category display name",
+            "examples": [
+              "Salary"
+            ],
+            "title": "Category Name",
+            "type": "string"
+          },
+          "code_type": {
+            "description": "Code type",
+            "examples": [
+              "income"
+            ],
+            "title": "Code Type",
+            "type": "string"
+          },
+          "expected01": {
+            "description": "Month 01 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected01",
+            "type": "number"
+          },
+          "expected02": {
+            "description": "Month 02 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected02",
+            "type": "number"
+          },
+          "expected03": {
+            "description": "Month 03 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected03",
+            "type": "number"
+          },
+          "expected04": {
+            "description": "Month 04 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected04",
+            "type": "number"
+          },
+          "expected05": {
+            "description": "Month 05 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected05",
+            "type": "number"
+          },
+          "expected06": {
+            "description": "Month 06 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected06",
+            "type": "number"
+          },
+          "expected07": {
+            "description": "Month 07 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected07",
+            "type": "number"
+          },
+          "expected08": {
+            "description": "Month 08 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected08",
+            "type": "number"
+          },
+          "expected09": {
+            "description": "Month 09 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected09",
+            "type": "number"
+          },
+          "expected10": {
+            "description": "Month 10 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected10",
+            "type": "number"
+          },
+          "expected11": {
+            "description": "Month 11 expected",
+            "examples": [
+              100000.0
+            ],
+            "title": "Expected11",
+            "type": "number"
+          },
+          "expected12": {
+            "description": "Month 12 expected",
+            "examples": [
+              200000.0
+            ],
+            "title": "Expected12",
+            "type": "number"
+          }
+        },
+        "required": [
+          "budget_year",
+          "category_code",
+          "category_name",
+          "code_type",
+          "expected01",
+          "expected02",
+          "expected03",
+          "expected04",
+          "expected05",
+          "expected06",
+          "expected07",
+          "expected08",
+          "expected09",
+          "expected10",
+          "expected11",
+          "expected12"
+        ],
+        "title": "BudgetRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,77 @@
+{
+  "components": {
+    "schemas": {
+      "BudgetVarianceRead": {
+        "example": {
+          "rows": [
+            {
+              "actual": 372000.0,
+              "code": "F01",
+              "diff": 12000.0,
+              "expected": 360000.0,
+              "name": "居住",
+              "type": "Fixed",
+              "usage_rate": 1.0333
+            }
+          ],
+          "summary": {
+            "elapsed_months": 6,
+            "projected_total": 720000.0,
+            "total_actual": 360000.0,
+            "total_diff": -420000.0,
+            "total_expected": 780000.0,
+            "usage_rate": 0.4615
+          },
+          "year": "2026"
+        },
+        "properties": {
+          "rows": {
+            "description": "Per-category rows, ordered by actual descending",
+            "examples": [
+              [
+                {
+                  "actual": 372000.0,
+                  "code": "F01",
+                  "diff": 12000.0,
+                  "expected": 360000.0,
+                  "name": "居住",
+                  "type": "Fixed",
+                  "usage_rate": 1.0333
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/BudgetVarianceRow"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/BudgetVarianceSummary",
+            "description": "Totals and run-rate projection"
+          },
+          "year": {
+            "description": "Budget year YYYY",
+            "examples": [
+              "2026"
+            ],
+            "title": "Year",
+            "type": "string"
+          }
+        },
+        "required": [
+          "year",
+          "rows",
+          "summary"
+        ],
+        "title": "BudgetVarianceRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

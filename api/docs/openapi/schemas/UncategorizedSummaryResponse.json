@@ -1,0 +1,54 @@
+{
+  "components": {
+    "schemas": {
+      "UncategorizedSummaryResponse": {
+        "example": {
+          "months": [
+            {
+              "count": 87,
+              "vesting_month": "202405"
+            }
+          ],
+          "total": 2330
+        },
+        "properties": {
+          "months": {
+            "description": "Per-month breakdown, newest month first; months with zero rows omitted",
+            "examples": [
+              [
+                {
+                  "count": 87,
+                  "vesting_month": "202405"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/UncategorizedMonthCount"
+            },
+            "title": "Months",
+            "type": "array"
+          },
+          "total": {
+            "description": "Uncategorized journal rows across all months (action_main_type outside every report bucket)",
+            "examples": [
+              2330
+            ],
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "months"
+        ],
+        "title": "UncategorizedSummaryResponse",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

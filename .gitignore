@@ -1,0 +1,52 @@
+# OS runtime files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.claude/
+.gemini/
+.agents/
+
+# Node (fallback, should be in view/.gitignore)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (fallback, should be in api/.gitignore)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Legacy Code & Management Files
+refactoring-tickets/
+account-book-view/
+account-book-API/
+
+# Secrets — never commit real env files, local databases, or raw data dumps.
+# (Tracked exceptions like *.env.example / view/.env.production keep their suffix
+#  and are unaffected; the anonymized test fixture *.db lives under api/tests.)
+.env
+.env.local
+.env.*.local
+*.sqlite
+*.sqlite3
+private_data.sql
+ledger.db
+ledger.csv
+# Real e-invoice carrier filter list (歸戶 PII) — keep local only; ship the .example
+api/config/invoice_skip.json

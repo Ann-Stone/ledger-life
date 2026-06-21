@@ -1,0 +1,96 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureCompositionRead": {
+        "example": {
+          "categories": [
+            {
+              "amount": 42000.0,
+              "children": [
+                {
+                  "amount": 18000.0,
+                  "code": "E0101",
+                  "name": "外食",
+                  "share": 12.5
+                }
+              ],
+              "code": "E01",
+              "name": "餐飲",
+              "share": 29.1,
+              "type": "Floating"
+            }
+          ],
+          "fixed_total": 60000.0,
+          "floating_total": 84000.0,
+          "total": 144000.0
+        },
+        "properties": {
+          "categories": {
+            "description": "Category nodes, ordered by amount descending",
+            "examples": [
+              [
+                {
+                  "amount": 42000.0,
+                  "children": [
+                    {
+                      "amount": 18000.0,
+                      "code": "E0101",
+                      "name": "外食",
+                      "share": 12.5
+                    }
+                  ],
+                  "code": "E01",
+                  "name": "餐飲",
+                  "share": 29.1,
+                  "type": "Floating"
+                }
+              ]
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditureCategoryNode"
+            },
+            "title": "Categories",
+            "type": "array"
+          },
+          "fixed_total": {
+            "description": "Sum of Fixed-type categories",
+            "examples": [
+              60000.0
+            ],
+            "title": "Fixed Total",
+            "type": "number"
+          },
+          "floating_total": {
+            "description": "Sum of Floating-type categories",
+            "examples": [
+              84000.0
+            ],
+            "title": "Floating Total",
+            "type": "number"
+          },
+          "total": {
+            "description": "Grand total expense in base currency",
+            "examples": [
+              144000.0
+            ],
+            "title": "Total",
+            "type": "number"
+          }
+        },
+        "required": [
+          "total",
+          "fixed_total",
+          "floating_total",
+          "categories"
+        ],
+        "title": "ExpenditureCompositionRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,57 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditureTrendRead": {
+        "example": {
+          "points": [
+            {
+              "amount": 45200.0,
+              "period": "202403"
+            },
+            {
+              "amount": 38500.0,
+              "period": "202404"
+            }
+          ],
+          "type": "monthly"
+        },
+        "properties": {
+          "points": {
+            "description": "Time series, oldest first",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ExpenditurePoint"
+            },
+            "title": "Points",
+            "type": "array"
+          },
+          "type": {
+            "description": "Aggregation granularity",
+            "enum": [
+              "monthly",
+              "yearly"
+            ],
+            "examples": [
+              "monthly"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "points"
+        ],
+        "title": "ExpenditureTrendRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

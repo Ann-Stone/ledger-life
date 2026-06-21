@@ -1,0 +1,65 @@
+{
+  "components": {
+    "schemas": {
+      "StockCategoryUpdate": {
+        "example": {
+          "in_use": "N"
+        },
+        "properties": {
+          "category_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Dropdown order",
+            "examples": [
+              2
+            ],
+            "title": "Category Index"
+          },
+          "in_use": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Active flag (Y/N); set 'N' to retire a category",
+            "examples": [
+              "N"
+            ],
+            "title": "In Use"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Display name",
+            "examples": [
+              "成長股"
+            ],
+            "title": "Name"
+          }
+        },
+        "title": "StockCategoryUpdate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

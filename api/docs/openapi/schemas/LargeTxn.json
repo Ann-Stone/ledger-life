@@ -1,0 +1,77 @@
+{
+  "components": {
+    "schemas": {
+      "LargeTxn": {
+        "example": {
+          "amount": 85000.0,
+          "category": "旅遊",
+          "date": "20260815",
+          "note": "日本機票",
+          "pay_way": "Chase Sapphire"
+        },
+        "properties": {
+          "amount": {
+            "description": "Expense magnitude in base currency, positive",
+            "examples": [
+              85000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "category": {
+            "description": "Category name (action_main)",
+            "examples": [
+              "旅遊"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "date": {
+            "description": "Transaction date YYYYMMDD",
+            "examples": [
+              "20260815"
+            ],
+            "title": "Date",
+            "type": "string"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form note",
+            "examples": [
+              "日本機票"
+            ],
+            "title": "Note"
+          },
+          "pay_way": {
+            "description": "Account or credit-card name",
+            "examples": [
+              "Chase Sapphire"
+            ],
+            "title": "Pay Way",
+            "type": "string"
+          }
+        },
+        "required": [
+          "date",
+          "category",
+          "amount",
+          "pay_way"
+        ],
+        "title": "LargeTxn",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

@@ -1,0 +1,184 @@
+{
+  "components": {
+    "schemas": {
+      "CreditCardRead": {
+        "example": {
+          "card_expiry": "2026/08",
+          "card_name": "Chase Sapphire",
+          "card_no": "4111-XXXX-XXXX-1111",
+          "charge_day": 15,
+          "credit_card_id": "CC-VISA-01",
+          "credit_card_index": 1,
+          "feedback_way": "cashback",
+          "fx_code": "USD",
+          "in_use": "Y",
+          "last_day": 25,
+          "limit_date": 20,
+          "note": "Primary card"
+        },
+        "properties": {
+          "card_expiry": {
+            "anyOf": [
+              {
+                "maxLength": 7,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Card expiration year/month 'YYYY/MM'",
+            "examples": [
+              "2026/08"
+            ],
+            "title": "Card Expiry"
+          },
+          "card_name": {
+            "description": "Display name",
+            "examples": [
+              "Chase Sapphire"
+            ],
+            "title": "Card Name",
+            "type": "string"
+          },
+          "card_no": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Card number",
+            "examples": [
+              "4111-XXXX-XXXX-1111"
+            ],
+            "title": "Card No"
+          },
+          "charge_day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Charge day",
+            "examples": [
+              15
+            ],
+            "title": "Charge Day"
+          },
+          "credit_card_id": {
+            "description": "Business identifier",
+            "examples": [
+              "CC-VISA-01"
+            ],
+            "title": "Credit Card Id",
+            "type": "string"
+          },
+          "credit_card_index": {
+            "description": "Dropdown order",
+            "examples": [
+              1
+            ],
+            "title": "Credit Card Index",
+            "type": "integer"
+          },
+          "feedback_way": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rewards method",
+            "examples": [
+              "cashback"
+            ],
+            "title": "Feedback Way"
+          },
+          "fx_code": {
+            "description": "Billing currency code",
+            "examples": [
+              "USD"
+            ],
+            "title": "Fx Code",
+            "type": "string"
+          },
+          "in_use": {
+            "description": "Active flag",
+            "examples": [
+              "Y"
+            ],
+            "title": "In Use",
+            "type": "string"
+          },
+          "last_day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Statement cut-off day",
+            "examples": [
+              25
+            ],
+            "title": "Last Day"
+          },
+          "limit_date": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment due day",
+            "examples": [
+              20
+            ],
+            "title": "Limit Date"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form note",
+            "examples": [
+              "Primary card"
+            ],
+            "title": "Note"
+          }
+        },
+        "required": [
+          "credit_card_id",
+          "card_name",
+          "fx_code",
+          "in_use",
+          "credit_card_index"
+        ],
+        "title": "CreditCardRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

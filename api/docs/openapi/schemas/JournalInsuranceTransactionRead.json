@@ -1,0 +1,56 @@
+{
+  "components": {
+    "schemas": {
+      "JournalInsuranceTransactionRead": {
+        "description": "Response body for the insurance composite endpoint.",
+        "example": {
+          "insurance_detail": {
+            "distinct_number": 17,
+            "excute_date": "20260115",
+            "excute_price": -1200.0,
+            "insurance_excute_type": "pay",
+            "insurance_id": "INS-001",
+            "memo": "Annual premium"
+          },
+          "journal": {
+            "action_main": "TRA",
+            "action_main_table": "Code_Data",
+            "action_main_type": "Transfer",
+            "action_sub": "Insurance",
+            "action_sub_table": "Insurance_Journal",
+            "action_sub_type": "Asset",
+            "distinct_number": 42,
+            "note": "Annual premium",
+            "spend_date": "20260115",
+            "spend_way": "1",
+            "spend_way_table": "Account",
+            "spend_way_type": "account",
+            "spending": -1200.0,
+            "vesting_month": "202601"
+          }
+        },
+        "properties": {
+          "insurance_detail": {
+            "$ref": "#/components/schemas/InsuranceJournalRead",
+            "description": "Persisted insurance detail row."
+          },
+          "journal": {
+            "$ref": "#/components/schemas/JournalRead",
+            "description": "Persisted journal row."
+          }
+        },
+        "required": [
+          "journal",
+          "insurance_detail"
+        ],
+        "title": "JournalInsuranceTransactionRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

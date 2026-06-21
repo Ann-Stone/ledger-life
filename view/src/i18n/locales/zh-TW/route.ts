@@ -1,0 +1,23 @@
+// Document titles + breadcrumb segments. Consumed via meta.titleKey / meta.breadcrumbKeys.
+export default {
+  appName: 'Balance Sheet',
+  home: '首頁',
+  dashboard: '儀表板',
+  cashFlow: '月度帳務',
+  reports: '財務報表',
+  balanceSheet: '資產負債表',
+  incomeStatement: '損益表',
+  cashFlowStatement: '現金流量表',
+  spending: '年度支出',
+  assets: '資產概覽',
+  otherAssets: '資產負債管理',
+  settings: '設定',
+  settingMenu: '選單設定',
+  settingBudget: '預算設定',
+  settingRemind: '提醒設定',
+  settingMenuLeaf: '選單',
+  settingBudgetLeaf: '預算',
+  settingRemindLeaf: '提醒',
+  utilities: '工具',
+  import: '資料匯入',
+}

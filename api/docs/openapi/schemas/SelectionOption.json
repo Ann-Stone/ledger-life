@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "SelectionOption": {
+        "example": {
+          "label": "Cash — NTD",
+          "value": "1"
+        },
+        "properties": {
+          "label": {
+            "description": "Human-readable label",
+            "examples": [
+              "Cash — NTD"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "value": {
+            "description": "Option value submitted on select",
+            "examples": [
+              "1"
+            ],
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "label"
+        ],
+        "title": "SelectionOption",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

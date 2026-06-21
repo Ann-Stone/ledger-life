@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "InvoiceImportError": {
+        "example": {
+          "line": 42,
+          "reason": "malformed amount column"
+        },
+        "properties": {
+          "line": {
+            "description": "1-based line number from the invoice CSV that failed",
+            "examples": [
+              42
+            ],
+            "title": "Line",
+            "type": "integer"
+          },
+          "reason": {
+            "description": "Short explanation of why the row was skipped or failed",
+            "examples": [
+              "malformed amount column"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "line",
+          "reason"
+        ],
+        "title": "InvoiceImportError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

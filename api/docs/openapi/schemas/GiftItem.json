@@ -1,0 +1,51 @@
+{
+  "components": {
+    "schemas": {
+      "GiftItem": {
+        "example": {
+          "amount": 6000.0,
+          "owner": "Mom",
+          "rate": 0.27
+        },
+        "properties": {
+          "amount": {
+            "description": "Summed absolute spending in base currency",
+            "examples": [
+              6000.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "owner": {
+            "description": "Recipient/sender owner name from Account.owner",
+            "examples": [
+              "Mom"
+            ],
+            "title": "Owner",
+            "type": "string"
+          },
+          "rate": {
+            "description": "amount * 100 / 2,200,000 (legacy gift-tax threshold percentage)",
+            "examples": [
+              0.27
+            ],
+            "title": "Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "owner",
+          "amount",
+          "rate"
+        ],
+        "title": "GiftItem",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

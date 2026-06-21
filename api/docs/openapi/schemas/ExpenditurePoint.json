@@ -1,0 +1,41 @@
+{
+  "components": {
+    "schemas": {
+      "ExpenditurePoint": {
+        "example": {
+          "amount": 45200.0,
+          "period": "202403"
+        },
+        "properties": {
+          "amount": {
+            "description": "Summed spending in base currency",
+            "examples": [
+              45200.0
+            ],
+            "title": "Amount",
+            "type": "number"
+          },
+          "period": {
+            "description": "YYYYMM for monthly or YYYY for yearly",
+            "examples": [
+              "202403"
+            ],
+            "title": "Period",
+            "type": "string"
+          }
+        },
+        "required": [
+          "period",
+          "amount"
+        ],
+        "title": "ExpenditurePoint",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

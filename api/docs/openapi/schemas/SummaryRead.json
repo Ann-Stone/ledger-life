@@ -1,0 +1,68 @@
+{
+  "components": {
+    "schemas": {
+      "SummaryRead": {
+        "example": {
+          "points": [
+            {
+              "breakdown": {
+                "accounts": 480000.0,
+                "cards": -3000.0,
+                "estates": 470000.0,
+                "insurances": 23000.0,
+                "loans": -230000.0,
+                "stocks": 310000.0
+              },
+              "period": "202301",
+              "value": 1050000.0
+            },
+            {
+              "breakdown": {
+                "accounts": 500000.0,
+                "cards": -3000.0,
+                "estates": 480000.0,
+                "insurances": 24000.0,
+                "loans": -240000.0,
+                "stocks": 320000.0
+              },
+              "period": "202302",
+              "value": 1081000.0
+            }
+          ],
+          "type": "asset_debt_trend"
+        },
+        "properties": {
+          "points": {
+            "description": "Time series, oldest first",
+            "examples": [
+              []
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SummaryPoint"
+            },
+            "title": "Points",
+            "type": "array"
+          },
+          "type": {
+            "$ref": "#/components/schemas/SummaryType",
+            "description": "Summary variant",
+            "examples": [
+              "spending"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "points"
+        ],
+        "title": "SummaryRead",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

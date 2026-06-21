@@ -1,0 +1,121 @@
+{
+  "components": {
+    "schemas": {
+      "IncomeStatementSummary": {
+        "example": {
+          "active_income": 960000.0,
+          "comprehensive_net": 684000.0,
+          "dividend": 36000.0,
+          "fixed": 300000.0,
+          "floating": 216000.0,
+          "investment_net": 240000.0,
+          "loan_interest": 0.0,
+          "operating_net": 444000.0,
+          "realized": 60000.0,
+          "unrealized": 144000.0
+        },
+        "properties": {
+          "active_income": {
+            "description": "本業收入 across the window, positive",
+            "examples": [
+              960000.0
+            ],
+            "title": "Active Income",
+            "type": "number"
+          },
+          "comprehensive_net": {
+            "description": "綜合損益 = operating_net + investment_net across the window",
+            "examples": [
+              684000.0
+            ],
+            "title": "Comprehensive Net",
+            "type": "number"
+          },
+          "dividend": {
+            "description": "孳息 (passive income) total across the window, positive",
+            "examples": [
+              36000.0
+            ],
+            "title": "Dividend",
+            "type": "number"
+          },
+          "fixed": {
+            "description": "Fixed-expense total across the window, positive",
+            "examples": [
+              300000.0
+            ],
+            "title": "Fixed",
+            "type": "number"
+          },
+          "floating": {
+            "description": "Variable-expense total across the window, positive",
+            "examples": [
+              216000.0
+            ],
+            "title": "Floating",
+            "type": "number"
+          },
+          "investment_net": {
+            "description": "投資損益合計 across the window",
+            "examples": [
+              240000.0
+            ],
+            "title": "Investment Net",
+            "type": "number"
+          },
+          "loan_interest": {
+            "default": 0.0,
+            "description": "貸款利息 total across the window (Loan_Journal interest/fee), positive",
+            "examples": [
+              0.0
+            ],
+            "title": "Loan Interest",
+            "type": "number"
+          },
+          "operating_net": {
+            "description": "本業淨額 = active_income − fixed − floating − loan_interest across the window",
+            "examples": [
+              444000.0
+            ],
+            "title": "Operating Net",
+            "type": "number"
+          },
+          "realized": {
+            "description": "已實現資本利得 total across the window, signed",
+            "examples": [
+              60000.0
+            ],
+            "title": "Realized",
+            "type": "number"
+          },
+          "unrealized": {
+            "description": "未實現市值變動 across the window, signed",
+            "examples": [
+              144000.0
+            ],
+            "title": "Unrealized",
+            "type": "number"
+          }
+        },
+        "required": [
+          "active_income",
+          "fixed",
+          "floating",
+          "operating_net",
+          "dividend",
+          "realized",
+          "unrealized",
+          "investment_net",
+          "comprehensive_net"
+        ],
+        "title": "IncomeStatementSummary",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

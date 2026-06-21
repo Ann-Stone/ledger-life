@@ -1,0 +1,140 @@
+{
+  "components": {
+    "schemas": {
+      "AccountCreate": {
+        "example": {
+          "account_id": "BANK-CHASE-01",
+          "account_index": 1,
+          "account_type": "bank",
+          "discount": 1.0,
+          "fx_code": "USD",
+          "in_use": "Y",
+          "is_calculate": "Y",
+          "memo": "Primary checking",
+          "name": "Chase Checking",
+          "owner": "stone"
+        },
+        "properties": {
+          "account_id": {
+            "description": "User-supplied business identifier",
+            "examples": [
+              "BANK-CHASE-01"
+            ],
+            "maxLength": 20,
+            "title": "Account Id",
+            "type": "string"
+          },
+          "account_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional sort order; auto-filled with max(account_index)+1 when omitted",
+            "examples": [
+              10
+            ],
+            "title": "Account Index"
+          },
+          "account_type": {
+            "description": "Account type",
+            "examples": [
+              "bank"
+            ],
+            "title": "Account Type",
+            "type": "string"
+          },
+          "discount": {
+            "default": 1.0,
+            "description": "Discount multiplier",
+            "examples": [
+              1.0
+            ],
+            "title": "Discount",
+            "type": "number"
+          },
+          "fx_code": {
+            "description": "Currency code",
+            "examples": [
+              "USD"
+            ],
+            "title": "Fx Code",
+            "type": "string"
+          },
+          "in_use": {
+            "default": "Y",
+            "description": "Active flag (Y/N)",
+            "examples": [
+              "Y"
+            ],
+            "title": "In Use",
+            "type": "string"
+          },
+          "is_calculate": {
+            "default": "Y",
+            "description": "Include in totals (Y/N)",
+            "examples": [
+              "Y"
+            ],
+            "title": "Is Calculate",
+            "type": "string"
+          },
+          "memo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Free-form memo",
+            "examples": [
+              "Primary checking"
+            ],
+            "title": "Memo"
+          },
+          "name": {
+            "description": "Account name",
+            "examples": [
+              "Chase Checking"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Owner label",
+            "examples": [
+              "stone"
+            ],
+            "title": "Owner"
+          }
+        },
+        "required": [
+          "account_id",
+          "name",
+          "account_type",
+          "fx_code"
+        ],
+        "title": "AccountCreate",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

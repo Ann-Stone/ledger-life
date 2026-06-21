@@ -1,0 +1,91 @@
+{
+  "components": {
+    "schemas": {
+      "SettlementResult": {
+        "example": {
+          "account_rows": 4,
+          "credit_card_rows": 2,
+          "estate_rows": 1,
+          "insurance_rows": 1,
+          "loan_rows": 1,
+          "stock_rows": 2,
+          "vesting_month": "202604"
+        },
+        "properties": {
+          "account_rows": {
+            "description": "AccountBalance rows recomputed for the month",
+            "examples": [
+              4
+            ],
+            "title": "Account Rows",
+            "type": "integer"
+          },
+          "credit_card_rows": {
+            "description": "CreditCardBalance rows recomputed for the month",
+            "examples": [
+              2
+            ],
+            "title": "Credit Card Rows",
+            "type": "integer"
+          },
+          "estate_rows": {
+            "description": "Estate snapshot rows inserted",
+            "examples": [
+              1
+            ],
+            "title": "Estate Rows",
+            "type": "integer"
+          },
+          "insurance_rows": {
+            "description": "Insurance snapshot rows inserted",
+            "examples": [
+              1
+            ],
+            "title": "Insurance Rows",
+            "type": "integer"
+          },
+          "loan_rows": {
+            "description": "Loan snapshot rows inserted",
+            "examples": [
+              1
+            ],
+            "title": "Loan Rows",
+            "type": "integer"
+          },
+          "stock_rows": {
+            "description": "Stock snapshot rows inserted (skips zero-amount holdings)",
+            "examples": [
+              2
+            ],
+            "title": "Stock Rows",
+            "type": "integer"
+          },
+          "vesting_month": {
+            "description": "Settled vesting month (YYYYMM)",
+            "examples": [
+              "202604"
+            ],
+            "title": "Vesting Month",
+            "type": "string"
+          }
+        },
+        "required": [
+          "vesting_month",
+          "estate_rows",
+          "insurance_rows",
+          "loan_rows",
+          "stock_rows",
+          "account_rows",
+          "credit_card_rows"
+        ],
+        "title": "SettlementResult",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Networth API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0"
+}

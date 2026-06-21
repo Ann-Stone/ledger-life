@@ -1,0 +1,32 @@
+# gitleaks config — extends the built-in ruleset with project-specific patterns.
+# Motivated by a real incident (2026-06): a legacy folder committed 財政部電子發票
+# credentials (App ID + mobile-barcode carriers) into git history. The whole git
+# history was rebuilt to a single clean commit; these rules guard against recurrence.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "tw-einvoice-app-id"
+description = "Taiwan MOF e-invoice App ID (EINV + 13 digits)"
+regex = '''EINV\d{13}'''
+tags = ["pii", "taiwan", "einvoice"]
+
+[[rules]]
+id = "tw-einvoice-carrier"
+description = "Taiwan e-invoice mobile barcode carrier (context-anchored)"
+regex = '''(?i)(carrier|載具|INVOICE_SKIP|INVOICE_CARD)\b[^\n]{0,40}?/[0-9A-Z.+-]{7}\b'''
+tags = ["pii", "taiwan", "einvoice"]
+
+[[rules]]
+id = "invoice-password-assignment"
+description = "Hardcoded INVOICE_PASSWORD value"
+regex = '''(?i)INVOICE_PASSWORD\s*[:=]\s*['"][^'"]{3,}['"]'''
+tags = ["secret"]
+
+[allowlist]
+description = "Anonymized fixtures and placeholder examples are not real secrets"
+paths = [
+  '''api/tests/fixtures/legacy_tiny\.db''',
+  '''.*\.env\.example''',
+]
